@@ -107,5 +107,4 @@ dist
 package-lock.json
 
 #Prod folder
-public/
 build/
