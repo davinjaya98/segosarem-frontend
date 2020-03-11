@@ -172,7 +172,9 @@ import BorderTable from './components/tables/bootstrap/borderTable';
 import SizingTable from './components/tables/bootstrap/sizingTable';
 import MesonryDesc from './components/gallery/mesonryDesc';
 
+//Own Pages
 import Dashboard from './pages/dashboard';
+import PageSetting from './pages/pageSetting';
 
 //firebase Auth
 function Root() {
@@ -231,6 +233,7 @@ function Root() {
                                         {/* Segosarem */}
                                         <Route path={`${process.env.PUBLIC_URL}/login`} component={Login} />
                                         <Route path={`${process.env.PUBLIC_URL}/dashboard`} component={Dashboard} />
+                                        <Route path={`${process.env.PUBLIC_URL}/pageSetting`} component={PageSetting} />
                                     </App>
                                 </Fragment>
                                 :

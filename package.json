@@ -1,8 +1,8 @@
 {
-  "name": "endless",
+  "name": "segosarem-admin",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://react.pixelstrap.com/endless/",
+  "homepage": "/segosarem-admin/",
   "dependencies": {
     "@amcharts/amcharts3-react": "^3.1.0",
     "@fullcalendar/daygrid": "^4.3.0",

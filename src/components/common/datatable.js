@@ -13,6 +13,13 @@ export class Datatable extends Component {
         }
     }
 
+    componentDidUpdate(prevProps) {
+        //Force update my data when the parent state got updated
+        if (prevProps.myData !== this.props.myData) {
+            this.setState({ myData: this.props.myData });
+        }
+    }
+
     selectRow = (e, i) => {
         if (!e.target.checked) {
             this.setState({

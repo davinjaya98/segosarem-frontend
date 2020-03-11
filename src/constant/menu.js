@@ -18,7 +18,7 @@ export const MENUITEMS = [
         title: 'Dashboard', path: '/dashboard', icon: Home, type: 'link', active: false
     },
     {
-        title: 'Page Setting', path: '/dashboard', icon: Home, type: 'link', active: false
+        title: 'Page Setting', path: '/pageSetting', icon: Home, type: 'link', active: false
     },
     {
         title: 'Without Sublink', path: '/dashboard', icon: Home, type: 'link', active: false
