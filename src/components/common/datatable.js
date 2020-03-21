@@ -182,7 +182,7 @@ export class Datatable extends Component {
                 <ReactTable
                     data={myData}
                     columns={columns}
-                    defaultPageSize={pageSize}
+                    pageSize={pageSize}
                     className={myClass}
                     showPagination={pagination}
                 />

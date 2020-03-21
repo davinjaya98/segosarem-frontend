@@ -1,109 +1,46 @@
-import React, { Fragment, useState } from 'react';
-// import Breadcrumb from '../components/common/breadcrumb';
-// import data from '../data/dummyTableData';
-// import Datatable from '../components/common/datatable';
+import React, { Fragment, useRef } from 'react';
+import { ToastContainer } from 'react-toastify';
+import Breadcrumb from '../components/common/breadcrumb';
+import PageSettingAdd from '../components/page-setting/page-setting-add/pageSettingAdd';
 import PageSettingList from '../components/page-setting/page-setting-list/pageSettingList';
 
 const PageSetting = () => {
 
-  // const [count, setCount] = useState(0);
-
-  // var data = [
-  //   {
-  //     id: "1",
-  //     name: "Product Menu",
-  //     status: <i className="fa fa-circle font-success f-12" />,
-  //     creat_on: "2018-04-18T00:00:00"
-  //   },
-  //   {
-  //     id: "2",
-  //     name: "Category Menu",
-  //     status: <i className="fa fa-circle font-warning f-12" />,
-  //     creat_on: "2018-04-18T00:00:00"
-  //   },
-  //   {
-  //     id: "3",
-  //     name: "Subcategory Menu",
-  //     status: <i className="fa fa-circle font-success f-12" />,
-  //     creat_on: "2018-04-18T00:00:00"
-  //   },
-  //   {
-  //     id: "4",
-  //     name: "Sales  Menu",
-  //     status: <i className="fa fa-circle font-danger f-12" />,
-  //     creat_on: "2018-04-18T00:00:00"
-  //   },
-  //   {
-  //     id: "5",
-  //     name: "Vendor Menu",
-  //     status: <i className="fa fa-circle font-success f-12" />,
-  //     creat_on: "2018-04-18T00:00:00"
-  //   },
-  //   {
-  //     id: "6",
-  //     name: "Category Menu",
-  //     status: <i className="fa fa-circle font-warning f-12" />,
-  //     creat_on: "2018-04-18T00:00:00"
-  //   },
-  //   {
-  //     id: "7",
-  //     name: "Subcategory Menu",
-  //     status: <i className="fa fa-circle font-success f-12" />,
-  //     creat_on: "2018-04-18T00:00:00"
-  //   },
-  //   {
-  //     id: "8",
-  //     name: "Sales  Menu",
-  //     status: <i className="fa fa-circle font-danger f-12" />,
-  //     creat_on: "2018-04-18T00:00:00"
-  //   },
-  //   {
-  //     id: "9",
-  //     name: "Vendor Menu",
-  //     status: <i className="fa fa-circle font-success f-12" />,
-  //     creat_on: "2018-04-18T00:00:00"
-  //   },
-  //   {
-  //     id: "10",
-  //     name: "Category Menu",
-  //     status: <i className="fa fa-circle font-warning f-12" />,
-  //     creat_on: "2018-04-18T00:00:00"
-  //   },
-  //   {
-  //     id: "11",
-  //     name: "Category Menu",
-  //     status: <i className="fa fa-circle font-warning f-12" />,
-  //     creat_on: "2018-04-18T00:00:00"
-  //   },
-  //   {
-  //     id: "12",
-  //     name: "Category Menu",
-  //     status: <i className="fa fa-circle font-warning f-12" />,
-  //     creat_on: "2018-04-18T00:00:00"
-  //   }
-  // ];
-
-  // setTimeout(function() {
-  //   fetch("./sampleData.json").then(res => res.json()).then((result) => {console.log(result)},(error) => {console.log(error)});
-  //   this.data = [{
-  //     id: "11",
-  //     name: "Category Menu",
-  //     status: <i className="fa fa-circle font-warning f-12" />,
-  //     creat_on: "2018-04-18T00:00:00"
-  //   },
-  //   {
-  //     id: "12",
-  //     name: "Category Menu",
-  //     status: <i className="fa fa-circle font-warning f-12" />,
-  //     creat_on: "2018-04-18T00:00:00"
-  //   }];
-  //   setCount(1);
-  //   console.log("YEASH");
-  // },5000);
+  const listRef = useRef();
+  
+  function triggerRefresh() {
+    listRef.current.fetchData();
+  }
 
   return (
     <Fragment>
-      <PageSettingList />
+      <Breadcrumb title="Page Setting List" parent="Page Setting" />
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-12">
+            <div className="card">
+              <div className="card-header">
+                <h5>Page Setting List</h5>
+              </div>
+              <div className="card-body datatable-react">
+                <div className="row">
+                  <div className="col-12">
+                    <div className="d-flex justify-content-end">
+                      <PageSettingAdd onAddSuccess={triggerRefresh}/>
+                    </div>
+                  </div>
+                </div>
+                <div className="row mt-4">
+                  <div className="col-12">
+                    <PageSettingList ref={listRef}/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ToastContainer />
     </Fragment>
   );
 };
