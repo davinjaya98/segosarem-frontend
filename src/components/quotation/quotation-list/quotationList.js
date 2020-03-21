@@ -1,5 +1,4 @@
 import React, { Fragment, Component } from 'react';
-import Breadcrumb from '../../common/breadcrumb'; // menu hierarchy in cms
 import Datatable from '../../common/datatable'; // front end table view for cms
 
 class QuotationList extends Component {
@@ -66,27 +65,13 @@ class QuotationList extends Component {
 
         return (
             <Fragment>
-                <Breadcrumb title="Quotation List" parent="Quotation" />
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-sm-12">
-                            <div className="card">
-                                <div className="card-header">
-                                    <h5>Quotation List</h5>
-                                </div>
-                                <div className="card-body datatable-react">
-                                    <Datatable
-                                        multiSelectOption={false}
-                                        myData={data}
-                                        pageSize={data.length > 10 ? 10 : data.length}
-                                        pagination={true}
-                                        class="-striped -highlight"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <Datatable
+                    multiSelectOption={false}
+                    myData={data}
+                    pageSize={data.length}
+                    pagination={false}
+                    class="-striped -highlight"
+                />
             </Fragment>
         );
     }
