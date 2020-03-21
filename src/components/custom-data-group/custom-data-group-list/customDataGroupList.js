@@ -9,18 +9,33 @@ class CustomDataGroupList extends Component {
                 "cdGroupId": 1,
                 "cdGroupName": "Group-dummy",
                 "cdGroupDescription": "dummy-description"
-            }]
+            }],
+            pageSettingId: 0
         }
     }
 
     componentDidMount() {
-        this.fetchData();
+        let requestParam = localStorage.getItem("requestParam");
+        if(requestParam) {
+            requestParam = JSON.parse(requestParam);
+            this.setState({
+                pageSettingId: requestParam.settingId
+            }, 
+            //Callback after set state
+            () => {
+                this.fetchData();
+            });
+        }
     }
 
     fetchData() {
-        fetch("/segosarem-backend/getcustomDataGroupList", {
+        const { pageSettingId } = this.state;
+
+        fetch("/segosarem-backend/getCdGroupByPageStgId", {
             method: 'POST',
-            body: JSON.stringify({}),
+            body: JSON.stringify({
+                pageSettingId: pageSettingId
+            }),
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
             }
