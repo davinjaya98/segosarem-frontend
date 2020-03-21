@@ -1,4 +1,7 @@
 import React, { Fragment, Component, useImperativeHandle } from 'react';
+
+import { withRouter } from "react-router-dom";
+
 import Datatable from '../../common/datatable';
 
 class PageSettingList extends Component {
@@ -54,4 +57,4 @@ class PageSettingList extends Component {
     }
 };
 
-export default PageSettingList;
+export default withRouter(PageSettingList);

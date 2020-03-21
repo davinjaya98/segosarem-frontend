@@ -4,6 +4,8 @@ import 'react-table/react-table.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { withRouter } from "react-router-dom";
+
 export class Datatable extends Component {
     constructor(props) {
         super(props)
@@ -64,6 +66,14 @@ export class Datatable extends Component {
 
     Capitalize(str) {
         return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    redirectToChild = (row) => {
+        localStorage.setItem("requestParam", JSON.stringify(row));
+
+        this.props.history.push(this.props.childUrl) //use here
+        // window.location.href = this.props.childUrl;
+        // console.log(this.props)
     }
 
     render() {
@@ -141,6 +151,7 @@ export class Datatable extends Component {
                     accessor: str => "delete",
                     Cell: (row) => (
                         <div>
+
                             <span onClick={() => {
                                 if (window.confirm('Are you sure you wish to delete this item?')) {
                                     let data = myData;
@@ -157,9 +168,9 @@ export class Datatable extends Component {
                             <span><i className="fa fa-pencil" style={{ width: 35, fontSize: 16, padding: 11, color: 'rgb(40, 167, 69)' }}></i></span>
 
                             {/* add one more symbol to access child row */}
-                            <a href={this.props.childUrl}>
+                            <span onClick={() => { this.redirectToChild(row.original) }}>
                                 <i className="fa fa-share" style={{ width: 35, fontSize: 16, padding: 11, color: '#e4566e' }}></i>
-                            </a>
+                            </span>
                             {/* add one more symbol to access child row */}
                         </div>
                     ),
@@ -186,4 +197,4 @@ export class Datatable extends Component {
     }
 }
 
-export default Datatable;
+export default withRouter(Datatable);
