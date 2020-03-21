@@ -14,7 +14,11 @@ const Quotation = () => {
                                 <h5>Quotation List</h5>
                             </div>
                             <div className="card-body datatable-react">
-                                <QuotationList />
+                                <div className="row">
+                                    <div className="col-12">
+                                        <QuotationList />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
