@@ -21,6 +21,9 @@ export const MENUITEMS = [
         title: 'Page Setting', path: '/pageSetting', icon: Home, type: 'link', active: false
     },
     {
+        title: 'Quotation', path: '/quotation', icon: Home, type: 'link', active: false
+    },
+    {
         title: 'Without Sublink', path: '/dashboard', icon: Home, type: 'link', active: false
     },
     {

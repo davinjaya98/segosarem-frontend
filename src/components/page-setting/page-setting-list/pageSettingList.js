@@ -69,6 +69,7 @@ class PageSettingList extends Component {
                                         pageSize={data.length > 10 ? 10 : data.length}
                                         pagination={true}
                                         class="-striped -highlight"
+                                        childUrl={`${process.env.PUBLIC_URL}/customDataGroup`}
                                     />
                                 </div>
                             </div>

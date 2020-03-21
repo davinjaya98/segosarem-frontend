@@ -175,6 +175,9 @@ import MesonryDesc from './components/gallery/mesonryDesc';
 //Own Pages
 import Dashboard from './pages/dashboard';
 import PageSetting from './pages/pageSetting';
+import Quotation from './pages/quotation';
+import CustomDataGroup from './pages/customDataGroup';
+import CustomData from './pages/customData';
 
 //firebase Auth
 function Root() {
@@ -234,6 +237,9 @@ function Root() {
                                         <Route path={`${process.env.PUBLIC_URL}/login`} component={Login} />
                                         <Route path={`${process.env.PUBLIC_URL}/dashboard`} component={Dashboard} />
                                         <Route path={`${process.env.PUBLIC_URL}/pageSetting`} component={PageSetting} />
+                                        <Route path={`${process.env.PUBLIC_URL}/quotation`} component={Quotation} />
+                                        <Route path={`${process.env.PUBLIC_URL}/customDataGroup`} component={CustomDataGroup} />
+                                        <Route path={`${process.env.PUBLIC_URL}/customData`} component={CustomData} />
                                     </App>
                                 </Fragment>
                                 :
