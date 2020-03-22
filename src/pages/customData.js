@@ -1,10 +1,44 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useRef } from 'react';
+import Breadcrumb from '../components/common/breadcrumb';
 import CustomDataList from '../components/custom-data/custom-data-list/customDataList';
+import CustomDataAdd from '../components/custom-data/custom-data-add/customDataAdd';
 
 const CustomData = () => {
+
+    const listRef = useRef();
+
+    function triggerRefresh() {
+        listRef.current.fetchData();
+    }
+
     return (
         <Fragment>
-            <CustomDataList />
+            <Breadcrumb title="Custom Data List" parent="Custom Data" />
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="col-sm-12">
+                        <div className="card">
+                            <div className="card-header">
+                                <h5>Custom Data List</h5>
+                            </div>
+                            <div className="card-body datatable-react">
+                                <div className="row">
+                                    <div className="col-12">
+                                        <div className="d-flex justify-content-end">
+                                            <CustomDataAdd onAddSuccess={triggerRefresh} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row mt-4">
+                                    <div className="col-12">
+                                        <CustomDataList ref={listRef} />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </Fragment>
     );
 };

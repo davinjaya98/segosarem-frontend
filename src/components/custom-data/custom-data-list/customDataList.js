@@ -1,6 +1,6 @@
 import React, { Fragment, Component } from 'react';
-import Breadcrumb from '../../common/breadcrumb';
 import Datatable from '../../common/datatable';
+import { withRouterInnerRef } from "../../util/withRouterInnerRef";
 
 class CustomDataList extends Component {
     constructor(props) {
@@ -12,18 +12,32 @@ class CustomDataList extends Component {
                 "cdType": 3,
                 "cdSequence": "1",
                 "cdKey": "homepage.menu"
-            }]
+            }],
+            cdGroupId: 0
         }
     }
 
     componentDidMount() {
-        this.fetchData();
+        let requestParam = localStorage.getItem("requestParam");
+        if (requestParam) {
+            requestParam = JSON.parse(requestParam);
+            this.setState({
+                cdGroupId: requestParam.cdGroupId
+            },
+                () => {
+                    this.fetchData();
+                });
+        }
     }
 
     fetchData() {
-        fetch("/segosarem-backend/getCustomDataList", {
+        const { cdGroupId } = this.state;
+
+        fetch("/segosarem-backend/getCustomDataListByCdGroupId", {
             method: 'POST',
-            body: JSON.stringify({}),
+            body: JSON.stringify({
+                cdGroupId: cdGroupId
+            }),
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
             }
@@ -43,30 +57,16 @@ class CustomDataList extends Component {
 
         return (
             <Fragment>
-                <Breadcrumb title="Custom Data List" parent="Custom Data" />
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-sm-12">
-                            <div className="card">
-                                <div className="card-header">
-                                    <h5>Custom Data List</h5>
-                                </div>
-                                <div className="card-body datatable-react">
-                                    <Datatable
-                                        multiSelectOption={false}
-                                        myData={data}
-                                        pageSize={data.length > 10 ? 10 : data.length}
-                                        pagination={true}
-                                        class="-striped -highlight"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <Datatable
+                    multiSelectOption={false}
+                    myData={data}
+                    pageSize={data.length > 10 ? 10 : data.length}
+                    pagination={true}
+                    class="-striped -highlight"
+                />
             </Fragment>
         );
     }
 }
 
-export default CustomDataList;
+export default withRouterInnerRef(CustomDataList);
