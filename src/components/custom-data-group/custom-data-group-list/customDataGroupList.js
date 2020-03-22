@@ -1,4 +1,7 @@
 import React, { Fragment, Component } from 'react';
+
+import { withRouterInnerRef } from "../../util/withRouterInnerRef";
+
 import Datatable from '../../common/datatable';
 
 class CustomDataGroupList extends Component {
@@ -67,4 +70,4 @@ class CustomDataGroupList extends Component {
     }
 }
 
-export default CustomDataGroupList;
+export default withRouterInnerRef(CustomDataGroupList);
