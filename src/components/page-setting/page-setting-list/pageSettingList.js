@@ -41,6 +41,7 @@ class PageSettingList extends Component {
 
     render() {
         const { data } = this.state;
+        const { redirectUrl } = this.props;
 
         return (
             <Fragment>
@@ -50,7 +51,7 @@ class PageSettingList extends Component {
                     pageSize={data.length}
                     pagination={false}
                     class="-striped -highlight"
-                    childUrl={`${process.env.PUBLIC_URL}/customDataGroup`}
+                    childUrl={redirectUrl}
                 />
             </Fragment>
         );
