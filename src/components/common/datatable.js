@@ -71,10 +71,14 @@ export class Datatable extends Component {
     redirectToChild = (row) => {
         // save current selected row data to browser local storage
         localStorage.setItem("requestParam", JSON.stringify(row));
-
         this.props.history.push(this.props.childUrl) //use here
         // window.location.href = this.props.childUrl;
         // console.log(this.props)
+    }
+
+    editTrigger = (row) => {
+        localStorage.setItem("editParam", JSON.stringify(row));
+        this.props.onEditClicked();
     }
 
     render() {
@@ -166,7 +170,10 @@ export class Datatable extends Component {
                                 ></i>
                             </span>
 
-                            <span><i className="fa fa-pencil" style={{ width: 35, fontSize: 16, padding: 11, color: 'rgb(40, 167, 69)' }}></i></span>
+                            {/* edit data */}
+                            <span onClick={() => { this.editTrigger(row.original) }}>
+                                <i className="fa fa-pencil" style={{ width: 35, fontSize: 16, padding: 11, color: 'rgb(40, 167, 69)' }}></i>
+                            </span>
 
                             {/* redirect to child */}
                             <span onClick={() => { this.redirectToChild(row.original) }}>

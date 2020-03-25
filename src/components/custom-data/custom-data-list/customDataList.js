@@ -2,6 +2,7 @@ import React, { Fragment, Component } from 'react';
 import Datatable from '../../common/datatable';
 import { withRouterInnerRef } from "../../util/withRouterInnerRef";
 
+
 class CustomDataList extends Component {
     constructor(props) {
         super(props);
@@ -15,6 +16,7 @@ class CustomDataList extends Component {
             }],
             cdGroupId: 0
         }
+        // this.editRef = React.createRef();
     }
 
     componentDidMount() {
@@ -52,6 +54,11 @@ class CustomDataList extends Component {
             });
     }
 
+    activateModal = () => {
+        // this.editRef.current.toggleModal();
+        this.props.showEditModal();
+    }
+
     render() {
         const { data } = this.state;
 
@@ -63,7 +70,11 @@ class CustomDataList extends Component {
                     pageSize={data.length > 10 ? 10 : data.length}
                     pagination={true}
                     class="-striped -highlight"
+                    onEditClicked={this.activateModal}
                 />
+                {/* <div>
+                    <CustomDataEdit ref={this.editRef} />
+                </div> */}
             </Fragment>
         );
     }

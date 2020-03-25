@@ -89,7 +89,7 @@ class CustomDataAdd extends Component {
             <Fragment>
                 <Button color="primary" onClick={this.toggleModal}>Add New Custom Data</Button>
                 <Modal isOpen={modal} toggle={this.toggleModal} size="lg">
-                    <ModalHeader toggle={this.toggleModal}>Modal title</ModalHeader>
+                    <ModalHeader toggle={this.toggleModal}>New Custom Data</ModalHeader>
                     <ModalBody>
                         <form id={formName} name={formName} onSubmit={this.addNew}>
                             <div className="form-group">
