@@ -1,7 +1,7 @@
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import React, { Component, Fragment } from 'react';
 import { toast } from 'react-toastify';
-
+import CustomDataSettingsList from '../../custom-data-settings/custom-data-settings-list/customDataSettingsList';
 
 class CustomDataEdit extends Component {
 
@@ -28,6 +28,7 @@ class CustomDataEdit extends Component {
             cdId: 0
             // custom data settings add form
         }
+        this.settingsRef = React.createRef();
     }
 
     // componentDidMount() {
@@ -142,6 +143,7 @@ class CustomDataEdit extends Component {
 
                     //Trigger list refresh
                     //this.props.onAddSuccess();
+                    this.settingsRef.current.fetchData();
                 }
             }, (err) => {
                 toast.error("Server Error");
@@ -160,8 +162,8 @@ class CustomDataEdit extends Component {
             <Fragment>
                 <Modal isOpen={modal} toggle={this.toggleModal} size="lg">
                     <ModalHeader toggle={this.toggleModal}>Update Custom Data</ModalHeader>
+                    {/* custom data edit form */}
                     <ModalBody>
-                        {/* custom data edit form */}
                         <form id={cdFormName} name={cdFormName} onSubmit={this.updateCdData}>
                             <div className="form-group">
                                 <label className="col-form-label" htmlFor="cdName">Custom Data Name:</label>
@@ -180,10 +182,11 @@ class CustomDataEdit extends Component {
                                 <input className="form-control" type="text" id="cdKey" name="cdKey" value={cdKey} onChange={this.handleChange} required />
                             </div> */}
                         </form>
-                        {/* custom data edit form */}
                     </ModalBody>
+                    {/* custom data edit form */}
+
+                    {/* custom data settings form, to add new settings*/}
                     <ModalBody>
-                        {/* custom data settings form, to add new settings*/}
                         <h5>Add New Custom Data Setting</h5>
                         <form id={cdsFormName} name={cdsFormName} onSubmit={this.addNewSetting}>
                             <div className="form-group">
@@ -196,22 +199,34 @@ class CustomDataEdit extends Component {
                             </div>
                             <div className="form-group">
                                 <label className="col-form-label" htmlFor="cdsType">Setting Type:</label>
-                                <input className="form-control" type="text" id="cdsType" name="cdsType" value={cdsType} onChange={this.handleChange} required />
+                                {/* <input className="form-control" type="text" id="cdsType" name="cdsType" value={cdsType} onChange={this.handleChange} required /> */}
+                                <select className="form-control btn-pill digits" id="cdsType" name="cdsType" value={cdsType} onChange={this.handleChange} required>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                </select>
                             </div>
                             <div className="form-group">
                                 <label className="col-form-label" htmlFor="cdsSequence">Setting Sequence:</label>
                                 <input className="form-control" type="text" id="cdsSequence" name="cdsSequence" value={cdsSequence} onChange={this.handleChange} required />
                             </div>
                         </form>
-                        {/* custom data settings form, to add new settings*/}
-
-                        {/* custom data settings list */}
-                        {/* <CustomDataSettingsList /> */}
-                        {/* custom data settings list */}
+                        <Button color="primary" form={cdsFormName} type="submit">Add New Setting</Button>
                     </ModalBody>
+                    {/* custom data settings form, to add new settings*/}
+
+                    {/* custom data settings list */}
+                    <ModalBody>
+                        <div>
+                            <CustomDataSettingsList ref={this.settingsRef} />
+                        </div>
+                    </ModalBody>
+                    {/* custom data settings list */}
+
                     <ModalFooter>
                         <Button color="primary" form={cdFormName} type="submit">Save Custom Data Changes</Button>
-                        <Button color="primary" form={cdsFormName} type="submit">Add New Setting</Button>
+
                         <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
                     </ModalFooter>
                 </Modal>
