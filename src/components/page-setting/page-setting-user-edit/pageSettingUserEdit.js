@@ -37,185 +37,185 @@ class PageSettingUserEdit extends Component {
         const { pageKey } = this.state;
 
         //TODO CODE HERE
-        // fetch("/segosarem-backend/getPageSettingByKey", {
-        //     method: 'POST',
-        //     body: JSON.stringify({
-        //         pageKey: pageKey
-        //     }),
-        //     headers: {
-        //         "Content-type": "application/json; charset=UTF-8"
-        //     }
-        // }).then(res => res.json())
-        //     .then((result) => {
-        //         if (result.returnCode == "000000") {
-        //             try {
-        let result = {
-            "responseObject": {
-                "settingId": 5,
-                "pageTitle": "Welcome to Segosarem Cakboyo",
-                "pageSeoKeywords": "segosarem, cakboyo, ayam, pedas, nikmat",
-                "pageKey": "page.homepage",
-                "customDataGroupList": [
-                    {
-                        "cdGroupId": 2,
-                        "cdGroupName": "Outlet",
-                        "cdGroupDescription": "List Outlet di halaman homepage",
-                        "pageSettingId": 0,
-                        "customDataList": [
-                            {
-                                "cdId": 4,
-                                "cdValuePair": null,
-                                "cdName": "Contoh Name",
-                                "cdType": 1,
-                                "cdSequence": "3",
-                                "cdKey": "Contoh Key",
-                                "cdGroupId": null,
-                                "cdSettingList": [
-
-                                ]
-                            },
-                            {
-                                "cdId": 2,
-                                "cdValuePair": [
-                                    {
-                                        "description": {
-                                            "fieldType": 1,
-                                            "value": "This is the description for the outlet section on homepage."
-                                        }
-                                    }
-                                ],
-                                "cdName": "Outlet Section Description",
-                                "cdType": 1,
-                                "cdSequence": "1",
-                                "cdKey": "homepage.outlet.description",
-                                "cdGroupId": null,
-                                "cdSettingList": [
-                                    {
-                                        "cdsId": 4,
-                                        "cdsName": "Description Text(Max 255)",
-                                        "cdsKey": "description",
-                                        "cdsType": 1,
-                                        "cdsSequence": "1",
-                                        "cdId": null
-                                    }
-                                ]
-                            },
-                            {
-                                "cdId": 3,
-                                "cdValuePair": [
-                                    {
-                                        "outlet.description": {
-                                            "fieldType": 1,
-                                            "value": "Segosarem Cabang Kresek Raya adalah cabang pertama segosarem cak boyo."
-                                        },
-                                        "outlet.name": {
-                                            "fieldType": 1,
-                                            "value": "Segosarem Cabang Kresek Raya"
-                                        },
-                                        "outlet.trending": {
-                                            "fieldType": 2,
-                                            "value": "true"
-                                        }
-                                    }
-                                ],
-                                "cdName": "Outlet Section Carousel",
-                                "cdType": 3,
-                                "cdSequence": "2",
-                                "cdKey": "homepage.outlet.carousel",
-                                "cdGroupId": null,
-                                "cdSettingList": [
-                                    {
-                                        "cdsId": 6,
-                                        "cdsName": "Outlet Name",
-                                        "cdsKey": "outlet.name",
-                                        "cdsType": 1,
-                                        "cdsSequence": "2",
-                                        "cdId": null
-                                    },
-                                    {
-                                        "cdsId": 7,
-                                        "cdsName": "Is Outlet a Trending Outlet?",
-                                        "cdsKey": "outlet.trending",
-                                        "cdsType": 2,
-                                        "cdsSequence": "3",
-                                        "cdId": null
-                                    },
-                                    {
-                                        "cdsId": 8,
-                                        "cdsName": "Outlet Description",
-                                        "cdsKey": "outlet.description",
-                                        "cdsType": 1,
-                                        "cdsSequence": "4",
-                                        "cdId": null
-                                    },
-                                    {
-                                        "cdsId": 5,
-                                        "cdsName": "Outlet Picture",
-                                        "cdsKey": "outlet.picture",
-                                        "cdsType": 1,
-                                        "cdsSequence": "1",
-                                        "cdId": null
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "cdGroupId": 1,
-                        "cdGroupName": "Menu",
-                        "cdGroupDescription": "List menu di halaman homepage",
-                        "pageSettingId": 0,
-                        "customDataList": [
-                            {
-                                "cdId": 1,
-                                "cdValuePair": null,
-                                "cdName": "Homepage Menu",
-                                "cdType": 3,
-                                "cdSequence": "1",
-                                "cdKey": "field.menu",
-                                "cdGroupId": null,
-                                "cdSettingList": [
-                                    {
-                                        "cdsId": 3,
-                                        "cdsName": "Trending menu",
-                                        "cdsKey": "trending.menu",
-                                        "cdsType": 2,
-                                        "cdsSequence": "3",
-                                        "cdId": null
-                                    },
-                                    {
-                                        "cdsId": 2,
-                                        "cdsName": "Menu Name",
-                                        "cdsKey": "menu.name",
-                                        "cdsType": 1,
-                                        "cdsSequence": "2",
-                                        "cdId": null
-                                    },
-                                    {
-                                        "cdsId": 1,
-                                        "cdsName": "Menu Picture",
-                                        "cdsKey": "menu.picture",
-                                        "cdsType": 1,
-                                        "cdsSequence": "1",
-                                        "cdId": null
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
+        fetch("/segosarem-backend/getPageSettingByKey", {
+            method: 'POST',
+            body: JSON.stringify({
+                pageKey: pageKey
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
             }
-        }
-        this.setState({
-            data: result.responseObject.customDataGroupList
+        }).then(res => res.json())
+            .then((result) => {
+                if (result.returnCode == "000000") {
+                    try {
+        // let result = {
+        //     "responseObject": {
+        //         "settingId": 5,
+        //         "pageTitle": "Welcome to Segosarem Cakboyo",
+        //         "pageSeoKeywords": "segosarem, cakboyo, ayam, pedas, nikmat",
+        //         "pageKey": "page.homepage",
+        //         "customDataGroupList": [
+        //             {
+        //                 "cdGroupId": 2,
+        //                 "cdGroupName": "Outlet",
+        //                 "cdGroupDescription": "List Outlet di halaman homepage",
+        //                 "pageSettingId": 0,
+        //                 "customDataList": [
+        //                     {
+        //                         "cdId": 4,
+        //                         "cdValuePair": null,
+        //                         "cdName": "Contoh Name",
+        //                         "cdType": 1,
+        //                         "cdSequence": "3",
+        //                         "cdKey": "Contoh Key",
+        //                         "cdGroupId": null,
+        //                         "cdSettingList": [
+
+        //                         ]
+        //                     },
+        //                     {
+        //                         "cdId": 2,
+        //                         "cdValuePair": [
+        //                             {
+        //                                 "description": {
+        //                                     "fieldType": 1,
+        //                                     "value": "This is the description for the outlet section on homepage."
+        //                                 }
+        //                             }
+        //                         ],
+        //                         "cdName": "Outlet Section Description",
+        //                         "cdType": 1,
+        //                         "cdSequence": "1",
+        //                         "cdKey": "homepage.outlet.description",
+        //                         "cdGroupId": null,
+        //                         "cdSettingList": [
+        //                             {
+        //                                 "cdsId": 4,
+        //                                 "cdsName": "Description Text(Max 255)",
+        //                                 "cdsKey": "description",
+        //                                 "cdsType": 1,
+        //                                 "cdsSequence": "1",
+        //                                 "cdId": null
+        //                             }
+        //                         ]
+        //                     },
+        //                     {
+        //                         "cdId": 3,
+        //                         "cdValuePair": [
+        //                             {
+        //                                 "outlet.description": {
+        //                                     "fieldType": 1,
+        //                                     "value": "Segosarem Cabang Kresek Raya adalah cabang pertama segosarem cak boyo."
+        //                                 },
+        //                                 "outlet.name": {
+        //                                     "fieldType": 1,
+        //                                     "value": "Segosarem Cabang Kresek Raya"
+        //                                 },
+        //                                 "outlet.trending": {
+        //                                     "fieldType": 2,
+        //                                     "value": "true"
+        //                                 }
+        //                             }
+        //                         ],
+        //                         "cdName": "Outlet Section Carousel",
+        //                         "cdType": 3,
+        //                         "cdSequence": "2",
+        //                         "cdKey": "homepage.outlet.carousel",
+        //                         "cdGroupId": null,
+        //                         "cdSettingList": [
+        //                             {
+        //                                 "cdsId": 6,
+        //                                 "cdsName": "Outlet Name",
+        //                                 "cdsKey": "outlet.name",
+        //                                 "cdsType": 1,
+        //                                 "cdsSequence": "2",
+        //                                 "cdId": null
+        //                             },
+        //                             {
+        //                                 "cdsId": 7,
+        //                                 "cdsName": "Is Outlet a Trending Outlet?",
+        //                                 "cdsKey": "outlet.trending",
+        //                                 "cdsType": 2,
+        //                                 "cdsSequence": "3",
+        //                                 "cdId": null
+        //                             },
+        //                             {
+        //                                 "cdsId": 8,
+        //                                 "cdsName": "Outlet Description",
+        //                                 "cdsKey": "outlet.description",
+        //                                 "cdsType": 1,
+        //                                 "cdsSequence": "4",
+        //                                 "cdId": null
+        //                             },
+        //                             {
+        //                                 "cdsId": 5,
+        //                                 "cdsName": "Outlet Picture",
+        //                                 "cdsKey": "outlet.picture",
+        //                                 "cdsType": 1,
+        //                                 "cdsSequence": "1",
+        //                                 "cdId": null
+        //                             }
+        //                         ]
+        //                     }
+        //                 ]
+        //             },
+        //             {
+        //                 "cdGroupId": 1,
+        //                 "cdGroupName": "Menu",
+        //                 "cdGroupDescription": "List menu di halaman homepage",
+        //                 "pageSettingId": 0,
+        //                 "customDataList": [
+        //                     {
+        //                         "cdId": 1,
+        //                         "cdValuePair": null,
+        //                         "cdName": "Homepage Menu",
+        //                         "cdType": 3,
+        //                         "cdSequence": "1",
+        //                         "cdKey": "field.menu",
+        //                         "cdGroupId": null,
+        //                         "cdSettingList": [
+        //                             {
+        //                                 "cdsId": 3,
+        //                                 "cdsName": "Trending menu",
+        //                                 "cdsKey": "trending.menu",
+        //                                 "cdsType": 2,
+        //                                 "cdsSequence": "3",
+        //                                 "cdId": null
+        //                             },
+        //                             {
+        //                                 "cdsId": 2,
+        //                                 "cdsName": "Menu Name",
+        //                                 "cdsKey": "menu.name",
+        //                                 "cdsType": 1,
+        //                                 "cdsSequence": "2",
+        //                                 "cdId": null
+        //                             },
+        //                             {
+        //                                 "cdsId": 1,
+        //                                 "cdsName": "Menu Picture",
+        //                                 "cdsKey": "menu.picture",
+        //                                 "cdsType": 1,
+        //                                 "cdsSequence": "1",
+        //                                 "cdId": null
+        //                             }
+        //                         ]
+        //                     }
+        //                 ]
+        //             }
+        //         ]
+        //     }
+        // }
+                this.setState({
+                    data: result.responseObject.customDataGroupList
+                });
+                }
+                catch (e) {
+                    console.log(e);
+                }
+                // console.log(result.responseObject);
+            }
         });
-        //             }
-        //             catch (e) {
-        //                 console.log(e);
-        //             }
-        //             // console.log(result.responseObject);
-        //         }
-        //     });
 
     }
 
@@ -342,7 +342,7 @@ class PageSettingUserEdit extends Component {
                     }
                     return (
                         <Fragment>
-                            {this.renderInputField(fieldSettings, fieldValue.value)}
+                            {this.renderInputField(fieldSettings, fieldValue ? fieldValue.value : null)}
                             <div className="row">
                                 <div className="col-12">
                                     <div className="d-flex align-items-center justify-content-end">
