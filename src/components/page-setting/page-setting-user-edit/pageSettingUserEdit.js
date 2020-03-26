@@ -13,6 +13,8 @@ class PageSettingUserEdit extends Component {
             //Form
             addFormName:'customDataValueAddEditForm',
             activeCustomData: null,
+            activeCustomDataSetting: null,
+            activeCustomDataValue: null,
             newDataModal: true,
             //Form
             pageKey: ''
@@ -207,7 +209,187 @@ class PageSettingUserEdit extends Component {
         //     }
         // }
         // let result = {"returnCode":"000000","responseObject":{"settingId":1,"pageTitle":"Segosarem Homepage","pageSeoKeywords":"Segosarem, Cak, Boyo, Enak","pageKey":"page.homepage","customDataGroupList":[{"cdGroupId":6,"cdGroupName":"ad","cdGroupDescription":"asdawd","pageSettingId":0,"customDataList":[]},{"cdGroupId":4,"cdGroupName":"cina","cdGroupDescription":"cina 2","pageSettingId":0,"customDataList":[]},{"cdGroupId":7,"cdGroupName":"well","cdGroupDescription":"hi","pageSettingId":0,"customDataList":[]},{"cdGroupId":8,"cdGroupName":"asd","cdGroupDescription":"asdaaaaaaaaaaaaaaaaaaa","pageSettingId":0,"customDataList":[]},{"cdGroupId":3,"cdGroupName":"tes 3","cdGroupDescription":"desc 3 cms","pageSettingId":0,"customDataList":[]},{"cdGroupId":2,"cdGroupName":"group 2","cdGroupDescription":"tes tambahan dari cms","pageSettingId":0,"customDataList":[]},{"cdGroupId":1,"cdGroupName":"Bagian Menu","cdGroupDescription":"Custom data untuk menu di homepage","pageSettingId":0,"customDataList":[{"cdId":1,"cdValuePair":[{"homepage.menu.description":{"fieldType":1,"value":"Deskripsi Makanan seperti Ayam, bakwan jagung, daun singkong, sambel mantul"},"homepage.menu.title":{"fieldType":1,"value":"Title Makanan"},"homepage.menu.trending":{"fieldType":3,"value":"true"}},{"homepage.menu.title":{"fieldType":1,"value":"Title Makanan"},"homepage.menu.trending":{"fieldType":3,"value":"true"},"homepage.menu.description":{"fieldType":1,"value":"Deskripsi Makanan seperti Ayam, bakwan jagung, daun singkong, sambel mantul"}}],"cdName":"Menu List","cdType":3,"cdSequence":"1","cdKey":"homepage.menu","cdGroupId":null,"cdSettingList":[{"cdsId":3,"cdsName":"Menu Description","cdsKey":"homepage.menu.description","cdsType":1,"cdsSequence":"3","cdId":null},{"cdsId":2,"cdsName":"Menu Title","cdsKey":"homepage.menu.title","cdsType":1,"cdsSequence":"2","cdId":null},{"cdsId":4,"cdsName":"Is trending menu?","cdsKey":"homepage.menu.trending","cdsType":3,"cdsSequence":"4","cdId":null},{"cdsId":6,"cdsName":"tes name 2","cdsKey":"tes key 2","cdsType":1,"cdsSequence":"6","cdId":null},{"cdsId":7,"cdsName":"tes name 3","cdsKey":"tes key 3","cdsType":1,"cdsSequence":"7","cdId":null},{"cdsId":9,"cdsName":"setting tes 2","cdsKey":"key tes 2","cdsType":2,"cdsSequence":"10","cdId":null},{"cdsId":5,"cdsName":"tes name","cdsKey":"tes key","cdsType":1,"cdsSequence":"5","cdId":null},{"cdsId":8,"cdsName":"setting tes 1","cdsKey":"key tes","cdsType":3,"cdsSequence":"8","cdId":null},{"cdsId":1,"cdsName":"Menu Image","cdsKey":"homepage.menu.image","cdsType":2,"cdsSequence":"1","cdId":null}]},{"cdId":7,"cdValuePair":null,"cdName":"Contoh Name","cdType":1,"cdSequence":"3","cdKey":"Contoh key 2","cdGroupId":null,"cdSettingList":[]},{"cdId":8,"cdValuePair":null,"cdName":"tes baru dari cms ","cdType":1,"cdSequence":"1","cdKey":"asdasdasdasd","cdGroupId":null,"cdSettingList":[]},{"cdId":6,"cdValuePair":null,"cdName":"Contoh Name","cdType":1,"cdSequence":"4","cdKey":"Contoh key","cdGroupId":null,"cdSettingList":[]},{"cdId":9,"cdValuePair":null,"cdName":"nyahahahaha","cdType":3,"cdSequence":"2","cdKey":"custom keyeye","cdGroupId":null,"cdSettingList":[]}]},{"cdGroupId":5,"cdGroupName":"tes lagi 5","cdGroupDescription":"desc tes","pageSettingId":0,"customDataList":[]}]}};
-                this.setState({
+        
+        // let result = {
+        //     "returnCode": "000000",
+        //     "responseObject": {
+        //       "settingId": 5,
+        //       "pageTitle": "Welcome to Segosarem Cakboyo",
+        //       "pageSeoKeywords": "segosarem, cakboyo, ayam, pedas, nikmat",
+        //       "pageKey": "page.homepage",
+        //       "customDataGroupList": [
+        //         {
+        //           "cdGroupId": 2,
+        //           "cdGroupName": "Outlet",
+        //           "cdGroupDescription": "List Outlet di halaman homepage",
+        //           "pageSettingId": 0,
+        //           "customDataList": [
+        //             {
+        //               "cdId": 3,
+        //               "cdValuePair": [
+        //                 {
+        //                   "parentId": 13,
+        //                   "value": {
+        //                     "outlet.description": {
+        //                       "fieldType": 1,
+        //                       "value": "Segosarem Cabang Kresek Raya adalah cabang pertama segosarem cak boyo."
+        //                     },
+        //                     "outlet.name": {
+        //                       "fieldType": 1,
+        //                       "value": "Segosarem Cabang Kresek Raya"
+        //                     },
+        //                     "outlet.trending": {
+        //                       "fieldType": 2,
+        //                       "value": "true"
+        //                     }
+        //                   }
+        //                 }
+        //               ],
+        //               "cdName": "Outlet Section Carousel",
+        //               "cdType": 3,
+        //               "cdSequence": "2",
+        //               "cdKey": "homepage.outlet.carousel",
+        //               "cdGroupId": null,
+        //               "cdSettingList": [
+        //                 {
+        //                   "cdsId": 7,
+        //                   "cdsName": "Is Outlet a Trending Outlet?",
+        //                   "cdsKey": "outlet.trending",
+        //                   "cdsType": 2,
+        //                   "cdsSequence": "3",
+        //                   "cdId": null
+        //                 },
+        //                 {
+        //                   "cdsId": 6,
+        //                   "cdsName": "Outlet Name",
+        //                   "cdsKey": "outlet.name",
+        //                   "cdsType": 1,
+        //                   "cdsSequence": "2",
+        //                   "cdId": null
+        //                 },
+        //                 {
+        //                   "cdsId": 8,
+        //                   "cdsName": "Outlet Description",
+        //                   "cdsKey": "outlet.description",
+        //                   "cdsType": 1,
+        //                   "cdsSequence": "4",
+        //                   "cdId": null
+        //                 },
+        //                 {
+        //                   "cdsId": 5,
+        //                   "cdsName": "Outlet Picture",
+        //                   "cdsKey": "outlet.picture",
+        //                   "cdsType": 1,
+        //                   "cdsSequence": "1",
+        //                   "cdId": null
+        //                 }
+        //               ]
+        //             },
+        //             {
+        //               "cdId": 4,
+        //               "cdValuePair": null,
+        //               "cdName": "Contoh Name",
+        //               "cdType": 1,
+        //               "cdSequence": "3",
+        //               "cdKey": "Contoh Key",
+        //               "cdGroupId": null,
+        //               "cdSettingList": [
+        //                 {
+        //                   "cdsId": 9,
+        //                   "cdsName": "Contoh Name",
+        //                   "cdsKey": "Contoh Key",
+        //                   "cdsType": 1,
+        //                   "cdsSequence": "1",
+        //                   "cdId": null
+        //                 }
+        //               ]
+        //             },
+        //             {
+        //               "cdId": 2,
+        //               "cdValuePair": [
+        //                 {
+        //                   "parentId": 11,
+        //                   "value": {
+        //                     "description": {
+        //                       "fieldType": 1,
+        //                       "value": "This is the description for the outlet section on homepage."
+        //                     }
+        //                   }
+        //                 }
+        //               ],
+        //               "cdName": "Outlet Section Description",
+        //               "cdType": 1,
+        //               "cdSequence": "1",
+        //               "cdKey": "homepage.outlet.description",
+        //               "cdGroupId": null,
+        //               "cdSettingList": [
+        //                 {
+        //                   "cdsId": 4,
+        //                   "cdsName": "Description Text(Max 255)",
+        //                   "cdsKey": "description",
+        //                   "cdsType": 1,
+        //                   "cdsSequence": "1",
+        //                   "cdId": null
+        //                 }
+        //               ]
+        //             }
+        //           ]
+        //         },
+        //         {
+        //           "cdGroupId": 1,
+        //           "cdGroupName": "Menu",
+        //           "cdGroupDescription": "List menu di halaman homepage",
+        //           "pageSettingId": 0,
+        //           "customDataList": [
+        //             {
+        //               "cdId": 1,
+        //               "cdValuePair": null,
+        //               "cdName": "Homepage Menu",
+        //               "cdType": 3,
+        //               "cdSequence": "1",
+        //               "cdKey": "field.menu",
+        //               "cdGroupId": null,
+        //               "cdSettingList": [
+        //                 {
+        //                   "cdsId": 2,
+        //                   "cdsName": "Menu Name",
+        //                   "cdsKey": "menu.name",
+        //                   "cdsType": 1,
+        //                   "cdsSequence": "2",
+        //                   "cdId": null
+        //                 },
+        //                 {
+        //                   "cdsId": 1,
+        //                   "cdsName": "Menu Picture",
+        //                   "cdsKey": "menu.picture",
+        //                   "cdsType": 1,
+        //                   "cdsSequence": "1",
+        //                   "cdId": null
+        //                 },
+        //                 {
+        //                   "cdsId": 3,
+        //                   "cdsName": "Trending menu",
+        //                   "cdsKey": "trending.menu",
+        //                   "cdsType": 2,
+        //                   "cdsSequence": "3",
+        //                   "cdId": null
+        //                 }
+        //               ]
+        //             }
+        //           ]
+        //         },
+        //         {
+        //           "cdGroupId": 5,
+        //           "cdGroupName": "Test",
+        //           "cdGroupDescription": "Test 2",
+        //           "pageSettingId": 0,
+        //           "customDataList": []
+        //         }
+        //       ]
+        //     }
+        //   }
+
+            this.setState({
                     data: result.responseObject.customDataGroupList
                 });
 
@@ -236,7 +418,7 @@ class PageSettingUserEdit extends Component {
             case 2:
                 return (
                     <div className="custom-control custom-checkbox mb-3">
-                      <input className="custom-control-input" id={setting.cdsKey} type="checkbox" required />
+                      <input className="custom-control-input" id={setting.cdsKey} type="checkbox" checked={value == "true"} required />
                       <label className="custom-control-label" htmlFor={setting.cdsKey}>{setting.cdsName}</label>
                       <div className="invalid-feedback">Example invalid feedback text</div>
                     </div>
@@ -251,13 +433,14 @@ class PageSettingUserEdit extends Component {
     }
 
     //Set Active Custom Data and toggle modal
-    setActiveCustomData(customData, newData) {
+    setActiveCustomData(fieldSettings, fieldValue, newData) {
         this.setState({
-            activeCustomData: customData,
+            activeCustomDataSetting: fieldSettings,
+            activeCustomDataValue: fieldValue,
             newDataModal: newData
         }, () => {
             this.toggleModal();
-            console.log(this.state.activeCustomData, this.state.newDataModal);
+            console.log(this.state.activeCustomDataSetting, this.state.activeCustomDataValue, this.state.newDataModal);
 
         });
     }
@@ -283,8 +466,8 @@ class PageSettingUserEdit extends Component {
                                     {fieldSettings.map(setting => {
                                         return(
                                             <Fragment>
-                                                {(value[setting["cdsKey"]]) ? 
-                                                    <td>{value[setting["cdsKey"]].value}</td>
+                                                {(value["value"][setting["cdsKey"]]) ? 
+                                                    <td>{value["value"][setting["cdsKey"]].value}</td>
                                                     :
                                                     <td></td>
                                                 }
@@ -297,7 +480,7 @@ class PageSettingUserEdit extends Component {
                                             ></i>
                                         </span>
                                         <span>
-                                            <i className="fa fa-pencil" onClick={() => {this.setActiveCustomData(customData, false);}} style={{ width: 35, fontSize: 16, padding: 11, color: 'rgb(40, 167, 69)' }}></i>
+                                            <i className="fa fa-pencil" onClick={() => {this.setActiveCustomData(fieldSettings, value, false);}} style={{ width: 35, fontSize: 16, padding: 11, color: 'rgb(40, 167, 69)' }}></i>
                                         </span>
                                     </td>
                                 </tr>
@@ -347,10 +530,11 @@ class PageSettingUserEdit extends Component {
                     }
                     return (
                         <Fragment>
-                            {this.renderInputField(fieldSettings, fieldValue ? fieldValue.value : null)}
+                            {this.renderInputField(fieldSettings, fieldValue ? fieldValue.value[fieldSettings.cdsKey].value : null)}
                             <div className="row">
                                 <div className="col-12">
                                     <div className="d-flex align-items-center justify-content-end">
+                                        PARENT {fieldValue ? fieldValue.parentId : ""}
                                         <button className="btn btn-primary mr-1">Submit</button>
                                     </div>
                                 </div>
@@ -383,7 +567,7 @@ class PageSettingUserEdit extends Component {
                             <div className="row">
                                 <div className="col-12">
                                     <div className="d-flex align-items-center justify-content-end">
-                                        <button type="button" className="btn btn-primary mr-1" onClick={() => {this.setActiveCustomData(customData, true);}}>Add New</button>
+                                        <button type="button" className="btn btn-primary mr-1" onClick={() => {this.setActiveCustomData(fieldSettings, null, true);}}>Add New</button>
                                     </div>
                                 </div>
                             </div>
@@ -410,22 +594,26 @@ class PageSettingUserEdit extends Component {
     }
 
     constructModalBody = () => {
-        const { addFormName, activeCustomData, newDataModal } = this.state;
+        const { addFormName, activeCustomDataSetting, activeCustomDataValue, newDataModal } = this.state;
 
         return (
             <Fragment>
                 <ModalBody>
                     <form id={addFormName} name={addFormName}>
                         {newDataModal ? 
-                            activeCustomData.cdSettingList.map(setting => {
+                            activeCustomDataSetting.map(setting => {
                                 return this.renderInputField(setting);
                             }) 
                             : 
-                            ""
+                            activeCustomDataSetting.map(setting => {
+                                let value = activeCustomDataValue.value[setting.cdsKey];
+                                return this.renderInputField(setting, value ? value.value : "");
+                            })
                         }
                     </form>
                 </ModalBody>
                 <ModalFooter>
+                    PARENT {activeCustomDataValue ? activeCustomDataValue.parentId : ""}
                     <Button color="primary" form={addFormName} type="submit">Save Changes</Button>
                     <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
                 </ModalFooter>
@@ -434,7 +622,7 @@ class PageSettingUserEdit extends Component {
     }
 
     render() {
-        const { modal, data, activeCustomData, newDataModal } = this.state;
+        const { modal, data, activeCustomDataSetting, newDataModal } = this.state;
 
         if (!data || data.length <= 0) {
             return (
@@ -498,7 +686,7 @@ class PageSettingUserEdit extends Component {
                     })}
                     <Modal isOpen={modal} toggle={this.toggleModal} size="lg">
                         <ModalHeader toggle={this.toggleModal}>{newDataModal ? "New Value" : "Update Value"}</ModalHeader>
-                        {activeCustomData ? this.constructModalBody() : <Fragment> Loading Data... </Fragment>}
+                        {activeCustomDataSetting ? this.constructModalBody() : <Fragment> Loading Data... </Fragment>}
                     </Modal>
                 </Fragment>
             );
