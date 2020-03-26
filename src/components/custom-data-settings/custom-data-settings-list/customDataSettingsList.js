@@ -1,30 +1,26 @@
 import React, { Fragment, Component } from 'react';
 import Datatable from '../../common/datatable';
-import { withRouterInnerRef } from "../../util/withRouterInnerRef";
 
-
-class CustomDataList extends Component {
+class CustomDataSettingsList extends Component {
     constructor(props) {
         super(props);
         this.state = {
             data: [{
-                "cdId": 1,
-                "cdName": "CustomData-dummy",
-                "cdType": 3,
-                "cdSequence": "1",
-                "cdKey": "homepage.menu"
+                cdsName: '',
+                cdsKey: '',
+                cdsType: 0,
+                cdsSequence: ''
             }],
-            cdGroupId: 0
+            cdId: 0
         }
-        // this.editRef = React.createRef();
     }
 
     componentDidMount() {
-        let requestParam = localStorage.getItem("requestParam");
-        if (requestParam) {
-            requestParam = JSON.parse(requestParam);
+        let editParam = localStorage.getItem("editParam");
+        if (editParam) {
+            editParam = JSON.parse(editParam);
             this.setState({
-                cdGroupId: requestParam.cdGroupId
+                cdId: editParam.cdId
             },
                 () => {
                     this.fetchData();
@@ -33,12 +29,12 @@ class CustomDataList extends Component {
     }
 
     fetchData() {
-        const { cdGroupId } = this.state;
+        const { cdId } = this.state;
 
-        fetch("/segosarem-backend/getCustomDataListByCdGroupId", {
+        fetch("/segosarem-backend/getCdSettingsListByCdId", {
             method: 'POST',
             body: JSON.stringify({
-                cdGroupId: cdGroupId
+                cdId: cdId
             }),
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
@@ -54,11 +50,6 @@ class CustomDataList extends Component {
             });
     }
 
-    activateModal = () => {
-        // this.editRef.current.toggleModal();
-        this.props.showEditModal();
-    }
-
     render() {
         const { data } = this.state;
 
@@ -70,14 +61,10 @@ class CustomDataList extends Component {
                     pageSize={data.length > 10 ? 10 : data.length}
                     pagination={false}
                     class="-striped -highlight"
-                    onEditClicked={this.activateModal}
                 />
-                {/* <div>
-                    <CustomDataEdit ref={this.editRef} />
-                </div> */}
             </Fragment>
         );
     }
 }
 
-export default withRouterInnerRef(CustomDataList);
+export default CustomDataSettingsList;
