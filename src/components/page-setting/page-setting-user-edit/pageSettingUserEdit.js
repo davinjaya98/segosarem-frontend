@@ -206,9 +206,12 @@ class PageSettingUserEdit extends Component {
         //         ]
         //     }
         // }
+        // let result = {"returnCode":"000000","responseObject":{"settingId":1,"pageTitle":"Segosarem Homepage","pageSeoKeywords":"Segosarem, Cak, Boyo, Enak","pageKey":"page.homepage","customDataGroupList":[{"cdGroupId":6,"cdGroupName":"ad","cdGroupDescription":"asdawd","pageSettingId":0,"customDataList":[]},{"cdGroupId":4,"cdGroupName":"cina","cdGroupDescription":"cina 2","pageSettingId":0,"customDataList":[]},{"cdGroupId":7,"cdGroupName":"well","cdGroupDescription":"hi","pageSettingId":0,"customDataList":[]},{"cdGroupId":8,"cdGroupName":"asd","cdGroupDescription":"asdaaaaaaaaaaaaaaaaaaa","pageSettingId":0,"customDataList":[]},{"cdGroupId":3,"cdGroupName":"tes 3","cdGroupDescription":"desc 3 cms","pageSettingId":0,"customDataList":[]},{"cdGroupId":2,"cdGroupName":"group 2","cdGroupDescription":"tes tambahan dari cms","pageSettingId":0,"customDataList":[]},{"cdGroupId":1,"cdGroupName":"Bagian Menu","cdGroupDescription":"Custom data untuk menu di homepage","pageSettingId":0,"customDataList":[{"cdId":1,"cdValuePair":[{"homepage.menu.description":{"fieldType":1,"value":"Deskripsi Makanan seperti Ayam, bakwan jagung, daun singkong, sambel mantul"},"homepage.menu.title":{"fieldType":1,"value":"Title Makanan"},"homepage.menu.trending":{"fieldType":3,"value":"true"}},{"homepage.menu.title":{"fieldType":1,"value":"Title Makanan"},"homepage.menu.trending":{"fieldType":3,"value":"true"},"homepage.menu.description":{"fieldType":1,"value":"Deskripsi Makanan seperti Ayam, bakwan jagung, daun singkong, sambel mantul"}}],"cdName":"Menu List","cdType":3,"cdSequence":"1","cdKey":"homepage.menu","cdGroupId":null,"cdSettingList":[{"cdsId":3,"cdsName":"Menu Description","cdsKey":"homepage.menu.description","cdsType":1,"cdsSequence":"3","cdId":null},{"cdsId":2,"cdsName":"Menu Title","cdsKey":"homepage.menu.title","cdsType":1,"cdsSequence":"2","cdId":null},{"cdsId":4,"cdsName":"Is trending menu?","cdsKey":"homepage.menu.trending","cdsType":3,"cdsSequence":"4","cdId":null},{"cdsId":6,"cdsName":"tes name 2","cdsKey":"tes key 2","cdsType":1,"cdsSequence":"6","cdId":null},{"cdsId":7,"cdsName":"tes name 3","cdsKey":"tes key 3","cdsType":1,"cdsSequence":"7","cdId":null},{"cdsId":9,"cdsName":"setting tes 2","cdsKey":"key tes 2","cdsType":2,"cdsSequence":"10","cdId":null},{"cdsId":5,"cdsName":"tes name","cdsKey":"tes key","cdsType":1,"cdsSequence":"5","cdId":null},{"cdsId":8,"cdsName":"setting tes 1","cdsKey":"key tes","cdsType":3,"cdsSequence":"8","cdId":null},{"cdsId":1,"cdsName":"Menu Image","cdsKey":"homepage.menu.image","cdsType":2,"cdsSequence":"1","cdId":null}]},{"cdId":7,"cdValuePair":null,"cdName":"Contoh Name","cdType":1,"cdSequence":"3","cdKey":"Contoh key 2","cdGroupId":null,"cdSettingList":[]},{"cdId":8,"cdValuePair":null,"cdName":"tes baru dari cms ","cdType":1,"cdSequence":"1","cdKey":"asdasdasdasd","cdGroupId":null,"cdSettingList":[]},{"cdId":6,"cdValuePair":null,"cdName":"Contoh Name","cdType":1,"cdSequence":"4","cdKey":"Contoh key","cdGroupId":null,"cdSettingList":[]},{"cdId":9,"cdValuePair":null,"cdName":"nyahahahaha","cdType":3,"cdSequence":"2","cdKey":"custom keyeye","cdGroupId":null,"cdSettingList":[]}]},{"cdGroupId":5,"cdGroupName":"tes lagi 5","cdGroupDescription":"desc tes","pageSettingId":0,"customDataList":[]}]}};
                 this.setState({
                     data: result.responseObject.customDataGroupList
                 });
+
+                // console.log(result)
                 }
                 catch (e) {
                     console.log(e);
@@ -276,29 +279,31 @@ class PageSettingUserEdit extends Component {
                     {values.map(value => {
                         return (
                             <Fragment>
-                                {fieldSettings.map(setting => {
-                                    return(
-                                        <Fragment>
-                                            {(value[setting["cdsKey"]]) ? 
-                                                <td>{value[setting["cdsKey"]].value}</td>
-                                                :
-                                                <td></td>
-                                            }
-                                        </Fragment>
-                                    );
-                                })}
+                                <tr>
+                                    {fieldSettings.map(setting => {
+                                        return(
+                                            <Fragment>
+                                                {(value[setting["cdsKey"]]) ? 
+                                                    <td>{value[setting["cdsKey"]].value}</td>
+                                                    :
+                                                    <td></td>
+                                                }
+                                            </Fragment>
+                                        );
+                                    })}
+                                    <td>
+                                        <span>
+                                            <i className="fa fa-trash" style={{ width: 35, fontSize: 16, padding: 11, color: '#e4566e' }}
+                                            ></i>
+                                        </span>
+                                        <span>
+                                            <i className="fa fa-pencil" onClick={() => {this.setActiveCustomData(customData, false);}} style={{ width: 35, fontSize: 16, padding: 11, color: 'rgb(40, 167, 69)' }}></i>
+                                        </span>
+                                    </td>
+                                </tr>
                             </Fragment>
                         )
                     })}
-                    <td>
-                        <span>
-                            <i className="fa fa-trash" style={{ width: 35, fontSize: 16, padding: 11, color: '#e4566e' }}
-                            ></i>
-                        </span>
-                        <span>
-                            <i className="fa fa-pencil" onClick={() => {this.setActiveCustomData(customData, false);}} style={{ width: 35, fontSize: 16, padding: 11, color: 'rgb(40, 167, 69)' }}></i>
-                        </span>
-                    </td>
                 </Fragment>
             );
         }
@@ -312,17 +317,17 @@ class PageSettingUserEdit extends Component {
                                     <th scope="col">{setting.cdsName}</th>
                                 );
                             })}
-                            <th>Action</th>
+                            <th style={{ minWidth: 95 }}>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
                             {(fieldValue && fieldValue.length > 0) ? 
                                 renderTableValue(fieldValue)
                                 : 
-                                <td className="text-center" colSpan={fieldSettings.length + 1}>You haven't add any value yet</td>
+                                <tr>
+                                    <td className="text-center" colSpan={fieldSettings.length + 1}>You haven't add any value yet</td>
+                                </tr>
                             }
-                        </tr>
                     </tbody>
                 </table>
             </div>
