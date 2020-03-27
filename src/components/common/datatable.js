@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { withRouter } from "react-router-dom";
@@ -204,7 +204,6 @@ export class Datatable extends Component {
                     className={myClass}
                     showPagination={pagination}
                 />
-                <ToastContainer />
             </Fragment>
         )
     }

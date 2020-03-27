@@ -1,5 +1,4 @@
 import React, { Fragment, useRef } from 'react';
-import { ToastContainer } from 'react-toastify';
 import Breadcrumb from '../components/common/breadcrumb';
 import PageSettingUserEdit from '../components/page-setting/page-setting-user-edit/pageSettingUserEdit';
 
@@ -19,7 +18,6 @@ const PageSetting = () => {
             <PageSettingUserEdit />
         </div>
       </div>
-      <ToastContainer />
     </Fragment>
   );
 };

@@ -1,5 +1,4 @@
 import React, { Fragment, useRef } from 'react';
-import { ToastContainer } from 'react-toastify';
 import Breadcrumb from '../components/common/breadcrumb';
 import PageSettingAdd from '../components/page-setting/page-setting-add/pageSettingAdd';
 import PageSettingList from '../components/page-setting/page-setting-list/pageSettingList';
@@ -40,7 +39,6 @@ const PortalConfig = () => {
           </div>
         </div>
       </div>
-      <ToastContainer />
     </Fragment>
   );
 };
