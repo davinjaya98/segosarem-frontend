@@ -24,7 +24,7 @@ class CustomDataEdit extends Component {
             cdsId: 0,
             cdsName: '',
             cdsKey: '',
-            cdsType: 0,
+            cdsType: 1,
             cdsSequence: '',
             cdId: 0
             // custom data settings add form
@@ -53,7 +53,12 @@ class CustomDataEdit extends Component {
                     cdType: editParam.cdType,
                     cdSequence: editParam.cdSequence,
                     cdKey: editParam.cdKey,
-                    cdId: editParam.cdId
+                    cdId: editParam.cdId,
+
+                    cdsName: '',
+                    cdsKey: '',
+                    cdsType: 1,
+                    cdsSequence: '',
                 });
             }
         );
@@ -86,9 +91,9 @@ class CustomDataEdit extends Component {
         }).then(res => res.json())
             .then((result) => {
                 if (result.returnCode == "000000") {
-                    this.setState({
-                        data: result.responseObject
-                    });
+                    // this.setState({
+                    //     data: result.responseObject
+                    // });
 
                     //Trigger success notification
                     toast.success("Successfully Updated");
@@ -107,7 +112,7 @@ class CustomDataEdit extends Component {
     addNewSetting = (event) => {
         const { cdsName, cdsKey, cdsType, cdsSequence, cdId } = this.state;
 
-        console.log("setting add triggered");
+        //console.log("setting add triggered");
 
         event.preventDefault();
 
@@ -134,7 +139,7 @@ class CustomDataEdit extends Component {
                 if (result.returnCode == "000000") {
                     this.setState({
                         data: result.responseObject,
-                        cdId: 0,
+                        // cdId: 0,
                         cdsKey: '',
                         cdsName: '',
                         cdsSequence: '',
@@ -144,7 +149,7 @@ class CustomDataEdit extends Component {
                     //Trigger success notification
                     toast.success("Successfully Added New Settings");
 
-                    console.log("success add setting");
+                    //console.log("success add setting");
 
                     //Trigger list refresh
                     //this.props.onAddSuccess();
@@ -237,10 +242,10 @@ class CustomDataEdit extends Component {
                                 <label className="col-form-label" htmlFor="cdsType">Setting Type:</label>
                                 {/* <input className="form-control" type="text" id="cdsType" name="cdsType" value={cdsType} onChange={this.handleChange} required /> */}
                                 <select className="form-control btn-pill digits" id="cdsType" name="cdsType" value={cdsType} onChange={this.handleChange} required>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
+                                    <option value="1">1 - Textfield</option>
+                                    <option value="2">2 - Checkbox</option>
+                                    <option value="3">3 - Image Upload</option>
+                                    <option value="4">4 - Text Area</option>
                                 </select>
                             </div>
                             <div className="form-group">
