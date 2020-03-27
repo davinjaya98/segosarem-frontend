@@ -81,6 +81,11 @@ export class Datatable extends Component {
         this.props.onEditClicked();
     }
 
+    deleteTrigger = (row) => {
+        localStorage.setItem("deleteParam", JSON.stringify(row));
+        this.props.onDeleteTriggered();
+    }
+
     render() {
         const { pageSize, myClass, multiSelectOption, pagination } = this.props;
         const { myData } = this.state
@@ -159,11 +164,12 @@ export class Datatable extends Component {
 
                             <span onClick={() => {
                                 if (window.confirm('Are you sure you wish to delete this item?')) {
-                                    let data = myData;
-                                    data.splice(row.index, 1);
-                                    this.setState({ myData: data });
+                                    // let data = myData;
+                                    // data.splice(row.index, 1);
+                                    // this.setState({ myData: data });
+                                    this.deleteTrigger(row.original);
                                 }
-                                toast.success("Successfully Deleted !")
+                                // toast.success("Successfully Deleted !")
 
                             }}>
                                 <i className="fa fa-trash" style={{ width: 35, fontSize: 16, padding: 11, color: '#e4566e' }}

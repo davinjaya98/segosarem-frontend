@@ -50,6 +50,10 @@ class CustomDataSettingsList extends Component {
             });
     }
 
+    triggerDelete = () => {
+        this.props.onDeleteClicked();
+    }
+
     render() {
         const { data } = this.state;
 
@@ -61,6 +65,7 @@ class CustomDataSettingsList extends Component {
                     pageSize={data.length > 10 ? 10 : data.length}
                     pagination={false}
                     class="-striped -highlight"
+                    onDeleteTriggered={this.triggerDelete}
                 />
             </Fragment>
         );

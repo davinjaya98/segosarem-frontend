@@ -21,6 +21,7 @@ class CustomDataEdit extends Component {
             // custom data details
 
             // custom data settings add form
+            cdsId: 0,
             cdsName: '',
             cdsKey: '',
             cdsType: 0,
@@ -106,6 +107,8 @@ class CustomDataEdit extends Component {
     addNewSetting = (event) => {
         const { cdsName, cdsKey, cdsType, cdsSequence, cdId } = this.state;
 
+        console.log("setting add triggered");
+
         event.preventDefault();
 
         // save new setting
@@ -141,6 +144,8 @@ class CustomDataEdit extends Component {
                     //Trigger success notification
                     toast.success("Successfully Added New Settings");
 
+                    console.log("success add setting");
+
                     //Trigger list refresh
                     //this.props.onAddSuccess();
                     this.settingsRef.current.fetchData();
@@ -150,8 +155,39 @@ class CustomDataEdit extends Component {
             });
     }
 
-    updateCdsData = () => {
+    deleteCdsData = () => {
+        console.log("delete function triggered");
 
+        let deleteParam = localStorage.getItem("deleteParam");
+        deleteParam = JSON.parse(deleteParam);
+
+        this.setState({
+            cdsId: deleteParam.cdsId
+        },
+            () => {
+                const { cdsId } = this.state;
+
+                fetch("/segosarem-backend/deleteCustomDataSetting", {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        entityId: cdsId
+                    }),
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8"
+                    }
+                }).then(res => res.json())
+                    .then((result) => {
+                        if (result.returnCode == "000000") {
+                            //Trigger success notification
+                            toast.success("Successfully Deleted Settings");
+
+                            //Trigger list refresh
+                            this.settingsRef.current.fetchData();
+                        }
+                    }, (err) => {
+                        toast.error("Server Error");
+                    });
+            });
     }
 
     render() {
@@ -219,14 +255,13 @@ class CustomDataEdit extends Component {
                     {/* custom data settings list */}
                     <ModalBody>
                         <div>
-                            <CustomDataSettingsList ref={this.settingsRef} />
+                            <CustomDataSettingsList ref={this.settingsRef} onDeleteClicked={this.deleteCdsData} />
                         </div>
                     </ModalBody>
                     {/* custom data settings list */}
 
                     <ModalFooter>
                         <Button color="primary" form={cdFormName} type="submit">Save Custom Data Changes</Button>
-
                         <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
                     </ModalFooter>
                 </Modal>
