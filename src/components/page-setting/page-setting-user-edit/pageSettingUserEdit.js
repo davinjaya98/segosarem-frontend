@@ -257,18 +257,15 @@ class PageSettingUserEdit extends Component {
             this.setState({
                     formFieldEntities: fields
                 }, () => {
-                    console.log(this.state.formFieldEntities)
                     this.setState({
                         data: result.responseObject.customDataGroupList,
                     })
                 });
 
-                console.log(result)
                 }
                 catch (e) {
                     console.log(e);
                 }
-                console.log(result.responseObject);
             }
         });
 
@@ -338,9 +335,29 @@ class PageSettingUserEdit extends Component {
             newDataModal: newData
         }, () => {
             this.toggleModal();
-            console.log(this.state.activeCustomDataSetting, this.state.activeCustomDataValue, this.state.newDataModal);
-
         });
+    }
+
+    deleteCustomDataValue(parentId) {
+        
+        fetch("/segosarem-backend/deleteCustomDataValue", {
+            method: 'POST',
+            body: JSON.stringify({
+                entityId: parentId
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }).then(res => res.json())
+            .then((result) => {
+                if (result.returnCode == "000000") {
+                    //Trigger success notification
+                    toast.success("Successfully Deleted!");
+                    this.fetchData();
+                }
+            });
+                
+                
     }
 
     renderMultiTable = (fieldSettings, fieldValue, customData) => {
@@ -374,7 +391,7 @@ class PageSettingUserEdit extends Component {
                                     })}
                                     <td>
                                         <span>
-                                            <i className="fa fa-trash" style={{ width: 35, fontSize: 16, padding: 11, color: '#e4566e' }}
+                                            <i className="fa fa-trash" onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?')) this.deleteCustomDataValue(value.parentId)}} style={{ width: 35, fontSize: 16, padding: 11, color: '#e4566e' }}
                                             ></i>
                                         </span>
                                         <span>
@@ -593,7 +610,6 @@ class PageSettingUserEdit extends Component {
                 toast.error("Server Error");
             });
 
-        // console.log(formData);
     }
 
     render() {
