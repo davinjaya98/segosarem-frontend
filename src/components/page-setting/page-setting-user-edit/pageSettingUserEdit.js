@@ -1,5 +1,7 @@
 import React, { Fragment, Component } from 'react';
 
+import { toast } from 'react-toastify';
+
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 import { withRouter } from "react-router-dom";
@@ -12,10 +14,11 @@ class PageSettingUserEdit extends Component {
             data: [],
             //Form
             addFormName:'customDataValueAddEditForm',
-            activeCustomData: null,
+            activeCdId: null,
             activeCustomDataSetting: null,
             activeCustomDataValue: null,
             newDataModal: true,
+            formFieldEntities: {},
             //Form
             pageKey: ''
         }
@@ -51,165 +54,7 @@ class PageSettingUserEdit extends Component {
             .then((result) => {
                 if (result.returnCode == "000000") {
                     try {
-        // let result = {
-        //     "responseObject": {
-        //         "settingId": 5,
-        //         "pageTitle": "Welcome to Segosarem Cakboyo",
-        //         "pageSeoKeywords": "segosarem, cakboyo, ayam, pedas, nikmat",
-        //         "pageKey": "page.homepage",
-        //         "customDataGroupList": [
-        //             {
-        //                 "cdGroupId": 2,
-        //                 "cdGroupName": "Outlet",
-        //                 "cdGroupDescription": "List Outlet di halaman homepage",
-        //                 "pageSettingId": 0,
-        //                 "customDataList": [
-        //                     {
-        //                         "cdId": 4,
-        //                         "cdValuePair": null,
-        //                         "cdName": "Contoh Name",
-        //                         "cdType": 1,
-        //                         "cdSequence": "3",
-        //                         "cdKey": "Contoh Key",
-        //                         "cdGroupId": null,
-        //                         "cdSettingList": [
 
-        //                         ]
-        //                     },
-        //                     {
-        //                         "cdId": 2,
-        //                         "cdValuePair": [
-        //                             {
-        //                                 "description": {
-        //                                     "fieldType": 1,
-        //                                     "value": "This is the description for the outlet section on homepage."
-        //                                 }
-        //                             }
-        //                         ],
-        //                         "cdName": "Outlet Section Description",
-        //                         "cdType": 1,
-        //                         "cdSequence": "1",
-        //                         "cdKey": "homepage.outlet.description",
-        //                         "cdGroupId": null,
-        //                         "cdSettingList": [
-        //                             {
-        //                                 "cdsId": 4,
-        //                                 "cdsName": "Description Text(Max 255)",
-        //                                 "cdsKey": "description",
-        //                                 "cdsType": 1,
-        //                                 "cdsSequence": "1",
-        //                                 "cdId": null
-        //                             }
-        //                         ]
-        //                     },
-        //                     {
-        //                         "cdId": 3,
-        //                         "cdValuePair": [
-        //                             {
-        //                                 "outlet.description": {
-        //                                     "fieldType": 1,
-        //                                     "value": "Segosarem Cabang Kresek Raya adalah cabang pertama segosarem cak boyo."
-        //                                 },
-        //                                 "outlet.name": {
-        //                                     "fieldType": 1,
-        //                                     "value": "Segosarem Cabang Kresek Raya"
-        //                                 },
-        //                                 "outlet.trending": {
-        //                                     "fieldType": 2,
-        //                                     "value": "true"
-        //                                 }
-        //                             }
-        //                         ],
-        //                         "cdName": "Outlet Section Carousel",
-        //                         "cdType": 3,
-        //                         "cdSequence": "2",
-        //                         "cdKey": "homepage.outlet.carousel",
-        //                         "cdGroupId": null,
-        //                         "cdSettingList": [
-        //                             {
-        //                                 "cdsId": 6,
-        //                                 "cdsName": "Outlet Name",
-        //                                 "cdsKey": "outlet.name",
-        //                                 "cdsType": 1,
-        //                                 "cdsSequence": "2",
-        //                                 "cdId": null
-        //                             },
-        //                             {
-        //                                 "cdsId": 7,
-        //                                 "cdsName": "Is Outlet a Trending Outlet?",
-        //                                 "cdsKey": "outlet.trending",
-        //                                 "cdsType": 2,
-        //                                 "cdsSequence": "3",
-        //                                 "cdId": null
-        //                             },
-        //                             {
-        //                                 "cdsId": 8,
-        //                                 "cdsName": "Outlet Description",
-        //                                 "cdsKey": "outlet.description",
-        //                                 "cdsType": 1,
-        //                                 "cdsSequence": "4",
-        //                                 "cdId": null
-        //                             },
-        //                             {
-        //                                 "cdsId": 5,
-        //                                 "cdsName": "Outlet Picture",
-        //                                 "cdsKey": "outlet.picture",
-        //                                 "cdsType": 1,
-        //                                 "cdsSequence": "1",
-        //                                 "cdId": null
-        //                             }
-        //                         ]
-        //                     }
-        //                 ]
-        //             },
-        //             {
-        //                 "cdGroupId": 1,
-        //                 "cdGroupName": "Menu",
-        //                 "cdGroupDescription": "List menu di halaman homepage",
-        //                 "pageSettingId": 0,
-        //                 "customDataList": [
-        //                     {
-        //                         "cdId": 1,
-        //                         "cdValuePair": null,
-        //                         "cdName": "Homepage Menu",
-        //                         "cdType": 3,
-        //                         "cdSequence": "1",
-        //                         "cdKey": "field.menu",
-        //                         "cdGroupId": null,
-        //                         "cdSettingList": [
-        //                             {
-        //                                 "cdsId": 3,
-        //                                 "cdsName": "Trending menu",
-        //                                 "cdsKey": "trending.menu",
-        //                                 "cdsType": 2,
-        //                                 "cdsSequence": "3",
-        //                                 "cdId": null
-        //                             },
-        //                             {
-        //                                 "cdsId": 2,
-        //                                 "cdsName": "Menu Name",
-        //                                 "cdsKey": "menu.name",
-        //                                 "cdsType": 1,
-        //                                 "cdsSequence": "2",
-        //                                 "cdId": null
-        //                             },
-        //                             {
-        //                                 "cdsId": 1,
-        //                                 "cdsName": "Menu Picture",
-        //                                 "cdsKey": "menu.picture",
-        //                                 "cdsType": 1,
-        //                                 "cdsSequence": "1",
-        //                                 "cdId": null
-        //                             }
-        //                         ]
-        //                     }
-        //                 ]
-        //             }
-        //         ]
-        //     }
-        // }
-        // let result = {"returnCode":"000000","responseObject":{"settingId":1,"pageTitle":"Segosarem Homepage","pageSeoKeywords":"Segosarem, Cak, Boyo, Enak","pageKey":"page.homepage","customDataGroupList":[{"cdGroupId":6,"cdGroupName":"ad","cdGroupDescription":"asdawd","pageSettingId":0,"customDataList":[]},{"cdGroupId":4,"cdGroupName":"cina","cdGroupDescription":"cina 2","pageSettingId":0,"customDataList":[]},{"cdGroupId":7,"cdGroupName":"well","cdGroupDescription":"hi","pageSettingId":0,"customDataList":[]},{"cdGroupId":8,"cdGroupName":"asd","cdGroupDescription":"asdaaaaaaaaaaaaaaaaaaa","pageSettingId":0,"customDataList":[]},{"cdGroupId":3,"cdGroupName":"tes 3","cdGroupDescription":"desc 3 cms","pageSettingId":0,"customDataList":[]},{"cdGroupId":2,"cdGroupName":"group 2","cdGroupDescription":"tes tambahan dari cms","pageSettingId":0,"customDataList":[]},{"cdGroupId":1,"cdGroupName":"Bagian Menu","cdGroupDescription":"Custom data untuk menu di homepage","pageSettingId":0,"customDataList":[{"cdId":1,"cdValuePair":[{"homepage.menu.description":{"fieldType":1,"value":"Deskripsi Makanan seperti Ayam, bakwan jagung, daun singkong, sambel mantul"},"homepage.menu.title":{"fieldType":1,"value":"Title Makanan"},"homepage.menu.trending":{"fieldType":3,"value":"true"}},{"homepage.menu.title":{"fieldType":1,"value":"Title Makanan"},"homepage.menu.trending":{"fieldType":3,"value":"true"},"homepage.menu.description":{"fieldType":1,"value":"Deskripsi Makanan seperti Ayam, bakwan jagung, daun singkong, sambel mantul"}}],"cdName":"Menu List","cdType":3,"cdSequence":"1","cdKey":"homepage.menu","cdGroupId":null,"cdSettingList":[{"cdsId":3,"cdsName":"Menu Description","cdsKey":"homepage.menu.description","cdsType":1,"cdsSequence":"3","cdId":null},{"cdsId":2,"cdsName":"Menu Title","cdsKey":"homepage.menu.title","cdsType":1,"cdsSequence":"2","cdId":null},{"cdsId":4,"cdsName":"Is trending menu?","cdsKey":"homepage.menu.trending","cdsType":3,"cdsSequence":"4","cdId":null},{"cdsId":6,"cdsName":"tes name 2","cdsKey":"tes key 2","cdsType":1,"cdsSequence":"6","cdId":null},{"cdsId":7,"cdsName":"tes name 3","cdsKey":"tes key 3","cdsType":1,"cdsSequence":"7","cdId":null},{"cdsId":9,"cdsName":"setting tes 2","cdsKey":"key tes 2","cdsType":2,"cdsSequence":"10","cdId":null},{"cdsId":5,"cdsName":"tes name","cdsKey":"tes key","cdsType":1,"cdsSequence":"5","cdId":null},{"cdsId":8,"cdsName":"setting tes 1","cdsKey":"key tes","cdsType":3,"cdsSequence":"8","cdId":null},{"cdsId":1,"cdsName":"Menu Image","cdsKey":"homepage.menu.image","cdsType":2,"cdsSequence":"1","cdId":null}]},{"cdId":7,"cdValuePair":null,"cdName":"Contoh Name","cdType":1,"cdSequence":"3","cdKey":"Contoh key 2","cdGroupId":null,"cdSettingList":[]},{"cdId":8,"cdValuePair":null,"cdName":"tes baru dari cms ","cdType":1,"cdSequence":"1","cdKey":"asdasdasdasd","cdGroupId":null,"cdSettingList":[]},{"cdId":6,"cdValuePair":null,"cdName":"Contoh Name","cdType":1,"cdSequence":"4","cdKey":"Contoh key","cdGroupId":null,"cdSettingList":[]},{"cdId":9,"cdValuePair":null,"cdName":"nyahahahaha","cdType":3,"cdSequence":"2","cdKey":"custom keyeye","cdGroupId":null,"cdSettingList":[]}]},{"cdGroupId":5,"cdGroupName":"tes lagi 5","cdGroupDescription":"desc tes","pageSettingId":0,"customDataList":[]}]}};
-        
         // let result = {
         //     "returnCode": "000000",
         //     "responseObject": {
@@ -389,38 +234,86 @@ class PageSettingUserEdit extends Component {
         //     }
         //   }
 
+           let fields = {};
+
+            result.responseObject.customDataGroupList.forEach((cdGroup) => {
+                cdGroup.customDataList.forEach((customData) => {
+                    if(customData.cdSettingList && customData.cdSettingList.length > 0) {
+                        //Attempting to create formFieldEntities
+                        customData.cdSettingList.forEach((cdSetting) => {
+                            fields[cdSetting.cdsKey] = null;
+                        });
+                    }
+                    if(customData.cdValuePair && customData.cdValuePair.length > 0) {
+                        customData.cdValuePair.forEach((cdValue) => {
+                            for(let [key, value ] of Object.entries(cdValue.value)) {
+                                fields[key + cdValue.parentId] = value.value;
+                            }
+                        })
+                    }
+                });
+            });
+
             this.setState({
-                    data: result.responseObject.customDataGroupList
+                    formFieldEntities: fields
+                }, () => {
+                    console.log(this.state.formFieldEntities)
+                    this.setState({
+                        data: result.responseObject.customDataGroupList,
+                    })
                 });
 
-                // console.log(result)
+                console.log(result)
                 }
                 catch (e) {
                     console.log(e);
                 }
-                // console.log(result.responseObject);
+                console.log(result.responseObject);
             }
         });
 
     }
 
-    renderInputField(setting, value) {
+    handleChange = (event) => {
+        const target = event.target;
+        
+        this.setState({
+            formFieldEntities: {
+                [target.name]: target.value
+            }
+        });
+    }
+
+    renderInputField(setting, value, parentId) {
+        const { formFieldEntities } = this.state;
+
+        //Register to formFieldEntities first
+        // if(!formFieldEntities[setting.cdsKey]) {
+        //     this.setState({
+        //         formFieldEntities: {
+        //             [setting.cdsKey]: value
+        //         }
+        //     }, () => {
+        //     });
+        // }
         switch(setting.cdsType) {
             //Text field
             case 1:
                 return (
                     <div className="form-group">
-                        <label className="col-form-label" htmlFor={setting.cdsKey}>{setting.cdsName}</label>
-                        <input className="form-control" type="text" id={setting.cdsKey} name={setting.cdsKey} value={value ? value : ""}/>
+                        PARENT ID IS {parentId}<br />
+                        <label className="col-form-label" htmlFor={setting.cdsKey + parentId}>{setting.cdsName}</label>
+                        <input className="form-control" type="text" id={setting.cdsKey + parentId} name={setting.cdsKey} value={formFieldEntities[setting.cdsKey + parentId]} setting-id={setting.cdsId} onChange={ this.handleChange }/>
                     </div>
                 );
             //Checkboxes
             case 2:
                 return (
                     <div className="custom-control custom-checkbox mb-3">
-                      <input className="custom-control-input" id={setting.cdsKey} type="checkbox" checked={value == "true"} required />
-                      <label className="custom-control-label" htmlFor={setting.cdsKey}>{setting.cdsName}</label>
-                      <div className="invalid-feedback">Example invalid feedback text</div>
+                        <input className="custom-control-input" name={setting.cdsKey} type="hidden" value="false" setting-id={setting.cdsId} />
+                        <input className="custom-control-input" id={setting.cdsKey + parentId} name={setting.cdsKey} type="checkbox" defaultChecked={formFieldEntities[setting.cdsKey + parentId] == "true"} value="true" setting-id={setting.cdsId} onChange={ this.handleChange } />
+                        <label className="custom-control-label" htmlFor={setting.cdsKey + parentId}>{setting.cdsName}</label>
+                        <div className="invalid-feedback">Example invalid feedback text</div>
                     </div>
                 );
             //Blob
@@ -433,8 +326,9 @@ class PageSettingUserEdit extends Component {
     }
 
     //Set Active Custom Data and toggle modal
-    setActiveCustomData(fieldSettings, fieldValue, newData) {
+    setActiveCustomData(cdId, fieldSettings, fieldValue, newData) {
         this.setState({
+            activeCdId: cdId,
             activeCustomDataSetting: fieldSettings,
             activeCustomDataValue: fieldValue,
             newDataModal: newData
@@ -480,7 +374,7 @@ class PageSettingUserEdit extends Component {
                                             ></i>
                                         </span>
                                         <span>
-                                            <i className="fa fa-pencil" onClick={() => {this.setActiveCustomData(fieldSettings, value, false);}} style={{ width: 35, fontSize: 16, padding: 11, color: 'rgb(40, 167, 69)' }}></i>
+                                            <i className="fa fa-pencil" onClick={() => {this.setActiveCustomData(customData.cdId, fieldSettings, value, false);}} style={{ width: 35, fontSize: 16, padding: 11, color: 'rgb(40, 167, 69)' }}></i>
                                         </span>
                                     </td>
                                 </tr>
@@ -530,11 +424,12 @@ class PageSettingUserEdit extends Component {
                     }
                     return (
                         <Fragment>
-                            {this.renderInputField(fieldSettings, fieldValue ? fieldValue.value[fieldSettings.cdsKey].value : null)}
+                            <input type="hidden" name="cdId" value={customData.cdId} />
+                            <input type="hidden" name="parentId" value={fieldValue ? fieldValue.parentId : ""}></input>
+                            {this.renderInputField(fieldSettings, (fieldValue ? fieldValue.value[fieldSettings.cdsKey].value : null), (fieldValue ? fieldValue.parentId : ""))}
                             <div className="row">
                                 <div className="col-12">
                                     <div className="d-flex align-items-center justify-content-end">
-                                        PARENT {fieldValue ? fieldValue.parentId : ""}
                                         <button className="btn btn-primary mr-1">Submit</button>
                                     </div>
                                 </div>
@@ -567,7 +462,7 @@ class PageSettingUserEdit extends Component {
                             <div className="row">
                                 <div className="col-12">
                                     <div className="d-flex align-items-center justify-content-end">
-                                        <button type="button" className="btn btn-primary mr-1" onClick={() => {this.setActiveCustomData(fieldSettings, null, true);}}>Add New</button>
+                                        <button type="button" className="btn btn-primary mr-1" onClick={() => {this.setActiveCustomData(customData.cdId, fieldSettings, null, true);}}>Add New</button>
                                     </div>
                                 </div>
                             </div>
@@ -594,31 +489,100 @@ class PageSettingUserEdit extends Component {
     }
 
     constructModalBody = () => {
-        const { addFormName, activeCustomDataSetting, activeCustomDataValue, newDataModal } = this.state;
+        const { addFormName, activeCdId, activeCustomDataSetting, activeCustomDataValue, newDataModal } = this.state;
+
+        let parentId = activeCustomDataValue ? activeCustomDataValue.parentId : "";
 
         return (
             <Fragment>
                 <ModalBody>
-                    <form id={addFormName} name={addFormName}>
+                    <form id={addFormName} name={addFormName} onSubmit={(e) => this.doSubmit(e, addFormName)}>
+                        <input type="hidden" name="cdId" value={activeCdId} />
+                        <input type="hidden" name="parentId" value={parentId} />
                         {newDataModal ? 
                             activeCustomDataSetting.map(setting => {
-                                return this.renderInputField(setting);
+                                return this.renderInputField(setting, null, parentId);
                             }) 
                             : 
                             activeCustomDataSetting.map(setting => {
                                 let value = activeCustomDataValue.value[setting.cdsKey];
-                                return this.renderInputField(setting, value ? value.value : "");
+                                return this.renderInputField(setting, (value ? value.value : ""), parentId);
                             })
                         }
                     </form>
                 </ModalBody>
                 <ModalFooter>
-                    PARENT {activeCustomDataValue ? activeCustomDataValue.parentId : ""}
                     <Button color="primary" form={addFormName} type="submit">Save Changes</Button>
                     <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
                 </ModalFooter>
             </Fragment>
         );
+    }
+
+    doSubmit = (event, formId, parentId) => {
+        event.preventDefault();
+        //Use FormID and get data using jquery form to cater for dynamic form
+        let formElem = document.getElementById(formId);
+        let formData = new FormData(formElem);
+        let request = {
+            valueBeans: []
+        }
+
+        for (let [key,value] of formData.entries()){
+            if(key == "parentId") {
+                if(value) {
+                    request.parentId = value;
+                }
+            }
+            else if(key == "cdId") {
+                request.cdId = value;
+            }
+            else {
+
+                let foundData = request.valueBeans.find(x => x.cdValueKey == key);
+                if(foundData) {
+                    foundData.cdValue = value;
+                }
+                else {
+                    let field = {
+                        cdValueKey: key,
+                        cdValue: value,
+                        cdsId: document.getElementById(key+formData.get("parentId")).getAttribute("setting-id")
+                    }
+                    request.valueBeans.push(field);
+                }
+            }
+        };
+        
+
+        fetch("/segosarem-backend/addOrUpdateCustomDataValue", {
+            method: 'POST',
+            body: JSON.stringify(request),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }).then(res => res.json())
+            .then((result) => {
+                if (result.returnCode == "000000") {
+                    // this.setState({
+                    //     data: result.responseObject
+                    // });
+
+                    //Trigger success notification
+                    toast.success("Successfully Added!");
+                    this.fetchData();
+
+                    //Close the modal
+                    this.toggleModal();
+
+                    //Trigger list refresh
+                    // this.props.onAddSuccess();
+                }
+            },(err) => {
+                toast.error("Server Error");
+            });
+
+        // console.log(formData);
     }
 
     render() {
@@ -659,24 +623,24 @@ class PageSettingUserEdit extends Component {
                                     <div className="card-body datatable-react">
                                         <div className="row">
                                             <div className="col-12">
-                                                <form id={formName} name={formName} className="theme-form">
-                                                    {(customGroup.customDataList && customGroup.customDataList.length > 0) ?
-                                                        <Fragment>
-                                                            {customGroup.customDataList.map((customData, index) => {
-                                                                // return this.renderInputSectionBasedOnType(customData);
-                                                                return (
-                                                                    <Fragment>
+                                                {(customGroup.customDataList && customGroup.customDataList.length > 0) ?
+                                                    <Fragment>
+                                                        {customGroup.customDataList.map((customData, index) => {
+                                                            // return this.renderInputSectionBasedOnType(customData);
+                                                            return (
+                                                                <Fragment>
+                                                                    <form id={formName + index} name={formName + index} className="theme-form" onSubmit={(e) => this.doSubmit(e, formName + index)}>
                                                                         {(index != 0) ? <hr className="mt-4 mb-4"></hr> : ""}
                                                                         <h6>{customData.cdName}</h6>
                                                                         {this.renderSectionBasedOnType(customData)}
-                                                                    </Fragment>
-                                                                );
-                                                            })}
-                                                        </Fragment>
-                                                        :
-                                                        <span>Please configure the fields first!</span>
-                                                    }
-                                                </form>
+                                                                    </form>
+                                                                </Fragment>
+                                                            );
+                                                        })}
+                                                    </Fragment>
+                                                    :
+                                                    <span>Please configure the fields first!</span>
+                                                }
                                             </div>
                                         </div>
                                     </div>
