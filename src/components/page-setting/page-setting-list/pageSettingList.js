@@ -9,7 +9,9 @@ class PageSettingList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: []
+            data: [],
+            excludeDelete: this.props.excludeDelete,
+            excludeEdit: this.props.excludeEdit
         }
     }
 
@@ -48,14 +50,19 @@ class PageSettingList extends Component {
     }
 
     render() {
-        const { data } = this.state;
+        const { data, excludeDelete, excludeEdit } = this.state;
         const { redirectUrl } = this.props;
+
+        const columnsToShow = ["pageTitle", "pageDescription", "pageSeoKeywords", "pageKey"];
 
         return (
             <Fragment>
                 <Datatable
                     multiSelectOption={false}
                     myData={data}
+                    columnsToShow={columnsToShow}
+                    excludeDelete={excludeDelete}
+                    excludeEdit={excludeEdit}
                     pageSize={data.length}
                     pagination={false}
                     class="-striped -highlight"

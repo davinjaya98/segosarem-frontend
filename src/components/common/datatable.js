@@ -87,11 +87,26 @@ export class Datatable extends Component {
     }
 
     render() {
-        const { pageSize, myClass, multiSelectOption, pagination } = this.props;
-        const { myData } = this.state
+        const { pageSize, myClass, multiSelectOption, pagination, columnsToShow, excludeDelete, excludeEdit } = this.props;
+        const { myData } = this.state;
+
+        let dataToRender = [];
+        // console.log(columnsToShow, myData);
+        if (columnsToShow && columnsToShow.length > 0) {
+            myData.forEach((thisData) => {
+                let tempData = {}
+                columnsToShow.forEach((thisColumn) => {
+                    tempData[thisColumn] = thisData[thisColumn];
+                });
+                dataToRender.push(tempData);
+            });
+        }
+        else {
+            dataToRender = myData;
+        }
 
         const columns = [];
-        for (var key in myData[0]) {
+        for (var key in dataToRender[0]) {
 
             let editable = this.renderEditable
             if (key === "image") {
@@ -161,8 +176,7 @@ export class Datatable extends Component {
                     accessor: str => "delete",
                     Cell: (row) => (
                         <div>
-
-                            <span onClick={() => {
+                            {!excludeDelete ? <span onClick={() => {
                                 if (window.confirm('Are you sure you wish to delete this item?')) {
                                     // let data = myData;
                                     // data.splice(row.index, 1);
@@ -174,13 +188,13 @@ export class Datatable extends Component {
                             }}>
                                 <i className="fa fa-trash" style={{ width: 35, fontSize: 16, padding: 11, color: '#e4566e' }}
                                 ></i>
-                            </span>
+                            </span> : ""}
 
                             {/* edit data */}
-                            <span onClick={() => { this.editTrigger(row.original) }}>
+                            {!excludeEdit ? <span onClick={() => { this.editTrigger(row.original) }}>
                                 <i className="fa fa-pencil" style={{ width: 35, fontSize: 16, padding: 11, color: 'rgb(40, 167, 69)' }}></i>
-                            </span>
-
+                            </span> : ""}
+                            
                             {/* redirect to child */}
                             <span onClick={() => { this.redirectToChild(row.original) }}>
                                 <i className="fa fa-share" style={{ width: 35, fontSize: 16, padding: 11, color: '#e4566e' }}></i>

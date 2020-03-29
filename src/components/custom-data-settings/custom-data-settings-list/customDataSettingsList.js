@@ -56,11 +56,13 @@ class CustomDataSettingsList extends Component {
     render() {
         const { data } = this.state;
 
+        const columnsToShow = ["cdsName", "cdsKey", "cdsType", "cdsSequence"];
         return (
             <Fragment>
                 <Datatable
                     multiSelectOption={false}
                     myData={data}
+                    columnsToShow={columnsToShow}
                     pageSize={data.length > 10 ? 10 : data.length}
                     pagination={false}
                     class="-striped -highlight"

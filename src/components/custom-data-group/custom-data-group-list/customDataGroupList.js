@@ -63,11 +63,13 @@ class CustomDataGroupList extends Component {
     render() {
         const { data } = this.state;
 
+        const columnsToShow = ["cdGroupName", "cdGroupDescription"];
         return (
             <Fragment>
                 <Datatable
                     multiSelectOption={false}
                     myData={data}
+                    columnsToShow={columnsToShow}
                     pageSize={data.length}
                     pagination={false}
                     class="-striped -highlight"

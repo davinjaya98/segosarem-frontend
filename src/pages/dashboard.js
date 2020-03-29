@@ -156,7 +156,7 @@ const Dashboard = () => {
               <div className="card-body datatable-react">
                 <div className="row mt-4">
                   <div className="col-12">
-                    <PageSettingList redirectUrl={`${process.env.PUBLIC_URL}/pageSetting`}/>
+                    <PageSettingList excludeDelete={true} excludeEdit={true} redirectUrl={`${process.env.PUBLIC_URL}/pageSetting`}/>
                   </div>
                 </div>
               </div>
