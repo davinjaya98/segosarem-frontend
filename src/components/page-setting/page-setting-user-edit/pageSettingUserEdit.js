@@ -286,22 +286,12 @@ class PageSettingUserEdit extends Component {
 
     renderInputField(setting, value, parentId) {
         const { formFieldEntities } = this.state;
-
-        //Register to formFieldEntities first
-        // if(!formFieldEntities[setting.cdsKey]) {
-        //     this.setState({
-        //         formFieldEntities: {
-        //             [setting.cdsKey]: value
-        //         }
-        //     }, () => {
-        //     });
-        // }
+        
         switch(setting.cdsType) {
             //Text field
             case 1:
                 return (
                     <div className="form-group">
-                        PARENT ID IS {parentId}<br />
                         <label className="col-form-label" htmlFor={setting.cdsKey + parentId}>{setting.cdsName}</label>
                         <input className="form-control" type="text" id={setting.cdsKey + parentId} name={setting.cdsKey} value={formFieldEntities[setting.cdsKey + parentId]} setting-id={setting.cdsId} onChange={ this.handleChange }/>
                     </div>
@@ -317,7 +307,21 @@ class PageSettingUserEdit extends Component {
                     </div>
                 );
             //Blob
+            case 3:
+                return (
+                    <div className="form-group">
+                        <label className="col-form-label" htmlFor={setting.cdsKey + parentId}>{setting.cdsName}</label>
+                        <input className="form-control" type="text" id={setting.cdsKey + parentId} name={setting.cdsKey} value={formFieldEntities[setting.cdsKey + parentId]} setting-id={setting.cdsId} onChange={ this.handleChange }/>
+                    </div>
+                );
             //Textarea
+            case 4:
+                return (
+                    <div className="form-group">
+                        <label className="col-form-label" htmlFor={setting.cdsKey + parentId}>{setting.cdsName}</label>
+                        <textarea className="form-control" type="text" id={setting.cdsKey + parentId} name={setting.cdsKey} row="5" value={formFieldEntities[setting.cdsKey + parentId]} setting-id={setting.cdsId} onChange={ this.handleChange }></textarea>
+                    </div>
+                );
             default:
                 return (
                     <span>Error when rendering custom data field</span>
@@ -481,11 +485,18 @@ class PageSettingUserEdit extends Component {
         }
     }
 
-    toggleModal = () => {
+    toggleModal = (close) => {
         const { modal } = this.state;
-        this.setState({
-            modal: !modal
-        });
+        if (close) {
+            this.setState({
+                modal: false
+            });
+        }
+        else {
+            this.setState({
+                modal: !modal
+            });
+        }
     }
 
     constructModalBody = () => {
@@ -573,7 +584,7 @@ class PageSettingUserEdit extends Component {
                     this.fetchData();
 
                     //Close the modal
-                    this.toggleModal();
+                    this.toggleModal(true);
 
                     //Trigger list refresh
                     // this.props.onAddSuccess();

@@ -8,11 +8,7 @@ class CustomDataGroupList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [{
-                "cdGroupId": 1,
-                "cdGroupName": "Group-dummy",
-                "cdGroupDescription": "dummy-description"
-            }],
+            data: [],
             pageSettingId: 0
         }
     }

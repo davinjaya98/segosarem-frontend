@@ -242,9 +242,10 @@ class CustomDataEdit extends Component {
                                 <label className="col-form-label" htmlFor="cdsType">Setting Type:</label>
                                 {/* <input className="form-control" type="text" id="cdsType" name="cdsType" value={cdsType} onChange={this.handleChange} required /> */}
                                 <select className="form-control btn-pill digits" id="cdsType" name="cdsType" value={cdsType} onChange={this.handleChange} required>
+                                    <option value="">Please Select</option>
                                     <option value="1">1 - Textfield</option>
                                     <option value="2">2 - Checkbox</option>
-                                    <option value="3">3 - Image Upload</option>
+                                    <option value="3">3 - Image Path</option>
                                     <option value="4">4 - Text Area</option>
                                 </select>
                             </div>

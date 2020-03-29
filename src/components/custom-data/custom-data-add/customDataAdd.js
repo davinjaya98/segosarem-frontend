@@ -98,7 +98,12 @@ class CustomDataAdd extends Component {
                             </div>
                             <div className="form-group">
                                 <label className="col-form-label" htmlFor="cdType">Custom Data Type:</label>
-                                <input className="form-control" type="text" id="cdType" name="cdType" value={cdType} onChange={this.handleChange} required />
+                                <select className="form-control btn-pill digits" id="cdType" name="cdType" value={cdType} onChange={this.handleChange} required>
+                                    <option value="">Please Select</option>
+                                    <option value="1">1 - Single</option>
+                                    {/* <option value="2">2 - Array</option> */}
+                                    <option value="3">3 - Multifield</option>
+                                </select>
                             </div>
                             <div className="form-group">
                                 <label className="col-form-label" htmlFor="cdSequence">Custom Data Sequence:</label>

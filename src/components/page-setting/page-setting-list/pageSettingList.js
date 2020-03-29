@@ -9,12 +9,7 @@ class PageSettingList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [{ "settingId": 123, "pageTitle": "Title Sample", "pageSeoKeywords": "Keywords Sample", "pageKey": "Key Sample" },
-            { "settingId": 123, "pageTitle": "Title Sample", "pageSeoKeywords": "Keywords Sample", "pageKey": "Key Sample" },
-            { "settingId": 123, "pageTitle": "Title Sample", "pageSeoKeywords": "Keywords Sample", "pageKey": "Key Sample" },
-            { "settingId": 123, "pageTitle": "Title Sample", "pageSeoKeywords": "Keywords Sample", "pageKey": "Key Sample" },
-            { "settingId": 123, "pageTitle": "Title Sample", "pageSeoKeywords": "Keywords Sample", "pageKey": "Key Sample" },
-            { "settingId": 123, "pageTitle": "Title Sample", "pageSeoKeywords": "Keywords Sample", "pageKey": "Key Sample" }]
+            data: []
         }
     }
 

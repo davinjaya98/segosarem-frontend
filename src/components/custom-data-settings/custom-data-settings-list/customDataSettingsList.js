@@ -5,12 +5,7 @@ class CustomDataSettingsList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [{
-                cdsName: '',
-                cdsKey: '',
-                cdsType: 0,
-                cdsSequence: ''
-            }],
+            data: [],
             cdId: 0
         }
     }

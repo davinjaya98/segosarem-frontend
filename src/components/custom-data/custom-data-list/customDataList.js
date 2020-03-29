@@ -7,13 +7,7 @@ class CustomDataList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [{
-                "cdId": 1,
-                "cdName": "CustomData-dummy",
-                "cdType": 3,
-                "cdSequence": "1",
-                "cdKey": "homepage.menu"
-            }],
+            data: [],
             cdGroupId: 0
         }
         // this.editRef = React.createRef();
