@@ -161,8 +161,6 @@ class CustomDataEdit extends Component {
     }
 
     deleteCdsData = () => {
-        console.log("delete function triggered");
-
         let deleteParam = localStorage.getItem("deleteParam");
         deleteParam = JSON.parse(deleteParam);
 

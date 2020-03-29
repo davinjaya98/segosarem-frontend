@@ -31,8 +31,20 @@ class PageSettingList extends Component {
                     this.setState({
                         data: result.responseObject
                     });
+                } else {
+                    this.setState({
+                        data: []
+                    });
                 }
             });
+    }
+
+    activateModal = () => {
+        this.props.showEditModal();
+    }
+
+    triggerDelete = () => {
+        this.props.onDeleteClicked();
     }
 
     render() {
@@ -48,6 +60,8 @@ class PageSettingList extends Component {
                     pagination={false}
                     class="-striped -highlight"
                     childUrl={redirectUrl}
+                    onEditClicked={this.activateModal}
+                    onDeleteTriggered={this.triggerDelete}
                 />
             </Fragment>
         );

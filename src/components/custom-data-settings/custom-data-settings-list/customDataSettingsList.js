@@ -40,6 +40,10 @@ class CustomDataSettingsList extends Component {
                     this.setState({
                         data: result.responseObject
                     });
+                } else {
+                    this.setState({
+                        data: []
+                    });
                 }
                 console.log(result);
             });

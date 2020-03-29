@@ -15,15 +15,15 @@ class CustomDataGroupList extends Component {
 
     componentDidMount() {
         let requestParam = localStorage.getItem("requestParam");
-        if(requestParam) {
+        if (requestParam) {
             requestParam = JSON.parse(requestParam);
             this.setState({
                 pageSettingId: requestParam.settingId
-            }, 
-            //Callback after set state
-            () => {
-                this.fetchData();
-            });
+            },
+                //Callback after set state
+                () => {
+                    this.fetchData();
+                });
         }
     }
 
@@ -44,8 +44,20 @@ class CustomDataGroupList extends Component {
                     this.setState({
                         data: result.responseObject
                     });
+                } else {
+                    this.setState({
+                        data: []
+                    });
                 }
             });
+    }
+
+    activateModal = () => {
+        this.props.showEditModal();
+    }
+
+    triggerDelete = () => {
+        this.props.onDeleteClicked();
     }
 
     render() {
@@ -60,6 +72,8 @@ class CustomDataGroupList extends Component {
                     pagination={false}
                     class="-striped -highlight"
                     childUrl={`${process.env.PUBLIC_URL}/customData`}
+                    onEditClicked={this.activateModal}
+                    onDeleteTriggered={this.triggerDelete}
                 />
             </Fragment>
         );

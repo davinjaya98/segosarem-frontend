@@ -2,13 +2,48 @@ import React, { Fragment, useRef } from 'react';
 import Breadcrumb from '../components/common/breadcrumb';
 import CustomDataGroupList from '../components/custom-data-group/custom-data-group-list/customDataGroupList';
 import CustomDataGroupAdd from '../components/custom-data-group/custom-data-group-add/customDataGroupAdd';
+import CustomDataGroupEdit from '../components/custom-data-group/custom-data-group-edit/customDataGroupEdit';
+import { toast } from 'react-toastify';
 
 const CustomDataGroup = () => {
 
     const listRef = useRef();
+    const editRef = useRef();
 
     function triggerRefresh() {
         listRef.current.fetchData();
+    }
+
+    function triggerShowModal() {
+        editRef.current.toggleModal();
+    }
+
+    function deleteCdGroup() {
+        let deleteParam = localStorage.getItem("deleteParam");
+        deleteParam = JSON.parse(deleteParam);
+
+        const cdGroupId = deleteParam.cdGroupId;
+
+        fetch("/segosarem-backend/deleteCustomDataGroup", {
+            method: 'POST',
+            body: JSON.stringify({
+                entityId: cdGroupId
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }).then(res => res.json())
+            .then((result) => {
+                if (result.returnCode == "000000") {
+                    //Trigger success notification
+                    toast.success("Successfully Deleted Custom Data Group");
+
+                    //Trigger list refresh
+                    listRef.current.fetchData();
+                }
+            }, (err) => {
+                toast.error("Server Error");
+            });
     }
 
     return (
@@ -31,7 +66,14 @@ const CustomDataGroup = () => {
                                 </div>
                                 <div className="row mt-4">
                                     <div className="col-12">
-                                        <CustomDataGroupList ref={listRef} />
+                                        <CustomDataGroupList ref={listRef} showEditModal={triggerShowModal} onDeleteClicked={deleteCdGroup} />
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-12">
+                                        <div className="d-flex justify-content-end">
+                                            <CustomDataGroupEdit ref={editRef} onEditSuccess={triggerRefresh} />
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -13,12 +13,13 @@ class PageSettingAdd extends Component {
             formName: 'pageSettingAddForm',
             pageTitle: '',
             pageSeoKeywords: '',
+            pageDescription: '',
             pageKey: ''
             //Form
         }
     }
 
-    componentDidMount() {}
+    componentDidMount() { }
 
     toggleModal = () => {
         const { modal } = this.state;
@@ -29,14 +30,14 @@ class PageSettingAdd extends Component {
 
     handleChange = (event) => {
         const target = event.target;
-        
+
         this.setState({
             [target.name]: target.value
         });
     }
 
     addNew = (event) => {
-        const { pageTitle, pageSeoKeywords, pageKey } = this.state;
+        const { pageTitle, pageSeoKeywords, pageKey, pageDescription } = this.state;
 
         event.preventDefault();
         fetch("/segosarem-backend/addPageSetting", {
@@ -44,6 +45,7 @@ class PageSettingAdd extends Component {
             body: JSON.stringify({
                 pageTitle: pageTitle,
                 pageSeoKeywords: pageSeoKeywords,
+                pageDescription: pageDescription,
                 pageKey: pageKey
             }),
             headers: {
@@ -65,15 +67,15 @@ class PageSettingAdd extends Component {
                     //Trigger list refresh
                     this.props.onAddSuccess();
                 }
-            },(err) => {
+            }, (err) => {
                 toast.error("Server Error");
             });
     }
 
     render() {
-        const { modal, formName, pageTitle, pageSeoKeywords, pageKey } = this.state;
+        const { modal, formName, pageTitle, pageSeoKeywords, pageDescription, pageKey } = this.state;
 
-        return(
+        return (
             <Fragment>
                 <Button color="primary" onClick={this.toggleModal}>Add New Page Setting</Button>
                 <Modal isOpen={modal} toggle={this.toggleModal} size="lg">
@@ -82,15 +84,19 @@ class PageSettingAdd extends Component {
                         <form id={formName} name={formName} onSubmit={this.addNew}>
                             <div className="form-group">
                                 <label className="col-form-label" htmlFor="pageTitle">Page Title:</label>
-                                <input className="form-control" type="text" id="pageTitle" name="pageTitle" value={pageTitle} onChange={this.handleChange} required/>
+                                <input className="form-control" type="text" id="pageTitle" name="pageTitle" value={pageTitle} onChange={this.handleChange} required />
                             </div>
                             <div className="form-group">
                                 <label className="col-form-label" htmlFor="pageSeoKeywords">SEO Keywords:</label>
-                                <input className="form-control" type="text" id="pageSeoKeywords" name="pageSeoKeywords" value={pageSeoKeywords} onChange={this.handleChange} required/>
+                                <input className="form-control" type="text" id="pageSeoKeywords" name="pageSeoKeywords" value={pageSeoKeywords} onChange={this.handleChange} required />
+                            </div>
+                            <div className="form-group">
+                                <label className="col-form-label" htmlFor="pageDescription">Page Description:</label>
+                                <input className="form-control" type="textarea" id="pageDescription" name="pageDescription" value={pageDescription} onChange={this.handleChange} required />
                             </div>
                             <div className="form-group">
                                 <label className="col-form-label" htmlFor="pageKey">Page Key:</label>
-                                <input className="form-control" type="text" id="pageKey" name="pageKey" value={pageKey} onChange={this.handleChange} required/>
+                                <input className="form-control" type="text" id="pageKey" name="pageKey" value={pageKey} onChange={this.handleChange} required />
                             </div>
                         </form>
                     </ModalBody>

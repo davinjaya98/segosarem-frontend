@@ -5,12 +5,7 @@ class QuotationList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [{
-                "quotationId": 21,
-                "custName": "dudud",
-                "custEmail": "email@domain.com",
-                "custPhoneNumnber": "8123019237012"
-            }]
+            data: []
         }
     }
 

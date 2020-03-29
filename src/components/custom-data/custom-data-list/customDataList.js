@@ -43,6 +43,10 @@ class CustomDataList extends Component {
                     this.setState({
                         data: result.responseObject
                     });
+                } else {
+                    this.setState({
+                        data: []
+                    });
                 }
                 console.log(result);
             });
@@ -51,6 +55,10 @@ class CustomDataList extends Component {
     activateModal = () => {
         // this.editRef.current.toggleModal();
         this.props.showEditModal();
+    }
+
+    triggerDelete = () => {
+        this.props.onDeleteClicked();
     }
 
     render() {
@@ -65,6 +73,7 @@ class CustomDataList extends Component {
                     pagination={false}
                     class="-striped -highlight"
                     onEditClicked={this.activateModal}
+                    onDeleteTriggered={this.triggerDelete}
                 />
                 {/* <div>
                     <CustomDataEdit ref={this.editRef} />

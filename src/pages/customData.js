@@ -3,6 +3,7 @@ import Breadcrumb from '../components/common/breadcrumb';
 import CustomDataList from '../components/custom-data/custom-data-list/customDataList';
 import CustomDataAdd from '../components/custom-data/custom-data-add/customDataAdd';
 import CustomDataEdit from '../components/custom-data/custom-data-edit/customDataEdit';
+import { toast } from 'react-toastify';
 
 const CustomData = () => {
 
@@ -15,6 +16,34 @@ const CustomData = () => {
 
     function triggerShowModal() {
         editRef.current.toggleModal();
+    }
+
+    function deleteCustomData() {
+        let deleteParam = localStorage.getItem("deleteParam");
+        deleteParam = JSON.parse(deleteParam);
+
+        const cdId = deleteParam.cdId;
+
+        fetch("/segosarem-backend/deleteCustomData", {
+            method: 'POST',
+            body: JSON.stringify({
+                entityId: cdId
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }).then(res => res.json())
+            .then((result) => {
+                if (result.returnCode == "000000") {
+                    //Trigger success notification
+                    toast.success("Successfully Deleted Custom Data");
+
+                    //Trigger list refresh
+                    listRef.current.fetchData();
+                }
+            }, (err) => {
+                toast.error("Server Error");
+            });
     }
 
     return (
@@ -37,7 +66,7 @@ const CustomData = () => {
                                 </div>
                                 <div className="row mt-4">
                                     <div className="col-12">
-                                        <CustomDataList ref={listRef} showEditModal={triggerShowModal} />
+                                        <CustomDataList ref={listRef} showEditModal={triggerShowModal} onDeleteClicked={deleteCustomData} />
                                     </div>
                                 </div>
                                 <div className="row">
