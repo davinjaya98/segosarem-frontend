@@ -35,20 +35,26 @@ class CustomDataList extends Component {
                 cdGroupId: cdGroupId
             }),
             headers: {
-                "Content-type": "application/json; charset=UTF-8"
+                "Content-type": "application/json; charset=UTF-8",
+                "token": localStorage.getItem("AdminToken")
             }
         }).then(res => res.json())
             .then((result) => {
-                if (result.returnCode == "000000") {
-                    this.setState({
-                        data: result.responseObject
-                    });
-                } else {
-                    this.setState({
-                        data: []
-                    });
+                switch (result.returnCode) {
+                    case "000000":
+                        this.setState({
+                            data: result.responseObject
+                        });
+                        break;
+                    case "333333":
+                        this.props.history.push(`${process.env.PUBLIC_URL}/login`);
+                        break;
+                    default:
+                        this.setState({
+                            data: []
+                        });
+                        break;
                 }
-                console.log(result);
             });
     }
 
@@ -71,6 +77,7 @@ class CustomDataList extends Component {
                     multiSelectOption={false}
                     myData={data}
                     columnsToShow={columnsToShow}
+                    excludeRedirect={true}
                     pageSize={data.length > 10 ? 10 : data.length}
                     pagination={false}
                     class="-striped -highlight"

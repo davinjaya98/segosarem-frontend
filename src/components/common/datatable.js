@@ -87,7 +87,7 @@ export class Datatable extends Component {
     }
 
     render() {
-        const { pageSize, myClass, multiSelectOption, pagination, columnsToShow, excludeDelete, excludeEdit } = this.props;
+        const { pageSize, myClass, multiSelectOption, pagination, columnsToShow, excludeDelete, excludeEdit, excludeRedirect } = this.props;
         const { myData } = this.state;
 
         let dataToRender = [];
@@ -196,9 +196,10 @@ export class Datatable extends Component {
                             </span> : ""}
                             
                             {/* redirect to child */}
-                            <span onClick={() => { this.redirectToChild(row.original) }}>
+                            {!excludeRedirect ? <span onClick={() => { this.redirectToChild(row.original) }}>
                                 <i className="fa fa-share" style={{ width: 35, fontSize: 16, padding: 11, color: '#e4566e' }}></i>
-                            </span>
+                            </span> : ""}
+                            
                         </div>
                     ),
                     style: {

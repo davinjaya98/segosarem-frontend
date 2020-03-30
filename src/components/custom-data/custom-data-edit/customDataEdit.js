@@ -81,28 +81,31 @@ class CustomDataEdit extends Component {
             body: JSON.stringify({
                 cdId: cdId,
                 cdName: cdName,
-                // cdType: cdType,
                 cdSequence: cdSequence
-                // cdKey: cdKey
             }),
             headers: {
-                "Content-type": "application/json; charset=UTF-8"
+                "Content-type": "application/json; charset=UTF-8",
+                "token": localStorage.getItem("AdminToken")
             }
         }).then(res => res.json())
             .then((result) => {
-                if (result.returnCode == "000000") {
-                    // this.setState({
-                    //     data: result.responseObject
-                    // });
+                switch (result.returnCode) {
+                    case "000000":
+                        //Trigger success notification
+                        toast.success("Successfully Updated");
 
-                    //Trigger success notification
-                    toast.success("Successfully Updated");
+                        //Close the modal
+                        this.toggleModal();
 
-                    //Close the modal
-                    this.toggleModal();
-
-                    //Trigger list refresh
-                    this.props.onEditSuccess();
+                        //Trigger list refresh
+                        this.props.onEditSuccess();
+                        break;
+                    case "333333":
+                        this.props.history.push(`${process.env.PUBLIC_URL}/login`);
+                        break;
+                    default:
+                        toast.error("Server Error");
+                        break;
                 }
             }, (err) => {
                 toast.error("Server Error");
@@ -112,19 +115,12 @@ class CustomDataEdit extends Component {
     addNewSetting = (event) => {
         const { cdsName, cdsKey, cdsType, cdsSequence, cdId } = this.state;
 
-        //console.log("setting add triggered");
-
         event.preventDefault();
 
         // save new setting
         fetch("/segosarem-backend/addCustomDataSetting", {
             method: 'POST',
             body: JSON.stringify({
-                // "cdId": 1,
-                // "cdsKey": "tes key",
-                // "cdsName": "tes name",
-                // "cdsSequence": "5",
-                // "cdsType": 1
                 cdId: cdId,
                 cdsKey: cdsKey,
                 cdsName: cdsName,
@@ -132,28 +128,34 @@ class CustomDataEdit extends Component {
                 cdsType: cdsType
             }),
             headers: {
-                "Content-type": "application/json; charset=UTF-8"
+                "Content-type": "application/json; charset=UTF-8",
+                "token": localStorage.getItem("AdminToken")
             }
         }).then(res => res.json())
             .then((result) => {
-                if (result.returnCode == "000000") {
-                    this.setState({
-                        data: result.responseObject,
-                        // cdId: 0,
-                        cdsKey: '',
-                        cdsName: '',
-                        cdsSequence: '',
-                        cdsType: 0
-                    });
+                switch (result.returnCode) {
+                    case "000000":
+                        this.setState({
+                            data: result.responseObject,
+                            // cdId: 0,
+                            cdsKey: '',
+                            cdsName: '',
+                            cdsSequence: '',
+                            cdsType: 0
+                        });
 
-                    //Trigger success notification
-                    toast.success("Successfully Added New Settings");
+                        //Trigger success notification
+                        toast.success("Successfully Added New Settings");
 
-                    //console.log("success add setting");
-
-                    //Trigger list refresh
-                    //this.props.onAddSuccess();
-                    this.settingsRef.current.fetchData();
+                        //Trigger list refresh
+                        this.settingsRef.current.fetchData();
+                        break;
+                    case "333333":
+                        this.props.history.push(`${process.env.PUBLIC_URL}/login`);
+                        break;
+                    default:
+                        toast.error("Server Error");
+                        break;
                 }
             }, (err) => {
                 toast.error("Server Error");
@@ -176,16 +178,25 @@ class CustomDataEdit extends Component {
                         entityId: cdsId
                     }),
                     headers: {
-                        "Content-type": "application/json; charset=UTF-8"
+                        "Content-type": "application/json; charset=UTF-8",
+                        "token": localStorage.getItem("AdminToken")
                     }
                 }).then(res => res.json())
                     .then((result) => {
-                        if (result.returnCode == "000000") {
-                            //Trigger success notification
-                            toast.success("Successfully Deleted Settings");
+                        switch (result.returnCode) {
+                            case "000000":
+                                //Trigger success notification
+                                toast.success("Successfully Deleted Settings");
 
-                            //Trigger list refresh
-                            this.settingsRef.current.fetchData();
+                                //Trigger list refresh
+                                this.settingsRef.current.fetchData();
+                                break;
+                            case "333333":
+                                this.props.history.push(`${process.env.PUBLIC_URL}/login`);
+                                break;
+                            default:
+                                toast.error("Server Error");
+                                break;
                         }
                     }, (err) => {
                         toast.error("Server Error");
