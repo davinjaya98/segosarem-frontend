@@ -53,9 +53,6 @@ function Root() {
                     <ScrollContext>
                         <Switch>
                             <Route path={`${process.env.PUBLIC_URL}/login`} component={Signin} />
-                            {/* <Route path={`${process.env.PUBLIC_URL}/pages/unlockUser`} component={UnlockUser} />
-                            <Route path={`${process.env.PUBLIC_URL}/pages/forgetPwd`} component={ForgetPwd} />
-                            <Route path={`${process.env.PUBLIC_URL}/pages/resetPwd`} component={ResetPwd} /> */}
                             <Route path={`${process.env.PUBLIC_URL}/pages/maintenance`} component={Maintenance} />
                             {/* <Route path={`${process.env.PUBLIC_URL}/pages/errors/error403`} component={Error403} /> */}
                             <Route path={`${process.env.PUBLIC_URL}/pages/errors/error404`} component={Error404} />
