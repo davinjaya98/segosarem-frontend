@@ -30,16 +30,25 @@ const CustomDataGroup = () => {
                 entityId: cdGroupId
             }),
             headers: {
-                "Content-type": "application/json; charset=UTF-8"
+                "Content-type": "application/json; charset=UTF-8",
+                "token": localStorage.getItem("AdminToken")
             }
         }).then(res => res.json())
             .then((result) => {
-                if (result.returnCode == "000000") {
+                switch(result.returnCode) {
+                  case "000000":
                     //Trigger success notification
                     toast.success("Successfully Deleted Custom Data Group");
-
-                    //Trigger list refresh
-                    listRef.current.fetchData();
+            
+                      //Trigger list refresh
+                      listRef.current.fetchData();
+                      break;
+                  case "333333":
+                      this.props.history.push(`${process.env.PUBLIC_URL}/login`);
+                      break;
+                  default:
+                      toast.error("Server Error");
+                      break;
                 }
             }, (err) => {
                 toast.error("Server Error");
