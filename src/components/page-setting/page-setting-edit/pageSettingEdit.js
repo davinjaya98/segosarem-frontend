@@ -61,21 +61,28 @@ class CustomDataGroupEdit extends Component {
                 pageDescription: pageDescription
             }),
             headers: {
-                "Content-type": "application/json; charset=UTF-8"
+                "Content-type": "application/json; charset=UTF-8",
+                "token": localStorage.getItem("AdminToken")
             }
         }).then(res => res.json())
             .then((result) => {
-                if (result.returnCode == "000000") {
-                    //Trigger success notification
-                    toast.success("Successfully Updated");
-
-                    //Close the modal
-                    this.toggleModal();
-
-                    //Trigger list refresh
-                    this.props.onEditSuccess();
-                } else {
-                    console.log("API return error");
+                switch(result.returnCode) {
+                    case "000000":
+                        //Trigger success notification
+                        toast.success("Successfully Updated");
+    
+                        //Close the modal
+                        this.toggleModal();
+    
+                        //Trigger list refresh
+                        this.props.onEditSuccess();
+                        break;
+                    case "333333":
+                        this.props.history.push(`${process.env.PUBLIC_URL}/login`);
+                        break;
+                    default:
+                        toast.error("Server Error");
+                        break;
                 }
             }, (err) => {
                 toast.error("Server Error");

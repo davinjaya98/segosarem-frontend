@@ -49,23 +49,32 @@ class PageSettingAdd extends Component {
                 pageKey: pageKey
             }),
             headers: {
-                "Content-type": "application/json; charset=UTF-8"
+                "Content-type": "application/json; charset=UTF-8",
+                "token": localStorage.getItem("AdminToken")
             }
         }).then(res => res.json())
             .then((result) => {
-                if (result.returnCode == "000000") {
-                    this.setState({
-                        data: result.responseObject
-                    });
-
-                    //Trigger success notification
-                    toast.success("Successfully Added");
-
-                    //Close the modal
-                    this.toggleModal();
-
-                    //Trigger list refresh
-                    this.props.onAddSuccess();
+                switch(result.returnCode) {
+                    case "000000":
+                        this.setState({
+                            data: result.responseObject
+                        });
+    
+                        //Trigger success notification
+                        toast.success("Successfully Added");
+    
+                        //Close the modal
+                        this.toggleModal();
+    
+                        //Trigger list refresh
+                        this.props.onAddSuccess();
+                        break;
+                    case "333333":
+                        this.props.history.push(`${process.env.PUBLIC_URL}/login`);
+                        break;
+                    default:
+                        toast.error("Server Error");
+                        break;
                 }
             }, (err) => {
                 toast.error("Server Error");

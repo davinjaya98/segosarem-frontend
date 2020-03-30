@@ -8,25 +8,49 @@ import { withRouter } from "react-router";
 
 
 const Signin = ({ history }) => {
-    const [email, setEmail] = useState("test@gmail.com");
-    const [password, setPassword] = useState("test123");
-
-    const [value, setValue] = useState(
-        localStorage.getItem('profileURL' || man)
-    );
-
-    useEffect(() => {
-        localStorage.setItem('profileURL', value);
-    }, [value]);
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
     const loginAuth = async () => {
         try {
-            setValue(man);
-            history.push(`${process.env.PUBLIC_URL}/dashboard`);
+            let token = localStorage.getItem("AdminToken");
+            let request = {
+                username: username,
+                password: password
+            };
+
+            if(token) {
+                request["token"] = token;
+            }
+
+            fetch("/segosarem-backend/authenticate", {
+                method: 'POST',
+                body: JSON.stringify(request),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            }).then(res => res.json())
+                .then((result) => {
+                    switch(result.returnCode) {
+                        case "000000":
+                            localStorage.setItem("AdminToken", result.responseObject.token);
+                            history.push(`${process.env.PUBLIC_URL}/dashboard`);
+                            break;
+                        case "222222":
+                            toast.error("You have reached the maximum number of try attempt.");
+                            break;
+                        case "333333":
+                            toast.error("Oppss.. The password or username is invalid.");
+                            break;
+                        default:
+                            toast.error("Server Error");
+                            break;
+                    }
+                }, (err) => {
+                    toast.error("Server Error");
+                });
         } catch (error) {
-            setTimeout(() => {
-                toast.error("Oppss.. The password is invalid or the user does not have a password.");
-            }, 200);
+            toast.error("Server Error");
         }
     }
 
@@ -50,11 +74,11 @@ const Signin = ({ history }) => {
                                                 </div>
                                                 <form className="theme-form" >
                                                     <div className="form-group">
-                                                        <label className="col-form-label pt-0">Your Name</label>
-                                                        <input className="form-control" type="email" name="email"
-                                                            value={email}
-                                                            onChange={e => setEmail(e.target.value)}
-                                                            placeholder="Email address"
+                                                        <label className="col-form-label pt-0">Username</label>
+                                                        <input className="form-control" type="username" name="username"
+                                                            value={username}
+                                                            onChange={e => setUsername(e.target.value)}
+                                                            placeholder="Username"
                                                         />
                                                         {/* {errors.email && 'Email is required'} */}
                                                     </div>
@@ -62,24 +86,12 @@ const Signin = ({ history }) => {
                                                         <label className="col-form-label">Password</label>
                                                         <input className="form-control" type="password" name="password"
                                                             value={password}
-                                                            onChange={e => setPassword(e.target.value)} />
+                                                            onChange={e => setPassword(e.target.value)}
+                                                            placeholder="*********" />
                                                         {/* {errors.password && 'Email is required'} */}
-                                                    </div>
-                                                    <div className="checkbox p-0">
-                                                        <input id="checkbox1" type="checkbox" />
-                                                        <label htmlFor="checkbox1">Remember me</label>
                                                     </div>
                                                     <div className="form-group form-row mt-3 mb-0">
                                                         <button className="btn btn-primary btn-block" type="button" onClick={() => loginAuth()} >Login</button>
-                                                    </div>
-                                                    <div className="login-divider"></div>
-                                                    <div className="social mt-3">
-                                                        <div className="form-group btn-showcase d-flex">
-                                                            <button className="btn social-btn btn-fb d-inline-block" type="button"> <i className="fa fa-facebook"></i></button>
-                                                            <button className="btn social-btn btn-twitter d-inline-block" type="button"><i className="fa fa-google"></i></button>
-                                                            <button className="btn social-btn btn-google d-inline-block" type="button"><i className="fa fa-twitter"></i></button>
-                                                            <button className="btn social-btn btn-github d-inline-block" type="button"><i className="fa fa-github"></i></button>
-                                                        </div>
                                                     </div>
                                                 </form>
                                             </div>
