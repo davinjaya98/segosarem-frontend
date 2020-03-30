@@ -48,225 +48,55 @@ class PageSettingUserEdit extends Component {
                 pageKey: pageKey
             }),
             headers: {
-                "Content-type": "application/json; charset=UTF-8"
+                "Content-type": "application/json; charset=UTF-8",
+                "token": localStorage.getItem("AdminToken")
             }
         }).then(res => res.json())
             .then((result) => {
-                if (result.returnCode == "000000") {
-                    try {
-
-        // let result = {
-        //     "returnCode": "000000",
-        //     "responseObject": {
-        //       "settingId": 5,
-        //       "pageTitle": "Welcome to Segosarem Cakboyo",
-        //       "pageSeoKeywords": "segosarem, cakboyo, ayam, pedas, nikmat",
-        //       "pageKey": "page.homepage",
-        //       "customDataGroupList": [
-        //         {
-        //           "cdGroupId": 2,
-        //           "cdGroupName": "Outlet",
-        //           "cdGroupDescription": "List Outlet di halaman homepage",
-        //           "pageSettingId": 0,
-        //           "customDataList": [
-        //             {
-        //               "cdId": 3,
-        //               "cdValuePair": [
-        //                 {
-        //                   "parentId": 13,
-        //                   "value": {
-        //                     "outlet.description": {
-        //                       "fieldType": 1,
-        //                       "value": "Segosarem Cabang Kresek Raya adalah cabang pertama segosarem cak boyo."
-        //                     },
-        //                     "outlet.name": {
-        //                       "fieldType": 1,
-        //                       "value": "Segosarem Cabang Kresek Raya"
-        //                     },
-        //                     "outlet.trending": {
-        //                       "fieldType": 2,
-        //                       "value": "true"
-        //                     }
-        //                   }
-        //                 }
-        //               ],
-        //               "cdName": "Outlet Section Carousel",
-        //               "cdType": 3,
-        //               "cdSequence": "2",
-        //               "cdKey": "homepage.outlet.carousel",
-        //               "cdGroupId": null,
-        //               "cdSettingList": [
-        //                 {
-        //                   "cdsId": 7,
-        //                   "cdsName": "Is Outlet a Trending Outlet?",
-        //                   "cdsKey": "outlet.trending",
-        //                   "cdsType": 2,
-        //                   "cdsSequence": "3",
-        //                   "cdId": null
-        //                 },
-        //                 {
-        //                   "cdsId": 6,
-        //                   "cdsName": "Outlet Name",
-        //                   "cdsKey": "outlet.name",
-        //                   "cdsType": 1,
-        //                   "cdsSequence": "2",
-        //                   "cdId": null
-        //                 },
-        //                 {
-        //                   "cdsId": 8,
-        //                   "cdsName": "Outlet Description",
-        //                   "cdsKey": "outlet.description",
-        //                   "cdsType": 1,
-        //                   "cdsSequence": "4",
-        //                   "cdId": null
-        //                 },
-        //                 {
-        //                   "cdsId": 5,
-        //                   "cdsName": "Outlet Picture",
-        //                   "cdsKey": "outlet.picture",
-        //                   "cdsType": 1,
-        //                   "cdsSequence": "1",
-        //                   "cdId": null
-        //                 }
-        //               ]
-        //             },
-        //             {
-        //               "cdId": 4,
-        //               "cdValuePair": null,
-        //               "cdName": "Contoh Name",
-        //               "cdType": 1,
-        //               "cdSequence": "3",
-        //               "cdKey": "Contoh Key",
-        //               "cdGroupId": null,
-        //               "cdSettingList": [
-        //                 {
-        //                   "cdsId": 9,
-        //                   "cdsName": "Contoh Name",
-        //                   "cdsKey": "Contoh Key",
-        //                   "cdsType": 1,
-        //                   "cdsSequence": "1",
-        //                   "cdId": null
-        //                 }
-        //               ]
-        //             },
-        //             {
-        //               "cdId": 2,
-        //               "cdValuePair": [
-        //                 {
-        //                   "parentId": 11,
-        //                   "value": {
-        //                     "description": {
-        //                       "fieldType": 1,
-        //                       "value": "This is the description for the outlet section on homepage."
-        //                     }
-        //                   }
-        //                 }
-        //               ],
-        //               "cdName": "Outlet Section Description",
-        //               "cdType": 1,
-        //               "cdSequence": "1",
-        //               "cdKey": "homepage.outlet.description",
-        //               "cdGroupId": null,
-        //               "cdSettingList": [
-        //                 {
-        //                   "cdsId": 4,
-        //                   "cdsName": "Description Text(Max 255)",
-        //                   "cdsKey": "description",
-        //                   "cdsType": 1,
-        //                   "cdsSequence": "1",
-        //                   "cdId": null
-        //                 }
-        //               ]
-        //             }
-        //           ]
-        //         },
-        //         {
-        //           "cdGroupId": 1,
-        //           "cdGroupName": "Menu",
-        //           "cdGroupDescription": "List menu di halaman homepage",
-        //           "pageSettingId": 0,
-        //           "customDataList": [
-        //             {
-        //               "cdId": 1,
-        //               "cdValuePair": null,
-        //               "cdName": "Homepage Menu",
-        //               "cdType": 3,
-        //               "cdSequence": "1",
-        //               "cdKey": "field.menu",
-        //               "cdGroupId": null,
-        //               "cdSettingList": [
-        //                 {
-        //                   "cdsId": 2,
-        //                   "cdsName": "Menu Name",
-        //                   "cdsKey": "menu.name",
-        //                   "cdsType": 1,
-        //                   "cdsSequence": "2",
-        //                   "cdId": null
-        //                 },
-        //                 {
-        //                   "cdsId": 1,
-        //                   "cdsName": "Menu Picture",
-        //                   "cdsKey": "menu.picture",
-        //                   "cdsType": 1,
-        //                   "cdsSequence": "1",
-        //                   "cdId": null
-        //                 },
-        //                 {
-        //                   "cdsId": 3,
-        //                   "cdsName": "Trending menu",
-        //                   "cdsKey": "trending.menu",
-        //                   "cdsType": 2,
-        //                   "cdsSequence": "3",
-        //                   "cdId": null
-        //                 }
-        //               ]
-        //             }
-        //           ]
-        //         },
-        //         {
-        //           "cdGroupId": 5,
-        //           "cdGroupName": "Test",
-        //           "cdGroupDescription": "Test 2",
-        //           "pageSettingId": 0,
-        //           "customDataList": []
-        //         }
-        //       ]
-        //     }
-        //   }
-
-           let fields = {};
-
-            result.responseObject.customDataGroupList.forEach((cdGroup) => {
-                cdGroup.customDataList.forEach((customData) => {
-                    if(customData.cdSettingList && customData.cdSettingList.length > 0) {
-                        //Attempting to create formFieldEntities
-                        customData.cdSettingList.forEach((cdSetting) => {
-                            fields[cdSetting.cdsKey] = null;
+                switch(result.returnCode) {
+                    case "000000":
+                        try {
+                            let fields = {};
+                            result.responseObject.customDataGroupList.forEach((cdGroup) => {
+                                cdGroup.customDataList.forEach((customData) => {
+                                    if(customData.cdSettingList && customData.cdSettingList.length > 0) {
+                                        //Attempting to create formFieldEntities
+                                        customData.cdSettingList.forEach((cdSetting) => {
+                                            fields[cdSetting.cdsKey] = null;
+                                        });
+                                    }
+                                    if(customData.cdValuePair && customData.cdValuePair.length > 0) {
+                                        customData.cdValuePair.forEach((cdValue) => {
+                                            for(let [key, value ] of Object.entries(cdValue.value)) {
+                                                fields[key + cdValue.parentId] = value.value;
+                                            }
+                                        });
+                                    }
+                                });
+                            });
+    
+                            this.setState({
+                                formFieldEntities: fields
+                            }, () => {
+                                this.setState({
+                                    data: result.responseObject.customDataGroupList,
+                                })
+                            });
+            
+                        }
+                        catch (e) {
+                            console.log(e);
+                        }
+                        break;
+                    case "333333":
+                        this.props.history.push(`${process.env.PUBLIC_URL}/login`);
+                        break;
+                    default:
+                        this.setState({
+                            data: []
                         });
+                        break;
                     }
-                    if(customData.cdValuePair && customData.cdValuePair.length > 0) {
-                        customData.cdValuePair.forEach((cdValue) => {
-                            for(let [key, value ] of Object.entries(cdValue.value)) {
-                                fields[key + cdValue.parentId] = value.value;
-                            }
-                        })
-                    }
-                });
-            });
-
-            this.setState({
-                    formFieldEntities: fields
-                }, () => {
-                    this.setState({
-                        data: result.responseObject.customDataGroupList,
-                    })
-                });
-
-                }
-                catch (e) {
-                    console.log(e);
-                }
-            }
         });
 
     }
@@ -339,21 +169,29 @@ class PageSettingUserEdit extends Component {
     }
 
     deleteCustomDataValue(parentId) {
-        
         fetch("/segosarem-backend/deleteCustomDataValue", {
             method: 'POST',
             body: JSON.stringify({
                 entityId: parentId
             }),
             headers: {
-                "Content-type": "application/json; charset=UTF-8"
+                "Content-type": "application/json; charset=UTF-8",
+                "token": localStorage.getItem("AdminToken")
             }
         }).then(res => res.json())
             .then((result) => {
-                if (result.returnCode == "000000") {
-                    //Trigger success notification
-                    toast.success("Successfully Deleted!");
-                    this.fetchData();
+                switch(result.returnCode) {
+                    case "000000":
+                        //Trigger success notification
+                        toast.success("Successfully Deleted!");
+                        this.fetchData();
+                        break;
+                    case "333333":
+                        this.props.history.push(`${process.env.PUBLIC_URL}/login`);
+                        break;
+                    default:
+                        toast.error("Server Error");
+                        break;
                 }
             });
                 
@@ -587,24 +425,26 @@ class PageSettingUserEdit extends Component {
             method: 'POST',
             body: JSON.stringify(request),
             headers: {
-                "Content-type": "application/json; charset=UTF-8"
+                "Content-type": "application/json; charset=UTF-8",
+                "token": localStorage.getItem("AdminToken")
             }
         }).then(res => res.json())
             .then((result) => {
-                if (result.returnCode == "000000") {
-                    // this.setState({
-                    //     data: result.responseObject
-                    // });
-
-                    //Trigger success notification
-                    toast.success("Successfully Added!");
-                    this.fetchData();
-
-                    //Close the modal
-                    this.toggleModal(true);
-
-                    //Trigger list refresh
-                    // this.props.onAddSuccess();
+                switch(result.returnCode) {
+                    case "000000":
+                        //Trigger success notification
+                        toast.success("Successfully Added!");
+                        this.fetchData();
+    
+                        //Close the modal
+                        this.toggleModal(true);
+                        break;
+                    case "333333":
+                        this.props.history.push(`${process.env.PUBLIC_URL}/login`);
+                        break;
+                    default:
+                        toast.error("Server Error");
+                        break;
                 }
             },(err) => {
                 toast.error("Server Error");
