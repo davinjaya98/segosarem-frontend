@@ -18,45 +18,31 @@ class QuotationList extends Component {
             method: 'POST',
             body: JSON.stringify({}),
             headers: {
-                "Content-type": "application/json; charset=UTF-8"
+                "Content-type": "application/json; charset=UTF-8",
+                "token": localStorage.getItem("AdminToken")
             }
         }).then(res => res.json())
             .then((result) => {
-                if (result.returnCode == "000000") {
-                    this.setState({
-                        data: result.responseObject
-                    });
+                switch(result.returnCode) {
+                    case "000000":
+                        this.setState({
+                            data: result.responseObject
+                        });
+                        break;
+                    case "333333":
+                        this.props.history.push(`${process.env.PUBLIC_URL}/login`);
+                        break;
+                    default:
+                        this.setState({
+                            data: []
+                        });
+                        break;
                 }
-                console.log(result);
             });
     }
 
     render() {
         const { data } = this.state;
-        /*
-        Example of Difference between getting object state and state
-
-        1. object state
-        const { data } = this.state;
-        const data = [{ 
-            "quotationId": 21, 
-            "custName": "dudud", 
-            "custEmail": "email@domain.com", 
-            "custPhoneNumnber": "8123019237012" 
-        }]
-
-        2. whole state
-        const data = this.state;
-        const data = {
-            data: [{ 
-                "quotationId": 21, 
-                "custName": "dudud", 
-                "custEmail": "email@domain.com", 
-                "custPhoneNumnber": "8123019237012" 
-            }]
-        }
-        */
-
 
         return (
             <Fragment>
