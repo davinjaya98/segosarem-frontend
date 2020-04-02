@@ -2,6 +2,8 @@ import React, { Fragment, Component } from 'react';
 
 import { toast } from 'react-toastify';
 
+import CKEditors from "react-ckeditor-component";
+
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 import { withRouter } from "react-router-dom";
@@ -147,6 +149,33 @@ class PageSettingUserEdit extends Component {
                     <div className="form-group">
                         <label className="col-form-label" htmlFor={setting.cdsKey + parentId}>{setting.cdsName}</label>
                         <textarea className="form-control" type="text" id={setting.cdsKey + parentId} name={setting.cdsKey} row="5" value={formFieldEntities[setting.cdsKey + parentId]} setting-id={setting.cdsId} onChange={ this.handleChange }></textarea>
+                    </div>
+                );
+            //Image Upload
+            case 5:
+                break;
+            //WYSWYG Editor
+            case 6:
+                return (
+                    <div className="form-group">
+                        {/* This is to submit the value */}
+                        <input type="hidden" id={setting.cdsKey + parentId} name={setting.cdsKey} value={formFieldEntities[setting.cdsKey + parentId]} setting-id={setting.cdsId}></input>
+                        {/* This one to render the value */}
+                        <CKEditors
+                            activeclassName="p10"
+                            content={formFieldEntities[setting.cdsKey + parentId]}
+                            events={{
+                                "blur": this.onBlur,
+                                "afterPaste": this.afterPaste,
+                                "change": (evt) => {
+                                    this.setState({
+                                        formFieldEntities: {
+                                            [setting.cdsKey + parentId]: evt.editor.getData()
+                                        }
+                                    })
+                                }
+                            }}
+                        />
                     </div>
                 );
             default:
