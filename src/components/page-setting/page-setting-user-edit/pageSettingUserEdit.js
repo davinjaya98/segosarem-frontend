@@ -105,11 +105,34 @@ class PageSettingUserEdit extends Component {
 
     handleChange = (event) => {
         const target = event.target;
+        const { formFieldEntities } = this.state;
         
+        let changed = {
+            [target.name]: target.value
+        }
+
+        let merged = {
+            ...formFieldEntities,
+            ...changed
+        }
         this.setState({
-            formFieldEntities: {
-                [target.name]: target.value
-            }
+            formFieldEntities: merged
+        });
+    }
+
+    handleCKEditorChange = (event, name) => {
+        const { formFieldEntities } = this.state;
+        
+        let changed = {
+            [name]: event.editor.getData()
+        }
+
+        let merged = {
+            ...formFieldEntities,
+            ...changed
+        }
+        this.setState({
+            formFieldEntities: merged
         });
     }
 
@@ -122,15 +145,15 @@ class PageSettingUserEdit extends Component {
                 return (
                     <div className="form-group">
                         <label className="col-form-label" htmlFor={setting.cdsKey + parentId}>{setting.cdsName}</label>
-                        <input className="form-control" type="text" id={setting.cdsKey + parentId} name={setting.cdsKey} value={formFieldEntities[setting.cdsKey + parentId]} setting-id={setting.cdsId} onChange={ this.handleChange }/>
+                        <input className="form-control" type="text" id={setting.cdsKey + parentId} name={setting.cdsKey + parentId} value={formFieldEntities[setting.cdsKey + parentId]} setting-id={setting.cdsId} onChange={ this.handleChange }/>
                     </div>
                 );
             //Checkboxes
             case 2:
                 return (
                     <div className="custom-control custom-checkbox mb-3">
-                        <input className="custom-control-input" name={setting.cdsKey} type="hidden" value="false" setting-id={setting.cdsId} />
-                        <input className="custom-control-input" id={setting.cdsKey + parentId} name={setting.cdsKey} type="checkbox" defaultChecked={formFieldEntities[setting.cdsKey + parentId] == "true"} value="true" setting-id={setting.cdsId} onChange={ this.handleChange } />
+                        <input className="custom-control-input" name={setting.cdsKey + parentId} type="hidden" value="false" setting-id={setting.cdsId} />
+                        <input className="custom-control-input" id={setting.cdsKey + parentId} name={setting.cdsKey + parentId} type="checkbox" defaultChecked={formFieldEntities[setting.cdsKey + parentId] == "true"} value="true" setting-id={setting.cdsId} onChange={ this.handleChange } />
                         <label className="custom-control-label" htmlFor={setting.cdsKey + parentId}>{setting.cdsName}</label>
                         <div className="invalid-feedback">Example invalid feedback text</div>
                     </div>
@@ -140,7 +163,7 @@ class PageSettingUserEdit extends Component {
                 return (
                     <div className="form-group">
                         <label className="col-form-label" htmlFor={setting.cdsKey + parentId}>{setting.cdsName}</label>
-                        <input className="form-control" type="text" id={setting.cdsKey + parentId} name={setting.cdsKey} value={formFieldEntities[setting.cdsKey + parentId]} setting-id={setting.cdsId} onChange={ this.handleChange }/>
+                        <input className="form-control" type="text" id={setting.cdsKey + parentId} name={setting.cdsKey + parentId} value={formFieldEntities[setting.cdsKey + parentId]} setting-id={setting.cdsId} onChange={ this.handleChange }/>
                     </div>
                 );
             //Textarea
@@ -148,7 +171,7 @@ class PageSettingUserEdit extends Component {
                 return (
                     <div className="form-group">
                         <label className="col-form-label" htmlFor={setting.cdsKey + parentId}>{setting.cdsName}</label>
-                        <textarea className="form-control" type="text" id={setting.cdsKey + parentId} name={setting.cdsKey} row="5" value={formFieldEntities[setting.cdsKey + parentId]} setting-id={setting.cdsId} onChange={ this.handleChange }></textarea>
+                        <textarea className="form-control" type="text" id={setting.cdsKey + parentId} name={setting.cdsKey + parentId} row="5" value={formFieldEntities[setting.cdsKey + parentId]} setting-id={setting.cdsId} onChange={ this.handleChange }></textarea>
                     </div>
                 );
             //Image Upload
@@ -159,7 +182,7 @@ class PageSettingUserEdit extends Component {
                 return (
                     <div className="form-group">
                         {/* This is to submit the value */}
-                        <input type="hidden" id={setting.cdsKey + parentId} name={setting.cdsKey} value={formFieldEntities[setting.cdsKey + parentId]} setting-id={setting.cdsId}></input>
+                        <input type="hidden" id={setting.cdsKey + parentId} name={setting.cdsKey + parentId} value={formFieldEntities[setting.cdsKey + parentId]} setting-id={setting.cdsId}></input>
                         {/* This one to render the value */}
                         <CKEditors
                             activeclassName="p10"
@@ -168,11 +191,7 @@ class PageSettingUserEdit extends Component {
                                 "blur": this.onBlur,
                                 "afterPaste": this.afterPaste,
                                 "change": (evt) => {
-                                    this.setState({
-                                        formFieldEntities: {
-                                            [setting.cdsKey + parentId]: evt.editor.getData()
-                                        }
-                                    })
+                                    this.handleCKEditorChange(evt, setting.cdsKey + parentId);
                                 }
                             }}
                         />
@@ -442,7 +461,7 @@ class PageSettingUserEdit extends Component {
                     let field = {
                         cdValueKey: key,
                         cdValue: value,
-                        cdsId: document.getElementById(key+formData.get("parentId")).getAttribute("setting-id")
+                        cdsId: document.getElementById(key).getAttribute("setting-id")
                     }
                     request.valueBeans.push(field);
                 }
