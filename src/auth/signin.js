@@ -10,6 +10,9 @@ import { withRouter } from "react-router";
 const Signin = ({ history }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const borderWhite = {
+        borderColor: "#374558"
+    }
 
     const loginAuth = async () => {
         try {
@@ -93,7 +96,11 @@ const Signin = ({ history }) => {
                                                     <div className="form-group form-row mt-3 mb-0">
                                                         <button className="btn btn-primary btn-block" type="button" onClick={() => loginAuth()} >Login</button>
                                                     </div>
+                                                    <hr style={borderWhite} />
                                                 </form>
+                                                <div className="text-center">
+                                                    <h6>Untuk bantuan silahkan hubungi kami <br /> di <a href="mailto:paparadam.interactivelab@gmail.com">Email</a> ini!</h6>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

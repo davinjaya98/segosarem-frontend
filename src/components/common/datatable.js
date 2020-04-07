@@ -87,7 +87,7 @@ export class Datatable extends Component {
     }
 
     render() {
-        const { pageSize, myClass, multiSelectOption, pagination, columnsToShow, excludeDelete, excludeEdit, excludeRedirect } = this.props;
+        const { pageSize, myClass, multiSelectOption, pagination, columnsToShow, excludeDelete, excludeEdit, excludeRedirect, excludeAction } = this.props;
         const { myData } = this.state;
 
         let dataToRender = [];
@@ -139,75 +139,77 @@ export class Datatable extends Component {
                 });
         }
 
-        if (multiSelectOption === true) {
-            columns.push(
-                {
-                    Header: <button className="btn btn-danger btn-sm btn-delete mb-0 b-r-4"
-                        onClick={
-                            (e) => {
-                                if (window.confirm('Are you sure you wish to delete this item?'))
-                                    this.handleRemoveRow()
-                            }}>Delete</button>,
-                    id: 'delete',
-                    accessor: str => "delete",
-                    sortable: false,
-                    style: {
-                        textAlign: 'center'
-                    },
-                    Cell: (row) => (
-                        <div>
-                            <span >
-                                <input type="checkbox" name={row.original.id} defaultChecked={this.state.checkedValues.includes(row.original.id)}
-                                    onChange={e => this.selectRow(e, row.original.id)} />
-                            </span>
-                        </div>
-                    ),
-                    accessor: key,
-                    style: {
-                        textAlign: 'center'
+        if(!excludeAction) {
+            if (multiSelectOption === true) {
+                columns.push(
+                    {
+                        Header: <button className="btn btn-danger btn-sm btn-delete mb-0 b-r-4"
+                            onClick={
+                                (e) => {
+                                    if (window.confirm('Are you sure you wish to delete this item?'))
+                                        this.handleRemoveRow()
+                                }}>Delete</button>,
+                        id: 'delete',
+                        accessor: str => "delete",
+                        sortable: false,
+                        style: {
+                            textAlign: 'center'
+                        },
+                        Cell: (row) => (
+                            <div>
+                                <span >
+                                    <input type="checkbox" name={row.original.id} defaultChecked={this.state.checkedValues.includes(row.original.id)}
+                                        onChange={e => this.selectRow(e, row.original.id)} />
+                                </span>
+                            </div>
+                        ),
+                        accessor: key,
+                        style: {
+                            textAlign: 'center'
+                        }
                     }
-                }
-            )
-        } else {
-            columns.push(
-                {
-                    Header: <b>Action</b>,
-                    id: 'delete',
-                    accessor: str => "delete",
-                    Cell: (row) => (
-                        <div>
-                            {!excludeDelete ? <span onClick={() => {
-                                if (window.confirm('Are you sure you wish to delete this item?')) {
-                                    // let data = myData;
-                                    // data.splice(row.index, 1);
-                                    // this.setState({ myData: data });
-                                    this.deleteTrigger(row.original);
-                                }
-                                // toast.success("Successfully Deleted !")
-
-                            }}>
-                                <i className="fa fa-trash" style={{ width: 35, fontSize: 16, padding: 11, color: '#e4566e' }}
-                                ></i>
-                            </span> : ""}
-
-                            {/* edit data */}
-                            {!excludeEdit ? <span onClick={() => { this.editTrigger(row.original) }}>
-                                <i className="fa fa-pencil" style={{ width: 35, fontSize: 16, padding: 11, color: 'rgb(40, 167, 69)' }}></i>
-                            </span> : ""}
-                            
-                            {/* redirect to child */}
-                            {!excludeRedirect ? <span onClick={() => { this.redirectToChild(row.original) }}>
-                                <i className="fa fa-share" style={{ width: 35, fontSize: 16, padding: 11, color: '#e4566e' }}></i>
-                            </span> : ""}
-                            
-                        </div>
-                    ),
-                    style: {
-                        textAlign: 'center'
-                    },
-                    sortable: false
-                }
-            )
+                )
+            } else {
+                columns.push(
+                    {
+                        Header: <b>Action</b>,
+                        id: 'delete',
+                        accessor: str => "delete",
+                        Cell: (row) => (
+                            <div>
+                                {!excludeDelete ? <span onClick={() => {
+                                    if (window.confirm('Are you sure you wish to delete this item?')) {
+                                        // let data = myData;
+                                        // data.splice(row.index, 1);
+                                        // this.setState({ myData: data });
+                                        this.deleteTrigger(row.original);
+                                    }
+                                    // toast.success("Successfully Deleted !")
+    
+                                }}>
+                                    <i className="fa fa-trash" style={{ width: 35, fontSize: 16, padding: 11, color: '#e4566e' }}
+                                    ></i>
+                                </span> : ""}
+    
+                                {/* edit data */}
+                                {!excludeEdit ? <span onClick={() => { this.editTrigger(row.original) }}>
+                                    <i className="fa fa-pencil" style={{ width: 35, fontSize: 16, padding: 11, color: 'rgb(40, 167, 69)' }}></i>
+                                </span> : ""}
+                                
+                                {/* redirect to child */}
+                                {!excludeRedirect ? <span onClick={() => { this.redirectToChild(row.original) }}>
+                                    <i className="fa fa-share" style={{ width: 35, fontSize: 16, padding: 11, color: '#e4566e' }}></i>
+                                </span> : ""}
+                                
+                            </div>
+                        ),
+                        style: {
+                            textAlign: 'center'
+                        },
+                        sortable: false
+                    }
+                )
+            }
         }
 
         return (
@@ -218,6 +220,7 @@ export class Datatable extends Component {
                     pageSize={pageSize}
                     className={myClass}
                     showPagination={pagination}
+                    sortable
                 />
             </Fragment>
         )
