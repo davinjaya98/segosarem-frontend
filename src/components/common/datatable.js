@@ -14,7 +14,10 @@ export class Datatable extends Component {
             myData: this.props.myData,
             paddingStyle: {
                 padding: "1rem",
-                textAlign: "left"
+                textAlign: "left",
+                whiteSspace: "nowrap",
+                textOverflow: "ellipsis",
+                overflow: "hidden"
             }
         }
     }
@@ -173,15 +176,13 @@ export class Datatable extends Component {
                             </div>
                         ),
                         accessor: key,
-                        style: {
-                            textAlign: 'center'
-                        }
+                        style: {paddingStyle}
                     }
                 )
             } else {
                 columns.push(
                     {
-                        Header: <b>Action</b>,
+                        Header: <div style={paddingStyle}><b>Action</b></div>,
                         id: 'delete',
                         accessor: str => "delete",
                         Cell: (row) => (
@@ -212,9 +213,7 @@ export class Datatable extends Component {
 
                             </div>
                         ),
-                        style: {
-                            textAlign: 'center'
-                        },
+                        style: {paddingStyle},
                         sortable: false
                     }
                 )
