@@ -11,7 +11,11 @@ export class Datatable extends Component {
         super(props)
         this.state = {
             checkedValues: [],
-            myData: this.props.myData
+            myData: this.props.myData,
+            paddingStyle: {
+                padding: "16px",
+                textAlign: "left"
+            }
         }
     }
 
@@ -47,6 +51,7 @@ export class Datatable extends Component {
     };
 
     renderEditable = (cellInfo) => {
+        console.log(cellInfo)
         return (
             <div
                 style={{ backgroundColor: "#fafafa" }}
@@ -61,6 +66,13 @@ export class Datatable extends Component {
                     __html: this.state.myData[cellInfo.index][cellInfo.column.id]
                 }}
             />
+        );
+    }
+
+    renderCells = (cellInfo) => {
+        const { paddingStyle } = this.state;
+        return (
+            <div style={paddingStyle}>{cellInfo.value}</div>
         );
     }
 
@@ -88,7 +100,7 @@ export class Datatable extends Component {
 
     render() {
         const { pageSize, myClass, multiSelectOption, pagination, columnsToShow, excludeDelete, excludeEdit, excludeRedirect, excludeAction } = this.props;
-        const { myData } = this.state;
+        const { myData, paddingStyle } = this.state;
 
         let dataToRender = [];
         // console.log(columnsToShow, myData);
@@ -130,12 +142,9 @@ export class Datatable extends Component {
 
             columns.push(
                 {
-                    Header: <b>{this.Capitalize(key.toString())}</b>,
+                    Header: <div style={paddingStyle}><b>{this.Capitalize(key.toString())}</b></div>,
                     accessor: key,
-                    Cell: editable,
-                    style: {
-                        textAlign: 'center'
-                    }
+                    Cell: this.renderCells
                 });
         }
 
