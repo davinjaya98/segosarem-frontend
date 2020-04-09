@@ -13,6 +13,7 @@ class CustomDataGroupEdit extends Component {
             cdGroupId: 0,
             cdGroupName: '',
             cdGroupDescription: '',
+            cdGroupSequence: '',
             pageSettingId: 0
         }
     }
@@ -32,7 +33,8 @@ class CustomDataGroupEdit extends Component {
                 this.setState({
                     cdGroupId: editParam.cdGroupId,
                     cdGroupName: editParam.cdGroupName,
-                    cdGroupDescription: editParam.cdGroupDescription
+                    cdGroupDescription: editParam.cdGroupDescription,
+                    cdGroupSequence: editParam.cdGroupSequence
                 });
             }
         );
@@ -47,7 +49,7 @@ class CustomDataGroupEdit extends Component {
     }
 
     updateCdgData = (event) => {
-        const { cdGroupId, cdGroupName, cdGroupDescription } = this.state;
+        const { cdGroupId, cdGroupName, cdGroupSequence, cdGroupDescription } = this.state;
 
         event.preventDefault();
         fetch("/segosarem-backend/updateCustomDataGroup", {
@@ -55,6 +57,7 @@ class CustomDataGroupEdit extends Component {
             body: JSON.stringify({
                 cdGroupId: cdGroupId,
                 cdGroupName: cdGroupName,
+                cdGroupSequence: cdGroupSequence,
                 cdGroupDescription: cdGroupDescription
             }),
             headers: {
@@ -63,14 +66,14 @@ class CustomDataGroupEdit extends Component {
             }
         }).then(res => res.json())
             .then((result) => {
-                switch(result.returnCode) {
+                switch (result.returnCode) {
                     case "000000":
                         //Trigger success notification
                         toast.success("Successfully Updated");
-    
+
                         //Close the modal
                         this.toggleModal();
-    
+
                         //Trigger list refresh
                         this.props.onEditSuccess();
                         break;
@@ -88,7 +91,7 @@ class CustomDataGroupEdit extends Component {
 
     render() {
         // get modal status, form name, and current custom data row details
-        const { modal, formName, cdGroupId, cdGroupName, cdGroupDescription } = this.state;
+        const { modal, formName, cdGroupId, cdGroupName, cdGroupSequence, cdGroupDescription } = this.state;
 
         return (
             <Fragment>
@@ -104,6 +107,10 @@ class CustomDataGroupEdit extends Component {
                             <div className="form-group">
                                 <label className="col-form-label" htmlFor="cdGroupDescription">Custom Data Group Description:</label>
                                 <input className="form-control" type="text" id="cdGroupDescription" name="cdGroupDescription" value={cdGroupDescription} onChange={this.handleChange} required />
+                            </div>
+                            <div className="form-group">
+                                <label className="col-form-label" htmlFor="cdGroupSequence">Custom Data Group Sequence:</label>
+                                <input className="form-control" type="text" id="cdGroupSequence" name="cdGroupSequence" value={cdGroupSequence} onChange={this.handleChange} required />
                             </div>
                         </form>
                     </ModalBody>

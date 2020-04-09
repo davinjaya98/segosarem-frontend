@@ -13,7 +13,7 @@ export class Datatable extends Component {
             checkedValues: [],
             myData: this.props.myData,
             paddingStyle: {
-                padding: "16px",
+                padding: "1rem",
                 textAlign: "left"
             }
         }
@@ -148,7 +148,7 @@ export class Datatable extends Component {
                 });
         }
 
-        if(!excludeAction) {
+        if (!excludeAction) {
             if (multiSelectOption === true) {
                 columns.push(
                     {
@@ -194,22 +194,22 @@ export class Datatable extends Component {
                                         this.deleteTrigger(row.original);
                                     }
                                     // toast.success("Successfully Deleted !")
-    
+
                                 }}>
                                     <i className="fa fa-trash" style={{ width: 35, fontSize: 16, padding: 11, color: '#e4566e' }}
                                     ></i>
                                 </span> : ""}
-    
+
                                 {/* edit data */}
                                 {!excludeEdit ? <span onClick={() => { this.editTrigger(row.original) }}>
                                     <i className="fa fa-pencil" style={{ width: 35, fontSize: 16, padding: 11, color: 'rgb(40, 167, 69)' }}></i>
                                 </span> : ""}
-                                
+
                                 {/* redirect to child */}
                                 {!excludeRedirect ? <span onClick={() => { this.redirectToChild(row.original) }}>
                                     <i className="fa fa-share" style={{ width: 35, fontSize: 16, padding: 11, color: '#e4566e' }}></i>
                                 </span> : ""}
-                                
+
                             </div>
                         ),
                         style: {

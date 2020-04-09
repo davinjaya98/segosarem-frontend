@@ -41,7 +41,7 @@ class CustomDataGroupList extends Component {
             }
         }).then(res => res.json())
             .then((result) => {
-                switch(result.returnCode) {
+                switch (result.returnCode) {
                     case "000000":
                         this.setState({
                             data: result.responseObject
@@ -70,7 +70,7 @@ class CustomDataGroupList extends Component {
     render() {
         const { data } = this.state;
 
-        const columnsToShow = ["cdGroupName", "cdGroupDescription"];
+        const columnsToShow = ["cdGroupName", "cdGroupDescription", "cdGroupSequence"];
         return (
             <Fragment>
                 <Datatable

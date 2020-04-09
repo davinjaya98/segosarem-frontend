@@ -32,7 +32,7 @@ class PageSettingList extends Component {
             }
         }).then(res => res.json())
             .then((result) => {
-                switch(result.returnCode) {
+                switch (result.returnCode) {
                     case "000000":
                         this.setState({
                             data: result.responseObject
@@ -62,7 +62,17 @@ class PageSettingList extends Component {
         const { data, excludeDelete, excludeEdit } = this.state;
         const { redirectUrl } = this.props;
 
-        const columnsToShow = ["pageTitle", "pageDescription", "pageSeoKeywords", "pageKey"];
+        const columnsToShow = ["pageTitle", "pageDescription", "pageSeoKeywords", "pageKey", "pageSequence"];
+
+        // sort pagesetting list
+        let sortPageSetting = (a, b) => {
+            if (Number.parseInt(a["pageSequence"]) > Number.parseInt(b["pageSequence"])) return 1;
+            if (Number.parseInt(b["pageSequence"]) > Number.parseInt(a["pageSequence"])) return -1;
+
+            return 0;
+        }
+
+        data.sort(sortPageSetting);
 
         return (
             <Fragment>

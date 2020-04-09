@@ -503,6 +503,15 @@ class PageSettingUserEdit extends Component {
     render() {
         const { modal, data, activeCustomDataSetting, newDataModal } = this.state;
 
+        let sortCdGroupData = (a,b) => {
+            if(Number.parseInt(a["cdGroupSequence"]) > Number.parseInt(b["cdGroupSequence"])) return 1;
+            if(Number.parseInt(b["cdGroupSequence"]) > Number.parseInt(a["cdGroupSequence"])) return -1;
+
+            return 0;
+        }
+
+        data.sort(sortCdGroupData);
+
         if (!data || data.length <= 0) {
             return (
                 <Fragment>

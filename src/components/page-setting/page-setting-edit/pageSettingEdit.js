@@ -14,6 +14,7 @@ class CustomDataGroupEdit extends Component {
             pageTitle: '',
             pageSeoKeywords: '',
             pageDescription: '',
+            pageSequence: '',
             pageKey: ''
         }
     }
@@ -34,7 +35,8 @@ class CustomDataGroupEdit extends Component {
                     settingId: editParam.settingId,
                     pageTitle: editParam.pageTitle,
                     pageSeoKeywords: editParam.pageSeoKeywords,
-                    pageDescription: editParam.pageDescription
+                    pageDescription: editParam.pageDescription,
+                    pageSequence: editParam.pageSequence
                 });
             }
         );
@@ -49,7 +51,7 @@ class CustomDataGroupEdit extends Component {
     }
 
     updatePageSettingData = (event) => {
-        const { settingId, pageTitle, pageSeoKeywords, pageDescription } = this.state;
+        const { settingId, pageTitle, pageSeoKeywords, pageDescription, pageSequence } = this.state;
 
         event.preventDefault();
         fetch("/segosarem-backend/updatePageSetting", {
@@ -58,7 +60,8 @@ class CustomDataGroupEdit extends Component {
                 settingId: settingId,
                 pageTitle: pageTitle,
                 pageSeoKeywords: pageSeoKeywords,
-                pageDescription: pageDescription
+                pageDescription: pageDescription,
+                pageSequence: pageSequence
             }),
             headers: {
                 "Content-type": "application/json; charset=UTF-8",
@@ -66,14 +69,14 @@ class CustomDataGroupEdit extends Component {
             }
         }).then(res => res.json())
             .then((result) => {
-                switch(result.returnCode) {
+                switch (result.returnCode) {
                     case "000000":
                         //Trigger success notification
                         toast.success("Successfully Updated");
-    
+
                         //Close the modal
                         this.toggleModal();
-    
+
                         //Trigger list refresh
                         this.props.onEditSuccess();
                         break;
@@ -91,7 +94,7 @@ class CustomDataGroupEdit extends Component {
 
     render() {
         // get modal status, form name, and current custom data row details
-        const { modal, formName, pageTitle, pageSeoKeywords, pageDescription } = this.state;
+        const { modal, formName, pageTitle, pageSeoKeywords, pageDescription, pageSequence } = this.state;
 
         return (
             <Fragment>
@@ -106,11 +109,15 @@ class CustomDataGroupEdit extends Component {
                             </div>
                             <div className="form-group">
                                 <label className="col-form-label" htmlFor="pageSeoKeywords">SEO Keywords:</label>
-                                <input className="form-control" type="text" id="pageSeoKeywords" name="pageSeoKeywords" value={pageSeoKeywords} onChange={this.handleChange} required />
+                                <input className="form-control" type="text" id="pageSeoKeywords" name="pageSeoKeywords" value={pageSeoKeywords} onChange={this.handleChange} placeholder="Keyword1,Keyword2" required />
                             </div>
                             <div className="form-group">
                                 <label className="col-form-label" htmlFor="pageDescription">Page Description:</label>
-                                <input className="form-control" type="textarea" id="pageDescription" name="pageDescription" value={pageDescription} onChange={this.handleChange} required />
+                                <textarea className="form-control" type="textarea" id="pageDescription" name="pageDescription" value={pageDescription} onChange={this.handleChange} required />
+                            </div>
+                            <div className="form-group">
+                                <label className="col-form-label" htmlFor="pageSequence">Page Sequence:</label>
+                                <input className="form-control" type="text" id="pageSequence" name="pageSequence" value={pageSequence} onChange={this.handleChange} required />
                             </div>
                         </form>
                     </ModalBody>

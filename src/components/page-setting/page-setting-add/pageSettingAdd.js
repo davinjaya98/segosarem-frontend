@@ -14,6 +14,7 @@ class PageSettingAdd extends Component {
             pageTitle: '',
             pageSeoKeywords: '',
             pageDescription: '',
+            pageSequence: '',
             pageKey: ''
             //Form
         }
@@ -37,7 +38,7 @@ class PageSettingAdd extends Component {
     }
 
     addNew = (event) => {
-        const { pageTitle, pageSeoKeywords, pageKey, pageDescription } = this.state;
+        const { pageTitle, pageSeoKeywords, pageKey, pageDescription, pageSequence } = this.state;
 
         event.preventDefault();
         fetch("/segosarem-backend/addPageSetting", {
@@ -46,6 +47,7 @@ class PageSettingAdd extends Component {
                 pageTitle: pageTitle,
                 pageSeoKeywords: pageSeoKeywords,
                 pageDescription: pageDescription,
+                pageSequence: pageSequence,
                 pageKey: pageKey
             }),
             headers: {
@@ -54,18 +56,18 @@ class PageSettingAdd extends Component {
             }
         }).then(res => res.json())
             .then((result) => {
-                switch(result.returnCode) {
+                switch (result.returnCode) {
                     case "000000":
                         this.setState({
                             data: result.responseObject
                         });
-    
+
                         //Trigger success notification
                         toast.success("Successfully Added");
-    
+
                         //Close the modal
                         this.toggleModal();
-    
+
                         //Trigger list refresh
                         this.props.onAddSuccess();
                         break;
@@ -82,7 +84,7 @@ class PageSettingAdd extends Component {
     }
 
     render() {
-        const { modal, formName, pageTitle, pageSeoKeywords, pageDescription, pageKey } = this.state;
+        const { modal, formName, pageTitle, pageSeoKeywords, pageDescription, pageSequence, pageKey } = this.state;
 
         return (
             <Fragment>
@@ -97,11 +99,15 @@ class PageSettingAdd extends Component {
                             </div>
                             <div className="form-group">
                                 <label className="col-form-label" htmlFor="pageSeoKeywords">SEO Keywords:</label>
-                                <input className="form-control" type="text" id="pageSeoKeywords" name="pageSeoKeywords" value={pageSeoKeywords} onChange={this.handleChange} required />
+                                <input className="form-control" type="text" id="pageSeoKeywords" name="pageSeoKeywords" value={pageSeoKeywords} onChange={this.handleChange} placeholder="Keyword1,Keyword2" required />
                             </div>
                             <div className="form-group">
                                 <label className="col-form-label" htmlFor="pageDescription">Page Description:</label>
-                                <input className="form-control" type="textarea" id="pageDescription" name="pageDescription" value={pageDescription} onChange={this.handleChange} required />
+                                <textarea className="form-control" type="textarea" id="pageDescription" name="pageDescription" value={pageDescription} onChange={this.handleChange} required />
+                            </div>
+                            <div className="form-group">
+                                <label className="col-form-label" htmlFor="pageSequence">Page Sequence:</label>
+                                <input className="form-control" type="text" id="pageSequence" name="pageSequence" value={pageSequence} onChange={this.handleChange} required />
                             </div>
                             <div className="form-group">
                                 <label className="col-form-label" htmlFor="pageKey">Page Key:</label>

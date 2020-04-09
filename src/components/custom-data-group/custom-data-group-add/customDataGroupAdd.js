@@ -13,6 +13,7 @@ class CustomDataGroupAdd extends Component {
             formName: 'customDataGroupAddForm',
             cdGroupName: '',
             cdGroupDescription: '',
+            cdGroupSequence: '',
             pageSettingId: 0
             //Form
         }
@@ -20,7 +21,7 @@ class CustomDataGroupAdd extends Component {
 
     componentDidMount() {
         let requestParam = localStorage.getItem("requestParam");
-        if(requestParam) {
+        if (requestParam) {
             requestParam = JSON.parse(requestParam);
             this.setState({
                 pageSettingId: requestParam.settingId
@@ -37,14 +38,14 @@ class CustomDataGroupAdd extends Component {
 
     handleChange = (event) => {
         const target = event.target;
-        
+
         this.setState({
             [target.name]: target.value
         });
     }
 
     addNew = (event) => {
-        const { cdGroupName, cdGroupDescription, pageSettingId } = this.state;
+        const { cdGroupName, cdGroupDescription, cdGroupSequence, pageSettingId } = this.state;
 
         event.preventDefault();
         fetch("/segosarem-backend/addCustomDataGroup", {
@@ -52,6 +53,7 @@ class CustomDataGroupAdd extends Component {
             body: JSON.stringify({
                 cdGroupName: cdGroupName,
                 cdGroupDescription: cdGroupDescription,
+                cdGroupSequence: cdGroupSequence,
                 pageSettingId: pageSettingId
             }),
             headers: {
@@ -60,18 +62,18 @@ class CustomDataGroupAdd extends Component {
             }
         }).then(res => res.json())
             .then((result) => {
-                switch(result.returnCode) {
+                switch (result.returnCode) {
                     case "000000":
                         this.setState({
                             data: result.responseObject
                         });
-    
+
                         //Trigger success notification
                         toast.success("Successfully Added");
-    
+
                         //Close the modal
                         this.toggleModal();
-    
+
                         //Trigger list refresh
                         this.props.onAddSuccess();
                         break;
@@ -82,15 +84,15 @@ class CustomDataGroupAdd extends Component {
                         toast.error("Server Error");
                         break;
                 }
-            },(err) => {
+            }, (err) => {
                 toast.error("Server Error");
             });
     }
 
     render() {
-        const { modal, formName, cdGroupName, cdGroupDescription } = this.state;
+        const { modal, formName, cdGroupName, cdGroupSequence, cdGroupDescription } = this.state;
 
-        return(
+        return (
             <Fragment>
                 <Button color="primary" onClick={this.toggleModal}>Add New Group</Button>
                 <Modal isOpen={modal} toggle={this.toggleModal} size="lg">
@@ -99,11 +101,15 @@ class CustomDataGroupAdd extends Component {
                         <form id={formName} name={formName} onSubmit={this.addNew}>
                             <div className="form-group">
                                 <label className="col-form-label" htmlFor="cdGroupName">Group Name:</label>
-                                <input className="form-control" type="text" id="cdGroupName" name="cdGroupName" value={cdGroupName} onChange={this.handleChange} required/>
+                                <input className="form-control" type="text" id="cdGroupName" name="cdGroupName" value={cdGroupName} onChange={this.handleChange} required />
                             </div>
                             <div className="form-group">
                                 <label className="col-form-label" htmlFor="cdGroupDescription">Group Description:</label>
-                                <input className="form-control" type="text" id="cdGroupDescription" name="cdGroupDescription" value={cdGroupDescription} onChange={this.handleChange} required/>
+                                <input className="form-control" type="text" id="cdGroupDescription" name="cdGroupDescription" value={cdGroupDescription} onChange={this.handleChange} required />
+                            </div>
+                            <div className="form-group">
+                                <label className="col-form-label" htmlFor="cdGroupSequence">Group Sequence:</label>
+                                <input className="form-control" type="text" id="cdGroupSequence" name="cdGroupSequence" value={cdGroupSequence} onChange={this.handleChange} required />
                             </div>
                         </form>
                     </ModalBody>
