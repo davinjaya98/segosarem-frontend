@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import logo from '../assets/images/endless-logo.png';
+import logo from '../assets/images/company-logo.png';
 import man from '../assets/images/dashboard/user.png';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -68,7 +68,7 @@ const Signin = ({ history }) => {
                                 <div className="auth-innerright">
                                     <div className="authentication-box">
                                         <div className="text-center">
-                                            <img src={logo} alt="" /></div>
+                                            <img src={logo} alt="" width="100%" /></div>
                                         <div className="card mt-4">
                                             <div className="card-body">
                                                 <div className="text-center">

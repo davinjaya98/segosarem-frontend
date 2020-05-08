@@ -1,5 +1,5 @@
 import React, { useState ,Fragment } from 'react';
-import logo from '../../../assets/images/endless-logo.png';
+import logo from '../../../assets/images/company-logo.png';
 import Language from './language';
 import UserMenu from './userMenu';
 import Notification from './notification';
