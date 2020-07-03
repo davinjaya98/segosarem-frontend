@@ -24,7 +24,7 @@ const CustomDataGroup = () => {
 
         const cdGroupId = deleteParam.cdGroupId;
 
-        fetch("/segosarem-backend/deleteCustomDataGroup", {
+        fetch("/deleteCustomDataGroup", {
             method: 'POST',
             body: JSON.stringify({
                 entityId: cdGroupId

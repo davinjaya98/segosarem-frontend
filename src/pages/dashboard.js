@@ -13,7 +13,7 @@ const Dashboard = () => {
   const [totalQuotation, setTotalQuotation] = useState(0);
 
   useEffect(() => {
-    fetch("/segosarem-backend/getQuotationList", {
+    fetch("/getQuotationList", {
       method: 'POST',
       body: JSON.stringify({}),
       headers: {

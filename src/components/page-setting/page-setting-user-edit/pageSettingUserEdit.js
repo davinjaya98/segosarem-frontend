@@ -44,7 +44,7 @@ class PageSettingUserEdit extends Component {
         const { pageKey } = this.state;
 
         //TODO CODE HERE
-        fetch("/segosarem-backend/getPageSettingByKey", {
+        fetch("/getPageSettingByKey", {
             method: 'POST',
             body: JSON.stringify({
                 pageKey: pageKey
@@ -217,7 +217,7 @@ class PageSettingUserEdit extends Component {
     }
 
     deleteCustomDataValue(parentId) {
-        fetch("/segosarem-backend/deleteCustomDataValue", {
+        fetch("/deleteCustomDataValue", {
             method: 'POST',
             body: JSON.stringify({
                 entityId: parentId
@@ -469,7 +469,7 @@ class PageSettingUserEdit extends Component {
         };
         
 
-        fetch("/segosarem-backend/addOrUpdateCustomDataValue", {
+        fetch("/addOrUpdateCustomDataValue", {
             method: 'POST',
             body: JSON.stringify(request),
             headers: {

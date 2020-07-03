@@ -49,7 +49,7 @@ class CustomDataAdd extends Component {
         const { cdName, cdType, cdSequence, cdKey, cdGroupId } = this.state;
 
         event.preventDefault();
-        fetch("/segosarem-backend/addCustomData", {
+        fetch("/addCustomData", {
             method: 'POST',
             body: JSON.stringify({
                 cdName: cdName,

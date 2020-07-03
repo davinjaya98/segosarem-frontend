@@ -26,7 +26,7 @@ class CustomDataSettingsList extends Component {
     fetchData() {
         const { cdId } = this.state;
 
-        fetch("/segosarem-backend/getCdSettingsListByCdId", {
+        fetch("/getCdSettingsListByCdId", {
             method: 'POST',
             body: JSON.stringify({
                 cdId: cdId

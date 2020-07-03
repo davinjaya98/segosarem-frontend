@@ -41,7 +41,7 @@ class PageSettingAdd extends Component {
         const { pageTitle, pageSeoKeywords, pageKey, pageDescription, pageSequence } = this.state;
 
         event.preventDefault();
-        fetch("/segosarem-backend/addPageSetting", {
+        fetch("/addPageSetting", {
             method: 'POST',
             body: JSON.stringify({
                 pageTitle: pageTitle,

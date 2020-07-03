@@ -30,7 +30,7 @@ class CustomDataGroupList extends Component {
     fetchData() {
         const { pageSettingId } = this.state;
 
-        fetch("/segosarem-backend/getCdGroupByPageStgId", {
+        fetch("/getCdGroupByPageStgId", {
             method: 'POST',
             body: JSON.stringify({
                 pageSettingId: pageSettingId

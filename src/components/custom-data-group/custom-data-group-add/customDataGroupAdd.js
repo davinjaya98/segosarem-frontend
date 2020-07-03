@@ -48,7 +48,7 @@ class CustomDataGroupAdd extends Component {
         const { cdGroupName, cdGroupDescription, cdGroupSequence, pageSettingId } = this.state;
 
         event.preventDefault();
-        fetch("/segosarem-backend/addCustomDataGroup", {
+        fetch("/addCustomDataGroup", {
             method: 'POST',
             body: JSON.stringify({
                 cdGroupName: cdGroupName,

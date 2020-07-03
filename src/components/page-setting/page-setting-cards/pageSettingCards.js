@@ -15,7 +15,7 @@ class pageSettingCards extends Component {
 
     fetchData() {
         //TODO CODE HERE
-        fetch("/segosarem-backend/getPageList", {
+        fetch("/getPageList", {
             method: 'POST',
             body: JSON.stringify({}),
             headers: {

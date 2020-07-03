@@ -24,7 +24,7 @@ const CustomData = () => {
 
         const cdId = deleteParam.cdId;
 
-        fetch("/segosarem-backend/deleteCustomData", {
+        fetch("/deleteCustomData", {
             method: 'POST',
             body: JSON.stringify({
                 entityId: cdId

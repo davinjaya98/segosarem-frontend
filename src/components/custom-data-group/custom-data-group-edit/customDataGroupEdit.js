@@ -52,7 +52,7 @@ class CustomDataGroupEdit extends Component {
         const { cdGroupId, cdGroupName, cdGroupSequence, cdGroupDescription } = this.state;
 
         event.preventDefault();
-        fetch("/segosarem-backend/updateCustomDataGroup", {
+        fetch("/updateCustomDataGroup", {
             method: 'POST',
             body: JSON.stringify({
                 cdGroupId: cdGroupId,

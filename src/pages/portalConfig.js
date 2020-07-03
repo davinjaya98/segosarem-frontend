@@ -24,7 +24,7 @@ const PortalConfig = () => {
 
     const settingId = deleteParam.settingId;
 
-    fetch("/segosarem-backend/deletePageSetting", {
+    fetch("/deletePageSetting", {
       method: 'POST',
       body: JSON.stringify({
         entityId: settingId

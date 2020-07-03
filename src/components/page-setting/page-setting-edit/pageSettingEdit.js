@@ -54,7 +54,7 @@ class CustomDataGroupEdit extends Component {
         const { settingId, pageTitle, pageSeoKeywords, pageDescription, pageSequence } = this.state;
 
         event.preventDefault();
-        fetch("/segosarem-backend/updatePageSetting", {
+        fetch("/updatePageSetting", {
             method: 'POST',
             body: JSON.stringify({
                 settingId: settingId,

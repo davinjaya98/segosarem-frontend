@@ -25,7 +25,7 @@ const Signin = ({ history }) => {
                 request["token"] = token;
             }
 
-            fetch("/segosarem-backend/authenticate", {
+            fetch("/authenticate", {
                 method: 'POST',
                 body: JSON.stringify(request),
                 headers: {

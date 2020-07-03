@@ -15,7 +15,7 @@ class QuotationList extends Component {
     }
 
     fetchData() {
-        fetch("/segosarem-backend/getQuotationList", {
+        fetch("/getQuotationList", {
             method: 'POST',
             body: JSON.stringify({}),
             headers: {

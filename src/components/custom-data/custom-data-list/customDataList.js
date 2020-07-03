@@ -29,7 +29,7 @@ class CustomDataList extends Component {
     fetchData() {
         const { cdGroupId } = this.state;
 
-        fetch("/segosarem-backend/getCustomDataListByCdGroupId", {
+        fetch("/getCustomDataListByCdGroupId", {
             method: 'POST',
             body: JSON.stringify({
                 cdGroupId: cdGroupId

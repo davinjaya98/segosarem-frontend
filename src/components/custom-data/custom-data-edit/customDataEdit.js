@@ -76,7 +76,7 @@ class CustomDataEdit extends Component {
         const { cdId, cdName, cdType, cdSequence, cdKey, cdGroupId } = this.state;
 
         event.preventDefault();
-        fetch("/segosarem-backend/updateCustomData", {
+        fetch("/updateCustomData", {
             method: 'POST',
             body: JSON.stringify({
                 cdId: cdId,
@@ -118,7 +118,7 @@ class CustomDataEdit extends Component {
         event.preventDefault();
 
         // save new setting
-        fetch("/segosarem-backend/addCustomDataSetting", {
+        fetch("/addCustomDataSetting", {
             method: 'POST',
             body: JSON.stringify({
                 cdId: cdId,
@@ -172,7 +172,7 @@ class CustomDataEdit extends Component {
             () => {
                 const { cdsId } = this.state;
 
-                fetch("/segosarem-backend/deleteCustomDataSetting", {
+                fetch("/deleteCustomDataSetting", {
                     method: 'POST',
                     body: JSON.stringify({
                         entityId: cdsId
