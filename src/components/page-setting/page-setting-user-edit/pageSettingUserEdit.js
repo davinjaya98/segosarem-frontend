@@ -626,6 +626,7 @@ class PageSettingUserEdit extends Component {
                                                     <input type="hidden" name="cdGroupId" value={customGroup.cdGroupId} />
                                                     <input type="hidden" name="cdGroupName" value={customGroup.cdGroupName} />
                                                     <input type="hidden" name="cdGroupDescription" value={customGroup.cdGroupDescription} />
+                                                    <input type="hidden" name="cdGroupSequence" value={customGroup.cdGroupSequence} />
                                                     <div className="form-group">
                                                         <label className="col-form-label" for={`cdGroupImage${customGroup.cdGroupId}`}> Image URL</label>
                                                         <input className="form-control" type="text" id={`cdGroupImage${customGroup.cdGroupId}`} name={`cdGroupImage${customGroup.cdGroupId}`} value={formFieldEntities[`cdGroupImage${customGroup.cdGroupId}`]} onChange={ this.handleChange }/>
