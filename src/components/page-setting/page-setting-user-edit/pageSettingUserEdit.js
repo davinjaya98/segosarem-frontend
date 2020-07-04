@@ -60,6 +60,8 @@ class PageSettingUserEdit extends Component {
                         try {
                             let fields = {};
                             result.responseObject.customDataGroupList.forEach((cdGroup) => {
+                                //Set the cd group image field to field entity
+                                fields[`cdGroupImage${cdGroup.cdGroupId}`] = cdGroup.cdGroupImage;
                                 cdGroup.customDataList.forEach((customData) => {
                                     if(customData.cdSettingList && customData.cdSettingList.length > 0) {
                                         //Attempting to create formFieldEntities
@@ -158,7 +160,7 @@ class PageSettingUserEdit extends Component {
                         <div className="invalid-feedback">Example invalid feedback text</div>
                     </div>
                 );
-            //Blob
+            //Image URL - Single
             case 3:
                 return (
                     <div className="form-group">
@@ -197,6 +199,14 @@ class PageSettingUserEdit extends Component {
                         />
                     </div>
                 );
+                //Image URL - Array Split by Commas
+                case 7:
+                    return (
+                        <div className="form-group">
+                            <label className="col-form-label" htmlFor={setting.cdsKey + parentId}>{setting.cdsName}</label>
+                            <input className="form-control" type="text" id={setting.cdsKey + parentId} name={setting.cdsKey + parentId} value={formFieldEntities[setting.cdsKey + parentId]} setting-id={setting.cdsId} onChange={ this.handleChange }/>
+                        </div>
+                    );
             default:
                 return (
                     <span>Error when rendering custom data field</span>
@@ -500,8 +510,71 @@ class PageSettingUserEdit extends Component {
 
     }
 
+    updateCdGroup = (event, formId) => {
+        event.preventDefault();
+        //Use FormID and get data using jquery form to cater for dynamic form
+        let formElem = document.getElementById(formId);
+        let formData = new FormData(formElem);
+        // let request = {
+        //     valueBeans: []
+        // }
+        let request = {};
+
+        for (let [key,value] of formData.entries()){
+            if(key.indexOf("cdGroupImage") > -1) {
+                request.cdGroupImage = value;
+            }
+            else {
+                request[key] = value;
+            }
+            // let foundData = request.valueBeans.find(x => x.cdValueKey == key);
+            // if(foundData) {
+            //     foundData.cdValue = value;
+            // }
+            // else {
+            //     let field = {
+            //         cdValueKey: key,
+            //         cdValue: value,
+            //         cdsId: document.getElementById(key).getAttribute("setting-id")
+            //     }
+            //     request.valueBeans.push(field);
+            // }
+        };
+        
+
+        fetch("/updateCustomDataGroup", {
+            method: 'POST',
+            body: JSON.stringify(request),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8",
+                "token": localStorage.getItem("AdminToken")
+            }
+        }).then(res => res.json())
+            .then((result) => {
+                switch(result.returnCode) {
+                    case "000000":
+                        //Trigger success notification
+                        toast.success("Successfully Added!");
+                        this.fetchData();
+    
+                        //Close the modal
+                        this.toggleModal(true);
+                        break;
+                    case "333333":
+                        this.props.history.push(`${process.env.PUBLIC_URL}/login`);
+                        break;
+                    default:
+                        toast.error("Server Error");
+                        break;
+                }
+            },(err) => {
+                toast.error("Server Error");
+            });
+
+    }
+
     render() {
-        const { modal, data, activeCustomDataSetting, newDataModal } = this.state;
+        const { modal, data, activeCustomDataSetting, newDataModal, formFieldEntities } = this.state;
 
         let sortCdGroupData = (a,b) => {
             if(Number.parseInt(a["cdGroupSequence"]) > Number.parseInt(b["cdGroupSequence"])) return 1;
@@ -545,6 +618,28 @@ class PageSettingUserEdit extends Component {
                                         <span>{customGroup.cdGroupDescription}</span>
                                     </div>
                                     <div className="card-body datatable-react">
+                                        {/* This is to edit the custom data group image */}
+                                        <div className="row">
+                                            <div className="col-12">
+                                                <form id={`group` + formName + index} name={`group` + formName + index} className="theme-form" onSubmit={(e) => this.updateCdGroup(e, `group` + formName + index)}>
+                                                    <h6>Custom Data Group Image</h6>
+                                                    <input type="hidden" name="cdGroupId" value={customGroup.cdGroupId} />
+                                                    <input type="hidden" name="cdGroupName" value={customGroup.cdGroupName} />
+                                                    <input type="hidden" name="cdGroupDescription" value={customGroup.cdGroupDescription} />
+                                                    <div className="form-group">
+                                                        <label className="col-form-label" for={`cdGroupImage${customGroup.cdGroupId}`}> Image URL</label>
+                                                        <input className="form-control" type="text" id={`cdGroupImage${customGroup.cdGroupId}`} name={`cdGroupImage${customGroup.cdGroupId}`} value={formFieldEntities[`cdGroupImage${customGroup.cdGroupId}`]} onChange={ this.handleChange }/>
+                                                    </div>
+                                                    <div className="row">
+                                                        <div className="col-12">
+                                                            <div className="d-flex align-items-center justify-content-end">
+                                                                <button className="btn btn-primary mr-1">Submit</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
                                         <div className="row">
                                             <div className="col-12">
                                                 {(customGroup.customDataList && customGroup.customDataList.length > 0) ?

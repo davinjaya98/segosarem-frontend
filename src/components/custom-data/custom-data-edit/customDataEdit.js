@@ -258,6 +258,7 @@ class CustomDataEdit extends Component {
                                     <option value="4">4 - Text Area</option>
                                     {/* <option value="5">5 - Image Upload</option> */}
                                     <option value="6">6 - Rich Text</option>
+                                    <option value="7">7 - URL - Multiple</option>
                                 </select>
                             </div>
                             <div className="form-group">
