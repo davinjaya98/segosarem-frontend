@@ -66,13 +66,13 @@ class PageSettingUserEdit extends Component {
                                     if(customData.cdSettingList && customData.cdSettingList.length > 0) {
                                         //Attempting to create formFieldEntities
                                         customData.cdSettingList.forEach((cdSetting) => {
-                                            fields[cdSetting.cdsKey] = null;
+                                            fields[cdSetting.cdsId] = null;
                                         });
                                     }
                                     if(customData.cdValuePair && customData.cdValuePair.length > 0) {
                                         customData.cdValuePair.forEach((cdValue) => {
                                             for(let [key, value ] of Object.entries(cdValue.value)) {
-                                                fields[key + cdValue.parentId] = value.value;
+                                                fields[value.cdsId + cdValue.parentId] = value.value;
                                             }
                                         });
                                     }
@@ -146,17 +146,17 @@ class PageSettingUserEdit extends Component {
             case 1:
                 return (
                     <div className="form-group">
-                        <label className="col-form-label" htmlFor={setting.cdsKey + parentId}>{setting.cdsName}</label>
-                        <input className="form-control" type="text" id={setting.cdsKey + parentId} name={setting.cdsKey + parentId} value={formFieldEntities[setting.cdsKey + parentId]} setting-id={setting.cdsId} onChange={ this.handleChange }/>
+                        <label className="col-form-label" htmlFor={setting.cdsId + parentId}>{setting.cdsName}</label>
+                        <input className="form-control" type="text" id={setting.cdsId + parentId} name={setting.cdsId + parentId} value={formFieldEntities[setting.cdsId + parentId]} setting-id={setting.cdsId} onChange={ this.handleChange }/>
                     </div>
                 );
             //Checkboxes
             case 2:
                 return (
                     <div className="custom-control custom-checkbox mb-3">
-                        <input className="custom-control-input" name={setting.cdsKey + parentId} type="hidden" value="false" setting-id={setting.cdsId} />
-                        <input className="custom-control-input" id={setting.cdsKey + parentId} name={setting.cdsKey + parentId} type="checkbox" defaultChecked={formFieldEntities[setting.cdsKey + parentId] == "true"} value="true" setting-id={setting.cdsId} onChange={ this.handleChange } />
-                        <label className="custom-control-label" htmlFor={setting.cdsKey + parentId}>{setting.cdsName}</label>
+                        <input className="custom-control-input" name={setting.cdsId + parentId} type="hidden" value="false" setting-id={setting.cdsId} />
+                        <input className="custom-control-input" id={setting.cdsId + parentId} name={setting.cdsId + parentId} type="checkbox" defaultChecked={formFieldEntities[setting.cdsId + parentId] == "true"} value="true" setting-id={setting.cdsId} onChange={ this.handleChange } />
+                        <label className="custom-control-label" htmlFor={setting.cdsId + parentId}>{setting.cdsName}</label>
                         <div className="invalid-feedback">Example invalid feedback text</div>
                     </div>
                 );
@@ -164,16 +164,16 @@ class PageSettingUserEdit extends Component {
             case 3:
                 return (
                     <div className="form-group">
-                        <label className="col-form-label" htmlFor={setting.cdsKey + parentId}>{setting.cdsName}</label>
-                        <input className="form-control" type="text" id={setting.cdsKey + parentId} name={setting.cdsKey + parentId} value={formFieldEntities[setting.cdsKey + parentId]} setting-id={setting.cdsId} onChange={ this.handleChange }/>
+                        <label className="col-form-label" htmlFor={setting.cdsId + parentId}>{setting.cdsName}</label>
+                        <input className="form-control" type="text" id={setting.cdsId + parentId} name={setting.cdsId + parentId} value={formFieldEntities[setting.cdsId + parentId]} setting-id={setting.cdsId} onChange={ this.handleChange }/>
                     </div>
                 );
             //Textarea
             case 4:
                 return (
                     <div className="form-group">
-                        <label className="col-form-label" htmlFor={setting.cdsKey + parentId}>{setting.cdsName}</label>
-                        <textarea className="form-control" type="text" id={setting.cdsKey + parentId} name={setting.cdsKey + parentId} row="5" value={formFieldEntities[setting.cdsKey + parentId]} setting-id={setting.cdsId} onChange={ this.handleChange }></textarea>
+                        <label className="col-form-label" htmlFor={setting.cdsId + parentId}>{setting.cdsName}</label>
+                        <textarea className="form-control" type="text" id={setting.cdsId + parentId} name={setting.cdsId + parentId} row="5" value={formFieldEntities[setting.cdsId + parentId]} setting-id={setting.cdsId} onChange={ this.handleChange }></textarea>
                     </div>
                 );
             //Image Upload
@@ -184,16 +184,16 @@ class PageSettingUserEdit extends Component {
                 return (
                     <div className="form-group">
                         {/* This is to submit the value */}
-                        <input type="hidden" id={setting.cdsKey + parentId} name={setting.cdsKey + parentId} value={formFieldEntities[setting.cdsKey + parentId]} setting-id={setting.cdsId}></input>
+                        <input type="hidden" id={setting.cdsId + parentId} name={setting.cdsId + parentId} value={formFieldEntities[setting.cdsId + parentId]} setting-id={setting.cdsId}></input>
                         {/* This one to render the value */}
                         <CKEditors
                             activeclassName="p10"
-                            content={formFieldEntities[setting.cdsKey + parentId]}
+                            content={formFieldEntities[setting.cdsId + parentId]}
                             events={{
                                 "blur": this.onBlur,
                                 "afterPaste": this.afterPaste,
                                 "change": (evt) => {
-                                    this.handleCKEditorChange(evt, setting.cdsKey + parentId);
+                                    this.handleCKEditorChange(evt, setting.cdsId + parentId);
                                 }
                             }}
                         />
@@ -203,8 +203,8 @@ class PageSettingUserEdit extends Component {
                 case 7:
                     return (
                         <div className="form-group">
-                            <label className="col-form-label" htmlFor={setting.cdsKey + parentId}>{setting.cdsName}</label>
-                            <input className="form-control" type="text" id={setting.cdsKey + parentId} name={setting.cdsKey + parentId} value={formFieldEntities[setting.cdsKey + parentId]} setting-id={setting.cdsId} onChange={ this.handleChange }/>
+                            <label className="col-form-label" htmlFor={setting.cdsId + parentId}>{setting.cdsName}</label>
+                            <input className="form-control" type="text" id={setting.cdsId + parentId} name={setting.cdsId + parentId} value={formFieldEntities[setting.cdsId + parentId]} setting-id={setting.cdsId} onChange={ this.handleChange }/>
                         </div>
                     );
             default:
@@ -343,7 +343,7 @@ class PageSettingUserEdit extends Component {
                         <Fragment>
                             <input type="hidden" name="cdId" value={customData.cdId} />
                             <input type="hidden" name="parentId" value={fieldValue ? fieldValue.parentId : ""}></input>
-                            {this.renderInputField(fieldSettings, (fieldValue ? fieldValue.value[fieldSettings.cdsKey].value : null), (fieldValue ? fieldValue.parentId : ""))}
+                            {this.renderInputField(fieldSettings, (fieldValue ? fieldValue.value[fieldSettings.cdsId].value : null), (fieldValue ? fieldValue.parentId : ""))}
                             <div className="row">
                                 <div className="col-12">
                                     <div className="d-flex align-items-center justify-content-end">
