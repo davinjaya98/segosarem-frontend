@@ -343,7 +343,7 @@ class PageSettingUserEdit extends Component {
                         <Fragment>
                             <input type="hidden" name="cdId" value={customData.cdId} />
                             <input type="hidden" name="parentId" value={fieldValue ? fieldValue.parentId : ""}></input>
-                            {this.renderInputField(fieldSettings, (fieldValue ? fieldValue.value[fieldSettings.cdsId].value : null), (fieldValue ? fieldValue.parentId : ""))}
+                            {this.renderInputField(fieldSettings, (fieldValue ? fieldValue.value[fieldSettings.cdsKey].value : null), (fieldValue ? fieldValue.parentId : ""))}
                             <div className="row">
                                 <div className="col-12">
                                     <div className="d-flex align-items-center justify-content-end">
