@@ -5,6 +5,8 @@ import CustomDataGroupAdd from '../components/custom-data-group/custom-data-grou
 import CustomDataGroupEdit from '../components/custom-data-group/custom-data-group-edit/customDataGroupEdit';
 import { toast } from 'react-toastify';
 
+import { BASE_HREF } from '../constant/basePath';
+
 const CustomDataGroup = () => {
 
     const listRef = useRef();
@@ -24,7 +26,7 @@ const CustomDataGroup = () => {
 
         const cdGroupId = deleteParam.cdGroupId;
 
-        fetch("/deleteCustomDataGroup", {
+        fetch(BASE_HREF + "/deleteCustomDataGroup", {
             method: 'POST',
             body: JSON.stringify({
                 entityId: cdGroupId

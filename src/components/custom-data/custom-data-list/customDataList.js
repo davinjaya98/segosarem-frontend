@@ -2,6 +2,7 @@ import React, { Fragment, Component } from 'react';
 import Datatable from '../../common/datatable';
 import { withRouterInnerRef } from "../../util/withRouterInnerRef";
 
+import { BASE_HREF } from '../../../constant/basePath';
 
 class CustomDataList extends Component {
     constructor(props) {
@@ -29,7 +30,7 @@ class CustomDataList extends Component {
     fetchData() {
         const { cdGroupId } = this.state;
 
-        fetch("/getCustomDataListByCdGroupId", {
+        fetch(BASE_HREF + "/getCustomDataListByCdGroupId", {
             method: 'POST',
             body: JSON.stringify({
                 cdGroupId: cdGroupId

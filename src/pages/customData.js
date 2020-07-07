@@ -5,6 +5,8 @@ import CustomDataAdd from '../components/custom-data/custom-data-add/customDataA
 import CustomDataEdit from '../components/custom-data/custom-data-edit/customDataEdit';
 import { toast } from 'react-toastify';
 
+import { BASE_HREF } from '../constant/basePath';
+
 const CustomData = () => {
 
     const listRef = useRef();
@@ -24,7 +26,7 @@ const CustomData = () => {
 
         const cdId = deleteParam.cdId;
 
-        fetch("/deleteCustomData", {
+        fetch(BASE_HREF + "/deleteCustomData", {
             method: 'POST',
             body: JSON.stringify({
                 entityId: cdId

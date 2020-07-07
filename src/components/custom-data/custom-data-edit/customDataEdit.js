@@ -3,6 +3,8 @@ import React, { Component, Fragment } from 'react';
 import { toast } from 'react-toastify';
 import CustomDataSettingsList from '../../custom-data-settings/custom-data-settings-list/customDataSettingsList';
 
+import { BASE_HREF } from '../../../constant/basePath';
+
 class CustomDataEdit extends Component {
 
     constructor(props) {
@@ -76,7 +78,7 @@ class CustomDataEdit extends Component {
         const { cdId, cdName, cdType, cdSequence, cdKey, cdGroupId } = this.state;
 
         event.preventDefault();
-        fetch("/updateCustomData", {
+        fetch(BASE_HREF + "/updateCustomData", {
             method: 'POST',
             body: JSON.stringify({
                 cdId: cdId,
@@ -118,7 +120,7 @@ class CustomDataEdit extends Component {
         event.preventDefault();
 
         // save new setting
-        fetch("/addCustomDataSetting", {
+        fetch(BASE_HREF + "/addCustomDataSetting", {
             method: 'POST',
             body: JSON.stringify({
                 cdId: cdId,
@@ -172,7 +174,7 @@ class CustomDataEdit extends Component {
             () => {
                 const { cdsId } = this.state;
 
-                fetch("/deleteCustomDataSetting", {
+                fetch(BASE_HREF + "/deleteCustomDataSetting", {
                     method: 'POST',
                     body: JSON.stringify({
                         entityId: cdsId

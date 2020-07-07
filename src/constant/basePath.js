@@ -1,0 +1,1 @@
+export const BASE_HREF ="/galea-cms";

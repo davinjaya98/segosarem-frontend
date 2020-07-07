@@ -2,6 +2,8 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import React, { Component, Fragment } from 'react';
 import { toast } from 'react-toastify';
 
+import { BASE_HREF } from '../../../constant/basePath';
+
 class CustomDataGroupEdit extends Component {
 
     constructor(props) {
@@ -54,7 +56,7 @@ class CustomDataGroupEdit extends Component {
         const { settingId, pageTitle, pageSeoKeywords, pageDescription, pageSequence } = this.state;
 
         event.preventDefault();
-        fetch("/updatePageSetting", {
+        fetch(BASE_HREF + "/updatePageSetting", {
             method: 'POST',
             body: JSON.stringify({
                 settingId: settingId,

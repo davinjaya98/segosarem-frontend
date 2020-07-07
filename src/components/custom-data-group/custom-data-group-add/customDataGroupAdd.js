@@ -4,6 +4,8 @@ import { toast } from 'react-toastify';
 
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
+import { BASE_HREF } from '../../../constant/basePath';
+
 class CustomDataGroupAdd extends Component {
     constructor(props) {
         super(props);
@@ -48,7 +50,7 @@ class CustomDataGroupAdd extends Component {
         const { cdGroupName, cdGroupDescription, cdGroupSequence, pageSettingId } = this.state;
 
         event.preventDefault();
-        fetch("/addCustomDataGroup", {
+        fetch(BASE_HREF + "/addCustomDataGroup", {
             method: 'POST',
             body: JSON.stringify({
                 cdGroupName: cdGroupName,

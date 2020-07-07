@@ -5,6 +5,8 @@ import PageSettingList from '../components/page-setting/page-setting-list/pageSe
 import PageSettingEdit from '../components/page-setting/page-setting-edit/pageSettingEdit';
 import { toast } from 'react-toastify';
 
+import { BASE_HREF } from '../constant/basePath';
+
 const PortalConfig = () => {
 
   const listRef = useRef();
@@ -24,7 +26,7 @@ const PortalConfig = () => {
 
     const settingId = deleteParam.settingId;
 
-    fetch("/deletePageSetting", {
+    fetch(BASE_HREF + "/deletePageSetting", {
       method: 'POST',
       body: JSON.stringify({
         entityId: settingId

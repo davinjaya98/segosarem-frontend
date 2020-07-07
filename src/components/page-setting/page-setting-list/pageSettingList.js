@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 
 import Datatable from '../../common/datatable';
 
+import { BASE_HREF } from '../../../constant/basePath';
 
 class PageSettingList extends Component {
     constructor(props) {
@@ -23,7 +24,7 @@ class PageSettingList extends Component {
 
     fetchData() {
         //TODO CODE HERE
-        fetch("/getPageList", {
+        fetch(BASE_HREF + "/getPageList", {
             method: 'POST',
             body: JSON.stringify({}),
             headers: {

@@ -4,6 +4,8 @@ import { toast } from 'react-toastify';
 
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
+import { BASE_HREF } from '../../../constant/basePath';
+
 class PageSettingAdd extends Component {
     constructor(props) {
         super(props);
@@ -41,7 +43,7 @@ class PageSettingAdd extends Component {
         const { pageTitle, pageSeoKeywords, pageKey, pageDescription, pageSequence } = this.state;
 
         event.preventDefault();
-        fetch("/addPageSetting", {
+        fetch(BASE_HREF + "/addPageSetting", {
             method: 'POST',
             body: JSON.stringify({
                 pageTitle: pageTitle,

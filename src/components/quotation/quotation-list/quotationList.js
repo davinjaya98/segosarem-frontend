@@ -2,6 +2,8 @@ import React, { Fragment, Component } from 'react';
 import Datatable from '../../common/datatable'; // front end table view for cms
 import moment from 'moment';
 
+import { BASE_HREF } from '../../../constant/basePath';
+
 class QuotationList extends Component {
     constructor(props) {
         super(props);
@@ -15,7 +17,7 @@ class QuotationList extends Component {
     }
 
     fetchData() {
-        fetch("/getQuotationList", {
+        fetch(BASE_HREF + "/getQuotationList", {
             method: 'POST',
             body: JSON.stringify({}),
             headers: {

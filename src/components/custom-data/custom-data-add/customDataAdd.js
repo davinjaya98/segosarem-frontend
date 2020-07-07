@@ -4,6 +4,8 @@ import { toast } from 'react-toastify';
 
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
+import { BASE_HREF } from '../../../constant/basePath';
+
 class CustomDataAdd extends Component {
     constructor(props) {
         super(props);
@@ -49,7 +51,7 @@ class CustomDataAdd extends Component {
         const { cdName, cdType, cdSequence, cdKey, cdGroupId } = this.state;
 
         event.preventDefault();
-        fetch("/addCustomData", {
+        fetch(BASE_HREF + "/addCustomData", {
             method: 'POST',
             body: JSON.stringify({
                 cdName: cdName,

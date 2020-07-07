@@ -8,6 +8,8 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 import { withRouter } from "react-router-dom";
 
+import { BASE_HREF } from '../../../constant/basePath';
+
 class PageSettingUserEdit extends Component {
     constructor(props) {
         super(props);
@@ -44,7 +46,7 @@ class PageSettingUserEdit extends Component {
         const { pageKey } = this.state;
 
         //TODO CODE HERE
-        fetch("/getPageSettingByKey", {
+        fetch(BASE_HREF + "/getPageSettingByKey", {
             method: 'POST',
             body: JSON.stringify({
                 pageKey: pageKey
@@ -227,7 +229,7 @@ class PageSettingUserEdit extends Component {
     }
 
     deleteCustomDataValue(parentId) {
-        fetch("/deleteCustomDataValue", {
+        fetch(BASE_HREF + "/deleteCustomDataValue", {
             method: 'POST',
             body: JSON.stringify({
                 entityId: parentId
@@ -479,7 +481,7 @@ class PageSettingUserEdit extends Component {
         };
         
 
-        fetch("/addOrUpdateCustomDataValue", {
+        fetch(BASE_HREF + "/addOrUpdateCustomDataValue", {
             method: 'POST',
             body: JSON.stringify(request),
             headers: {
@@ -542,7 +544,7 @@ class PageSettingUserEdit extends Component {
         };
         
 
-        fetch("/updateCustomDataGroup", {
+        fetch(BASE_HREF + "/updateCustomDataGroup", {
             method: 'POST',
             body: JSON.stringify(request),
             headers: {

@@ -7,13 +7,15 @@ import PageSettingList from '../components/page-setting/page-setting-list/pageSe
 import PageSettingCards from '../components/page-setting/page-setting-cards/pageSettingCards';
 import CountUp from 'react-countup';
 
+import { BASE_HREF } from '../constant/basePath';
+
 const Dashboard = () => {
 
 
   const [totalQuotation, setTotalQuotation] = useState(0);
 
   useEffect(() => {
-    fetch("/getQuotationList", {
+    fetch(BASE_HREF + "/getQuotationList", {
       method: 'POST',
       body: JSON.stringify({}),
       headers: {

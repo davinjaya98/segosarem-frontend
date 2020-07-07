@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { withRouter } from "react-router";
 
+import { BASE_HREF } from '../constant/basePath';
 
 const Signin = ({ history }) => {
     const [username, setUsername] = useState("");
@@ -25,7 +26,7 @@ const Signin = ({ history }) => {
                 request["token"] = token;
             }
 
-            fetch("/authenticate", {
+            fetch(BASE_HREF + "/authenticate", {
                 method: 'POST',
                 body: JSON.stringify(request),
                 headers: {

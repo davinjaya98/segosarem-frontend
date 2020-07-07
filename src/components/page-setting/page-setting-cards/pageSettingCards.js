@@ -1,6 +1,8 @@
 import React, { Fragment, Component, useImperativeHandle } from 'react';
 import { withRouterInnerRef } from "../../util/withRouterInnerRef";
 
+import { BASE_HREF } from '../../../constant/basePath';
+
 class pageSettingCards extends Component {
     constructor(props) {
         super(props);
@@ -15,7 +17,7 @@ class pageSettingCards extends Component {
 
     fetchData() {
         //TODO CODE HERE
-        fetch("/getPageList", {
+        fetch(BASE_HREF + "/getPageList", {
             method: 'POST',
             body: JSON.stringify({}),
             headers: {

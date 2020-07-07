@@ -1,6 +1,8 @@
 import React, { Fragment, Component } from 'react';
 import Datatable from '../../common/datatable';
 
+import { BASE_HREF } from '../../../constant/basePath';
+
 class CustomDataSettingsList extends Component {
     constructor(props) {
         super(props);
@@ -26,7 +28,7 @@ class CustomDataSettingsList extends Component {
     fetchData() {
         const { cdId } = this.state;
 
-        fetch("/getCdSettingsListByCdId", {
+        fetch(BASE_HREF + "/getCdSettingsListByCdId", {
             method: 'POST',
             body: JSON.stringify({
                 cdId: cdId

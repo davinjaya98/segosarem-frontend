@@ -4,6 +4,8 @@ import { withRouterInnerRef } from "../../util/withRouterInnerRef";
 
 import Datatable from '../../common/datatable';
 
+import { BASE_HREF } from '../../../constant/basePath';
+
 class CustomDataGroupList extends Component {
     constructor(props) {
         super(props);
@@ -30,7 +32,7 @@ class CustomDataGroupList extends Component {
     fetchData() {
         const { pageSettingId } = this.state;
 
-        fetch("/getCdGroupByPageStgId", {
+        fetch(BASE_HREF + "/getCdGroupByPageStgId", {
             method: 'POST',
             body: JSON.stringify({
                 pageSettingId: pageSettingId
