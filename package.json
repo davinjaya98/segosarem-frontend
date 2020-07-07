@@ -2,7 +2,7 @@
   "name": "galea-admin",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/galea-cms/",
+  "homepage": "/",
   "dependencies": {
     "@fullcalendar/daygrid": "^4.3.0",
     "@fullcalendar/interaction": "^4.3.0",
