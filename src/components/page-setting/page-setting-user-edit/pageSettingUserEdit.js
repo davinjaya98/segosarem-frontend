@@ -57,6 +57,7 @@ class PageSettingUserEdit extends Component {
             }
         }).then(res => res.json())
             .then((result) => {
+            // let result = {"returnCode":"000000","responseObject":{"settingId":2,"pageTitle":"CSA Home","pageDescription":"Homepage for CSA website","pageSeoKeywords":"CSA Home page","pageKey":"homepage","pageSequence":"1","customDataGroupList":[{"cdGroupId":7,"cdGroupName":"Hero Banner Carousel Component","cdGroupDescription":"Component for homepage banner","pageSettingId":0,"pageSettingKey":null,"cdGroupSequence":"1","cdGroupImage":null,"customDataList":[{"cdId":1,"cdValuePair":[{"parentId":1,"value":{"titletext":{"cdsId":1,"fieldType":1,"value":"We Connect Every Lines & Shapes Together With You"}}}],"cdName":"Banner Upper Title","cdType":1,"cdSequence":"1","cdKey":"bannertitle1","cdGroupId":null,"cdSettingList":[{"cdsId":1,"cdsName":"Upper Homepage Banner Title","cdsKey":"titletext","cdsType":1,"cdsSequence":"1","cdId":null}]},{"cdId":2,"cdValuePair":[{"parentId":3,"value":{"titletext":{"cdsId":1,"fieldType":1,"value":"Architecture, Interior, Furniture"}}}],"cdName":"Banner Lower Title","cdType":1,"cdSequence":"1","cdKey":"bannertitle2","cdGroupId":null,"cdSettingList":[{"cdsId":2,"cdsName":"Lower homepage banner title","cdsKey":"titletext","cdsType":1,"cdsSequence":"1","cdId":null}]}]},{"cdGroupId":8,"cdGroupName":"CSA Intro Component","cdGroupDescription":"Component for CSA Introduction","pageSettingId":0,"pageSettingKey":null,"cdGroupSequence":"2","cdGroupImage":null,"customDataList":[{"cdId":3,"cdValuePair":[{"parentId":5,"value":{"titletext":{"cdsId":11,"fieldType":1,"value":"Our Services"}}}],"cdName":"Title for CSA Intro","cdType":1,"cdSequence":"1","cdKey":"csaintrotitle","cdGroupId":null,"cdSettingList":[{"cdsId":11,"cdsName":"title for csa intro component","cdsKey":"titletext","cdsType":1,"cdsSequence":"1","cdId":null}]},{"cdId":4,"cdValuePair":[{"parentId":7,"value":{"paragraphtextarea":{"cdsId":12,"fieldType":4,"value":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"}}}],"cdName":"Paragraph of CSA Intro","cdType":1,"cdSequence":"2","cdKey":"csaintroparagraph","cdGroupId":null,"cdSettingList":[{"cdsId":12,"cdsName":"Paragraph at the left sideof csa intro component","cdsKey":"paragraphtextarea","cdsType":4,"cdsSequence":"1","cdId":null}]},{"cdId":6,"cdValuePair":[{"parentId":9,"value":{"imgurl":{"cdsId":3,"fieldType":3,"value":"https://www.childhood.org.au/app/uploads/2017/07/ACF-logo-placeholder.png"},"titletext":{"cdsId":4,"fieldType":1,"value":"Build & Constructions"},"paragraphtextarea":{"cdsId":5,"fieldType":4,"value":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"}}},{"parentId":16,"value":{"imgurl":{"cdsId":3,"fieldType":3,"value":""},"titletext":{"cdsId":4,"fieldType":1,"value":"Interior"},"paragraphtextarea":{"cdsId":5,"fieldType":4,"value":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"}}},{"parentId":33,"value":{"imgurl":{"cdsId":3,"fieldType":3,"value":"https://www.childhood.org.au/app/uploads/2017/07/ACF-logo-placeholder.png"},"titletext":{"cdsId":4,"fieldType":1,"value":"Furniture"},"paragraphtextarea":{"cdsId":5,"fieldType":4,"value":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"}}}],"cdName":"Content of CSA Intro","cdType":3,"cdSequence":"3","cdKey":"csaintrocontent","cdGroupId":null,"cdSettingList":[{"cdsId":3,"cdsName":"img url for csa intro content","cdsKey":"imgurl","cdsType":3,"cdsSequence":"1","cdId":null},{"cdsId":4,"cdsName":"csa intro content title","cdsKey":"titletext","cdsType":1,"cdsSequence":"2","cdId":null},{"cdsId":5,"cdsName":"paragraph of each csa intro content","cdsKey":"paragraphtextarea","cdsType":4,"cdsSequence":"3","cdId":null}]}]},{"cdGroupId":9,"cdGroupName":"About Us Snippet Component","cdGroupDescription":"Component for About Us Snippet at Homepage","pageSettingId":0,"pageSettingKey":null,"cdGroupSequence":"3","cdGroupImage":"","customDataList":[{"cdId":7,"cdValuePair":[{"parentId":46,"value":{"imgurl":{"cdsId":6,"fieldType":3,"value":"https://paparadam-assets.sgp1.digitaloceanspaces.com/images/csa-fe/img-architect-05.png"}}}],"cdName":"First Snippet Image","cdType":1,"cdSequence":"1","cdKey":"aboutussnippetimage1","cdGroupId":null,"cdSettingList":[{"cdsId":6,"cdsName":"url for about us snippet first image","cdsKey":"imgurl","cdsType":3,"cdsSequence":"1","cdId":null}]},{"cdId":8,"cdValuePair":[{"parentId":48,"value":{"imgurl":{"cdsId":7,"fieldType":3,"value":"https://paparadam-assets.sgp1.digitaloceanspaces.com/images/csa-fe/img-architect-04.png"}}}],"cdName":"Second Snippet Image","cdType":1,"cdSequence":"2","cdKey":"aboutussnippetimage2","cdGroupId":null,"cdSettingList":[{"cdsId":7,"cdsName":"url for about us snippet second image","cdsKey":"imgurl","cdsType":3,"cdsSequence":"1","cdId":null}]},{"cdId":9,"cdValuePair":[{"parentId":50,"value":{"titletext":{"cdsId":8,"fieldType":1,"value":"About CSA"}}}],"cdName":"About us snippet title","cdType":1,"cdSequence":"3","cdKey":"aboutussnippettitle","cdGroupId":null,"cdSettingList":[{"cdsId":8,"cdsName":"title for about us snippet","cdsKey":"titletext","cdsType":1,"cdsSequence":"1","cdId":null}]},{"cdId":10,"cdValuePair":[{"parentId":52,"value":{"paragraphtextarea":{"cdsId":9,"fieldType":4,"value":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"}}}],"cdName":"About us snippet paragraph","cdType":1,"cdSequence":"4","cdKey":"aboutussnippetparagraph","cdGroupId":null,"cdSettingList":[{"cdsId":9,"cdsName":"paragraph content of about us snippet","cdsKey":"paragraphtextarea","cdsType":4,"cdsSequence":"1","cdId":null}]}]},{"cdGroupId":10,"cdGroupName":"Gallery Component","cdGroupDescription":"Gallery image slider at homepage","pageSettingId":0,"pageSettingKey":null,"cdGroupSequence":"4","cdGroupImage":null,"customDataList":[{"cdId":11,"cdValuePair":[{"parentId":54,"value":{"imgurl":{"cdsId":10,"fieldType":3,"value":"https://paparadam-assets.sgp1.digitaloceanspaces.com/images/csa-fe/img-architect-04.png"}}},{"parentId":56,"value":{"imgurl":{"cdsId":10,"fieldType":3,"value":"https://paparadam-assets.sgp1.digitaloceanspaces.com/images/csa-fe/img-architect-05.png"}}},{"parentId":58,"value":{"imgurl":{"cdsId":10,"fieldType":3,"value":"https://paparadam-assets.sgp1.digitaloceanspaces.com/images/csa-fe/img-architect-04.png"}}},{"parentId":60,"value":{"imgurl":{"cdsId":10,"fieldType":3,"value":"https://paparadam-assets.sgp1.digitaloceanspaces.com/images/csa-fe/img-architect-05.png"}}}],"cdName":"Gallery Images","cdType":3,"cdSequence":"1","cdKey":"galleryslider","cdGroupId":null,"cdSettingList":[{"cdsId":10,"cdsName":"url for slider images","cdsKey":"imgurl","cdsType":3,"cdsSequence":"1","cdId":null}]}]}]}};
                 switch(result.returnCode) {
                     case "000000":
                         try {
@@ -74,7 +75,7 @@ class PageSettingUserEdit extends Component {
                                     if(customData.cdValuePair && customData.cdValuePair.length > 0) {
                                         customData.cdValuePair.forEach((cdValue) => {
                                             for(let [key, value ] of Object.entries(cdValue.value)) {
-                                                fields[value.cdsId + cdValue.parentId] = value.value;
+                                                fields[value.cdsId + "par" + cdValue.parentId] = value.value;
                                             }
                                         });
                                     }
@@ -87,6 +88,8 @@ class PageSettingUserEdit extends Component {
                                 this.setState({
                                     data: result.responseObject.customDataGroupList,
                                 })
+
+                                // console.log("List of all form fields ", this.state.formFieldEntities)
                             });
             
                         }
@@ -148,17 +151,17 @@ class PageSettingUserEdit extends Component {
             case 1:
                 return (
                     <div className="form-group">
-                        <label className="col-form-label" htmlFor={setting.cdsId + parentId}>{setting.cdsName}</label>
-                        <input className="form-control" type="text" id={setting.cdsId + parentId} name={setting.cdsId + parentId} value={formFieldEntities[setting.cdsId + parentId]} setting-id={setting.cdsId} onChange={ this.handleChange }/>
+                        <label className="col-form-label" htmlFor={setting.cdsId + "par" +  parentId}>{setting.cdsName}</label>
+                        <input className="form-control" type="text" id={setting.cdsId + "par" +  parentId} name={setting.cdsId + "par" +  parentId} value={formFieldEntities[setting.cdsId + "par" +  parentId]} setting-id={setting.cdsId} onChange={ this.handleChange }/>
                     </div>
                 );
             //Checkboxes
             case 2:
                 return (
                     <div className="custom-control custom-checkbox mb-3">
-                        <input className="custom-control-input" name={setting.cdsId + parentId} type="hidden" value="false" setting-id={setting.cdsId} />
-                        <input className="custom-control-input" id={setting.cdsId + parentId} name={setting.cdsId + parentId} type="checkbox" defaultChecked={formFieldEntities[setting.cdsId + parentId] == "true"} value="true" setting-id={setting.cdsId} onChange={ this.handleChange } />
-                        <label className="custom-control-label" htmlFor={setting.cdsId + parentId}>{setting.cdsName}</label>
+                        <input className="custom-control-input" name={setting.cdsId + "par" +  parentId} type="hidden" value="false" setting-id={setting.cdsId} />
+                        <input className="custom-control-input" id={setting.cdsId + "par" +  parentId} name={setting.cdsId + "par" +  parentId} type="checkbox" defaultChecked={formFieldEntities[setting.cdsId + "par" +  parentId] == "true"} value="true" setting-id={setting.cdsId} onChange={ this.handleChange } />
+                        <label className="custom-control-label" htmlFor={setting.cdsId + "par" +  parentId}>{setting.cdsName}</label>
                         <div className="invalid-feedback">Example invalid feedback text</div>
                     </div>
                 );
@@ -166,16 +169,16 @@ class PageSettingUserEdit extends Component {
             case 3:
                 return (
                     <div className="form-group">
-                        <label className="col-form-label" htmlFor={setting.cdsId + parentId}>{setting.cdsName}</label>
-                        <input className="form-control" type="text" id={setting.cdsId + parentId} name={setting.cdsId + parentId} value={formFieldEntities[setting.cdsId + parentId]} setting-id={setting.cdsId} onChange={ this.handleChange }/>
+                        <label className="col-form-label" htmlFor={setting.cdsId + "par" +  parentId}>{setting.cdsName}</label>
+                        <input className="form-control" type="text" id={setting.cdsId + "par" +  parentId} name={setting.cdsId + "par" +  parentId} value={formFieldEntities[setting.cdsId + "par" +  parentId]} setting-id={setting.cdsId} onChange={ this.handleChange }/>
                     </div>
                 );
             //Textarea
             case 4:
                 return (
                     <div className="form-group">
-                        <label className="col-form-label" htmlFor={setting.cdsId + parentId}>{setting.cdsName}</label>
-                        <textarea className="form-control" type="text" id={setting.cdsId + parentId} name={setting.cdsId + parentId} row="5" value={formFieldEntities[setting.cdsId + parentId]} setting-id={setting.cdsId} onChange={ this.handleChange }></textarea>
+                        <label className="col-form-label" htmlFor={setting.cdsId + "par" +  parentId}>{setting.cdsName}</label>
+                        <textarea className="form-control" type="text" id={setting.cdsId + "par" +  parentId} name={setting.cdsId + "par" +  parentId} row="5" value={formFieldEntities[setting.cdsId + "par" +  parentId]} setting-id={setting.cdsId} onChange={ this.handleChange }></textarea>
                     </div>
                 );
             //Image Upload
@@ -186,16 +189,16 @@ class PageSettingUserEdit extends Component {
                 return (
                     <div className="form-group">
                         {/* This is to submit the value */}
-                        <input type="hidden" id={setting.cdsId + parentId} name={setting.cdsId + parentId} value={formFieldEntities[setting.cdsId + parentId]} setting-id={setting.cdsId}></input>
+                        <input type="hidden" id={setting.cdsId + "par" +  parentId} name={setting.cdsId + "par" +  parentId} value={formFieldEntities[setting.cdsId + "par" +  parentId]} setting-id={setting.cdsId}></input>
                         {/* This one to render the value */}
                         <CKEditors
                             activeclassName="p10"
-                            content={formFieldEntities[setting.cdsId + parentId]}
+                            content={formFieldEntities[setting.cdsId + "par" +  parentId]}
                             events={{
                                 "blur": this.onBlur,
                                 "afterPaste": this.afterPaste,
                                 "change": (evt) => {
-                                    this.handleCKEditorChange(evt, setting.cdsId + parentId);
+                                    this.handleCKEditorChange(evt, setting.cdsId + "par" +  parentId);
                                 }
                             }}
                         />
@@ -205,8 +208,8 @@ class PageSettingUserEdit extends Component {
                 case 7:
                     return (
                         <div className="form-group">
-                            <label className="col-form-label" htmlFor={setting.cdsId + parentId}>{setting.cdsName}</label>
-                            <input className="form-control" type="text" id={setting.cdsId + parentId} name={setting.cdsId + parentId} value={formFieldEntities[setting.cdsId + parentId]} setting-id={setting.cdsId} onChange={ this.handleChange }/>
+                            <label className="col-form-label" htmlFor={setting.cdsId + "par" +  parentId}>{setting.cdsName}</label>
+                            <input className="form-control" type="text" id={setting.cdsId + "par" +  parentId} name={setting.cdsId + "par" +  parentId} value={formFieldEntities[setting.cdsId + "par" +  parentId]} setting-id={setting.cdsId} onChange={ this.handleChange }/>
                         </div>
                     );
             default:
